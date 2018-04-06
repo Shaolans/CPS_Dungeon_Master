@@ -1,0 +1,89 @@
+!SESSION 2018-04-06 16:14:05.177 -----------------------------------------------
+eclipse.buildId=4.4.2.M20150204-1700
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.896
+!MESSAGE System property http.proxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.899
+!MESSAGE System property http.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.900
+!MESSAGE System property https.proxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.900
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.901
+!MESSAGE System property socksProxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.901
+!MESSAGE System property socksProxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.903
+!MESSAGE System property https.proxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.903
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.904
+!MESSAGE System property socksProxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.905
+!MESSAGE System property socksProxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.905
+!MESSAGE System property socksProxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:14:28.906
+!MESSAGE System property socksProxyPort is not set but should be 3128.
+!SESSION 2018-04-06 16:17:31.178 -----------------------------------------------
+eclipse.buildId=4.4.2.M20150204-1700
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2018-04-06 16:17:34.117
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.410
+!MESSAGE System property http.proxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.413
+!MESSAGE System property http.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.414
+!MESSAGE System property https.proxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.414
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.415
+!MESSAGE System property socksProxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.415
+!MESSAGE System property socksProxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.416
+!MESSAGE System property https.proxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.417
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.418
+!MESSAGE System property socksProxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.418
+!MESSAGE System property socksProxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.419
+!MESSAGE System property socksProxyHost is not set but should be proxy.
+
+!ENTRY org.eclipse.core.net 1 0 2018-04-06 16:17:35.419
+!MESSAGE System property socksProxyPort is not set but should be 3128.
