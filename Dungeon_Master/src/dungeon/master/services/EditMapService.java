@@ -1,6 +1,6 @@
 package dungeon.master.services;
 
-public interface EditMapService extends MapService {
+public interface EditMapService extends MapService /*refine*/ {
 	
 	/* Observators */
 	

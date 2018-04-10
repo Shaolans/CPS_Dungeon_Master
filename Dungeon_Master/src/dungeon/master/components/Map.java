@@ -12,12 +12,12 @@ public class Map implements MapService {
 	
 	@Override
 	public int getHeight() {
-		return cellmap.length;
+		return cellmap[0].length;
 	}
 
 	@Override
 	public int getWidth() {
-		return cellmap[0].length;
+		return cellmap.length;
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class Map implements MapService {
 
 	@Override
 	public void init(int w, int h) {
-		cellmap = new Cell[h][w];
+		cellmap = new Cell[w][h];
 	}
 
 	@Override

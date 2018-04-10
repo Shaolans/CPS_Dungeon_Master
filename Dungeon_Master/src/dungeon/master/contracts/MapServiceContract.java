@@ -73,11 +73,11 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		
 		/*capture */
 		
-		Cell[][] mapGrille_atPre = new Cell[getHeight()][getWidth()] ;
+		Cell[][] mapGrille_atPre = new Cell[getWidth()][getHeight()] ;
 		
-		for(int i=0; i<getHeight(); i++){
-			for(int j=0; j<getWidth(); j++){
-				mapGrille_atPre[i][j] = getCellNature(x,y);
+		for(int i=0; i<getWidth(); i++){
+			for(int j=0; j<getHeight(); j++){
+				mapGrille_atPre[i][j] = getCellNature(i,j);
 			}
 		}
 		
@@ -96,8 +96,8 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 			throw new PostconditionError("getCellNature(x,y)@pre=DNC \\impl getCellNature(x,y)=DNO does not hold");
 		}
 		
-		for(int i=0; i<getHeight(); i++){
-			for(int j=0; j<getWidth(); j++){
+		for(int i=0; i<getWidth(); i++){
+			for(int j=0; j<getHeight(); j++){
 				
 				if(i!=x && j!=y){
 					if(mapGrille_atPre[i][j]!=getCellNature(i,j)){
@@ -122,10 +122,10 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		
 		/*capture */
 		
-		Cell[][] mapGrille_atPre = new Cell[getHeight()][getWidth()] ;
+		Cell[][] mapGrille_atPre = new Cell[getWidth()][getHeight()] ;
 		
-		for(int i=0; i<getHeight(); i++){
-			for(int j=0; j<getWidth(); j++){
+		for(int i=0; i<getWidth(); i++){
+			for(int j=0; j<getHeight(); j++){
 				mapGrille_atPre[i][j] = getCellNature(x,y);
 			}
 		}
@@ -145,8 +145,8 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 			throw new PostconditionError("getCellNature(x,y)@pre=DNO \\impl getCellNature(x,y)=DNC does not hold");
 		}
 		
-		for(int i=0; i<getHeight(); i++){
-			for(int j=0; j<getWidth(); j++){
+		for(int i=0; i<getWidth(); i++){
+			for(int j=0; j<getHeight(); j++){
 				
 				if(i!=x && j!=y){
 					if(mapGrille_atPre[i][j]!=getCellNature(i,j)){
