@@ -5,7 +5,7 @@ import dungeon.master.services.MapService;
 
 public class MapServiceDecorator implements MapService{
 
-	private MapService map;
+	protected MapService map;
 		
 	public MapServiceDecorator(MapService map) {
 		this.map = map;
