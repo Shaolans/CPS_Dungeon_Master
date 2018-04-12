@@ -1,14 +1,15 @@
 package dungeon.master.components;
 
+import dungeon.master.enumerations.Option;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.MobService;
 
 public class Environment extends Map implements EnvironmentService {
 	
-	// TO FIX
+	
 	@Override
-	public boolean getCellContent(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+	public Option<MobService> getCellContent(int x, int y) {
+		return null;
 	}
 
 }

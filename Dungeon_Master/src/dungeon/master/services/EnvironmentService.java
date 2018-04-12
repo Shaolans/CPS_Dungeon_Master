@@ -1,9 +1,11 @@
 package dungeon.master.services;
 
+import dungeon.master.enumerations.Option;
+
 public interface EnvironmentService extends MapService {
 	
 	/* Observators */
-	public boolean getCellContent(int x, int y);
+	public Option<MobService> getCellContent(int x, int y);
 	
 	/* Operators */
 	// \pre getCellContent(col,row) == No

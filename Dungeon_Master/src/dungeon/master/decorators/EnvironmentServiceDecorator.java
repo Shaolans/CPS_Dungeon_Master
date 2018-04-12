@@ -1,7 +1,9 @@
 package dungeon.master.decorators;
 
 import dungeon.master.enumerations.Cell;
+import dungeon.master.enumerations.Option;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.MobService;
 
 public class EnvironmentServiceDecorator extends MapServiceDecorator implements EnvironmentService {
 	
@@ -14,7 +16,7 @@ public class EnvironmentServiceDecorator extends MapServiceDecorator implements 
 	}
 	
 	@Override
-	public boolean getCellContent(int x, int y) {
+	public Option<MobService> getCellContent(int x, int y) {
 		return getDelegate().getCellContent(x, y);
 	}
 
