@@ -15,6 +15,10 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 		super(decorator);
 	}
 	
+	public MobService getDelegate(){
+		return super.getDelegate();
+	}
+	
 	public void checkInvariant() {
 		if(!(0 <= getCol() && getEnv().getWidth() < getCol())){
 			throw new InvariantError("0 <= getCol() <= getEnv().getWidth() does not hold");

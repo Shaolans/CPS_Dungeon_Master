@@ -7,10 +7,15 @@ import dungeon.master.services.MobService;
 public class MobServiceDecorator implements MobService {
 	private MobService decorator;
 	
+	
 	public EnvironmentService getEnv() {
 		return decorator.getEnv();
 	}
-
+	
+	public MobService getDelegate(){
+		return decorator;
+	}
+	
 	public int getCol() {
 		return decorator.getCol();
 	}
