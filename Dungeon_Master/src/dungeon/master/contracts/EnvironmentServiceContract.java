@@ -1,6 +1,7 @@
 package dungeon.master.contracts;
 
 
+import dungeon.master.decorators.EnvironmentServiceDecorator;
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Option;
 import dungeon.master.exceptions.PostconditionError;
@@ -8,12 +9,15 @@ import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
-public class EnvironmentServiceContract extends MapServiceContract implements EnvironmentService {
+public class EnvironmentServiceContract extends EnvironmentServiceDecorator implements EnvironmentService {
 
 	public EnvironmentServiceContract(EnvironmentService env) {
 		super(env);
 	}
 
+	public void checkInvariant() {
+		//NONE
+	}
 	
 	@Override
 	public void closeDoor(int x, int y) {
@@ -27,7 +31,7 @@ public class EnvironmentServiceContract extends MapServiceContract implements En
 		}
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		/*capture */
 		
@@ -42,7 +46,7 @@ public class EnvironmentServiceContract extends MapServiceContract implements En
 		super.closeDoor(x,y);
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		/*postconditions */
 		

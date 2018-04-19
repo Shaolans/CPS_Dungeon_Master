@@ -27,8 +27,8 @@ public interface MobService {
 	
 	/* Constructors */
 	
-	/* \pre 0 <= col <= env.getWidth()
-	 * \pre 0 <= row <= env.getHeight()
+	/* \pre 0 <= col <= getEnv().getWidth()
+	 * \pre 0 <= row <= getEnv().getHeight()
 	 */
 	public void init(EnvironmentService env, int row, int col, Dir dir);
 	/* \post getEnv() = env

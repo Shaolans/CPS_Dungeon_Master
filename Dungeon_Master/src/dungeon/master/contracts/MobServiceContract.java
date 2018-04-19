@@ -301,16 +301,156 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 
 	@Override
 	public void StrafeL() {
-		// TODO Auto-generated method stub
+		/* Preconditions */
+		//NONE
 		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Capture */
+		int row_atpre = getRow();
+		int col_atpre = getCol();
+		
+		/* run */
+		super.turnR();
+		
+		checkInvariant();
+		
+		/* Postconditions */
+		if(getFace() == Dir.N) {
+			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
+					col_atpre+1 < getEnv().getWidth() &&
+					getEnv().getCellContent(col_atpre+1, row_atpre) == null) {
+				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
+					throw new PostconditionError("getFace()@pre == N ... (StrafeL) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == N ... (StrafeL) does not hold");
+				}
+			}
+		}
+		
+		
+		if(getFace() == Dir.E) {
+			if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
+					row_atpre+1 < getEnv().getHeight() &&
+					getEnv().getCellContent(col_atpre, row_atpre+1) == null) {
+				if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == E ... (StrafeL) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == E ... (StrafeL) does not hold");
+				}
+			}
+		}
+		
+		if(getFace() == Dir.W) {
+			if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
+					row_atpre-1 >= 0 &&
+					getEnv().getCellContent(col_atpre, row_atpre-1) == null) {
+				if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == W ... (StrafeL) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == W ... (StrafeL) does not hold");
+				}
+			}
+		}
+		
+		if(getFace() == Dir.S) {
+			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
+					col_atpre-1 >= 0 &&
+					getEnv().getCellContent(col_atpre-1, row_atpre) == null) {
+				if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
+					throw new PostconditionError("getFace()@pre == S ... (StrafeL) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == S ... (StrafeL) does not hold");
+				}
+			}
+		}
 	}
 
 	@Override
 	public void StrafeR() {
+		/* Preconditions */
+		//NONE
 		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Capture */
+		int row_atpre = getRow();
+		int col_atpre = getCol();
+		
+		/* run */
+		super.turnL();
+		
+		checkInvariant();
+		
+		/* Postconditions */
+		if(getFace() == Dir.S) {
+			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
+					col_atpre+1 < getEnv().getWidth() &&
+					getEnv().getCellContent(col_atpre+1, row_atpre) == null) {
+				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
+					throw new PostconditionError("getFace()@pre == N ... (StrafeR) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == N ... (StrafeR) does not hold");
+				}
+			}
+		}
+		
+		
+		if(getFace() == Dir.W) {
+			if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
+					row_atpre+1 < getEnv().getHeight() &&
+					getEnv().getCellContent(col_atpre, row_atpre+1) == null) {
+				if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == E ... (StrafeR) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == E ... (StrafeR) does not hold");
+				}
+			}
+		}
+		
+		if(getFace() == Dir.E) {
+			if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
+					row_atpre-1 >= 0 &&
+					getEnv().getCellContent(col_atpre, row_atpre-1) == null) {
+				if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == W ... (StrafeR) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == W ... (StrafeR) does not hold");
+				}
+			}
+		}
+		
+		if(getFace() == Dir.N) {
+			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
+					col_atpre-1 >= 0 &&
+					getEnv().getCellContent(col_atpre-1, row_atpre) == null) {
+				if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
+					throw new PostconditionError("getFace()@pre == S ... (StrafeR) does not hold");
+				}
+			}else {
+				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					throw new PostconditionError("getFace()@pre == S ... (StrafeR) does not hold");
+				}
+			}
+		}
 		
 	}
-	
 	
 
 }
