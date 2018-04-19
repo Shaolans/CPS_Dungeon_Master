@@ -25,6 +25,11 @@ public class EntityServiceDecorator extends MobServiceDecorator implements
 	public void init(EnvironmentService env, int col, int row, Dir dir, int hp) {
 		getDelegate().init(env, col, row, dir, hp);
 	}
+
+	@Override
+	public void step() {
+		getDelegate().step();
+	}
 	
 	
 

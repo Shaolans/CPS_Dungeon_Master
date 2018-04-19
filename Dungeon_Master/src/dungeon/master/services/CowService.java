@@ -2,16 +2,9 @@ package dungeon.master.services;
 
 import dungeon.master.enumerations.Dir;
 
-public interface EntityService extends MobService {
-	
-	/* Observators */
-	public int getHp();
-	
-	/* Invariant */
-	//NONE
-	
+public interface CowService extends EntityService {
+
 	/* Constructors */
-	
 	/* \pre h > 0
 	 * \pre 0 <= col <= env.getWidth()
 	 * \pre 0 <= row <= env.getHeight()
@@ -24,6 +17,9 @@ public interface EntityService extends MobService {
 	 * \post getHp() = hp;
 	 */
 	
-	/* Operators */
 	public void step();
+	/* \post getCol()@pre - 1 <= getCol() <= getCol()@pre + 1
+	 * \post getRow()@pre - 1 <= getRow() <= getRow()@pre + 1
+	 */
+	
 }
