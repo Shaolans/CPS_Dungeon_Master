@@ -6,7 +6,7 @@ public class Cow extends Entity implements CowService {
 
 	@Override
 	public void step() {
-		int step = (int)(Math.random()*4);
+		int step = (int)(Math.random()*6);
 		switch(step) {
 		case 0:
 			forward();
@@ -19,6 +19,12 @@ public class Cow extends Entity implements CowService {
 			break;
 		case 3:
 			StrafeR();
+			break;
+		case 4:
+			turnL();
+			break;
+		case 5:
+			turnR();
 			break;
 		}
 	}
