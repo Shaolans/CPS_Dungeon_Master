@@ -1,45 +1,53 @@
-package dungeon.master.decorators;
+package dungeon.master.components;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dungeon.master.services.EngineService;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 
-public class EngineServiceDecorator implements EngineService {
-	private EngineService delegate;
+public class Engine implements EngineService {
+	private List<EntityService> entities;
+	private EnvironmentService envi;
 	
-	public EngineServiceDecorator(EngineService delegate) {
-		this.delegate = delegate;
-	}
-
+	@Override
 	public EnvironmentService getEnvi() {
-		return delegate.getEnvi();
+		return envi;
 	}
 
+	@Override
 	public List<EntityService> getEntities() {
-		return delegate.getEntities();
+		return entities;
 	}
 
+	@Override
 	public EntityService getEntity(int i) {
-		return delegate.getEntity(i);
+		return entities.get(i);
 	}
 
+	@Override
 	public void init(EnvironmentService env) {
-		delegate.init(env);
+		entities = new ArrayList<>();
+		envi = env;
+
 	}
 
+	@Override
 	public void removeEntity(int i) {
-		delegate.removeEntity(i);
+		entities.remove(i);
 	}
 
+	@Override
 	public void addEntity(EntityService entity) {
-		delegate.addEntity(entity);
+		entities.add(entity);
 	}
 
+	@Override
 	public void step() {
-		delegate.step();
+		for(EntityService ent: entities) {
+			ent.step();
+		}
 	}
-	
-	
+
 }
