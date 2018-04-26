@@ -15,10 +15,10 @@ public class Cow extends Entity implements CowService {
 			backward();
 			break;
 		case 2:
-			StrafeL();
+			strafeL();
 			break;
 		case 3:
-			StrafeR();
+			strafeR();
 			break;
 		case 4:
 			turnL();

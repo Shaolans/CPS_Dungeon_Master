@@ -121,7 +121,7 @@ public class Mob implements MobService {
 	}
 
 	@Override
-	public void StrafeL() {
+	public void strafeL() {
 		if(face == Dir.N &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row) == null &&
@@ -152,7 +152,7 @@ public class Mob implements MobService {
 	}
 
 	@Override
-	public void StrafeR() {
+	public void strafeR() {
 		if(face == Dir.S &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row) == null &&

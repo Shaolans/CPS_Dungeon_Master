@@ -300,7 +300,7 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 	}
 
 	@Override
-	public void StrafeL() {
+	public void strafeL() {
 		/* Preconditions */
 		//NONE
 		
@@ -376,7 +376,7 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 	}
 
 	@Override
-	public void StrafeR() {
+	public void strafeR() {
 		/* Preconditions */
 		//NONE
 		

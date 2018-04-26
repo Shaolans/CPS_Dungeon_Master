@@ -314,7 +314,7 @@ public class EntityServiceContract extends EntityServiceDecorator implements
 	}
 
 	@Override
-	public void StrafeL() {
+	public void strafeL() {
 		/* Preconditions */
 		//NONE
 		
@@ -390,7 +390,7 @@ public class EntityServiceContract extends EntityServiceDecorator implements
 	}
 
 	@Override
-	public void StrafeR() {
+	public void strafeR() {
 		/* Preconditions */
 		//NONE
 		

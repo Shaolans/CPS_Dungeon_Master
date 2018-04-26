@@ -48,12 +48,12 @@ public class MobServiceDecorator implements MobService {
 		decorator.turnR();
 	}
 
-	public void StrafeL() {
-		decorator.StrafeL();
+	public void strafeL() {
+		decorator.strafeL();
 	}
 
-	public void StrafeR() {
-		decorator.StrafeR();
+	public void strafeR() {
+		decorator.strafeR();
 	}
 
 	public MobServiceDecorator(MobService decorator) {

@@ -32,8 +32,8 @@ public class PlayerServiceDecorator extends EntityServiceDecorator implements Pl
 	}
 
 	@Override
-	public Cell getViewable(int col, int row) {
-		return getDelegate().getViewable(col, row);
+	public boolean isViewable(int col, int row) {
+		return getDelegate().isViewable(col, row);
 	}
 
 }

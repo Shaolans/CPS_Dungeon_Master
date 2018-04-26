@@ -179,7 +179,7 @@ public interface MobService {
 	 * \post getEnv() = getEnv()@pre
 	 */
 	
-	public void StrafeL();
+	public void strafeL();
 	/* \post getFace()@pre==N \implies
 	 * getEnv().getCellNature(getCol()@pre+1, getRow()@pre) \in {EMP, DWO}
 	 * and getCol()+1 < getEnv().getWidth()
@@ -237,7 +237,7 @@ public interface MobService {
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre
 	 */
 	
-	public void StrafeR();
+	public void strafeR();
 	/* \post getFace()@pre==S \implies
 	 * getEnv().getCellNature(getCol()@pre+1, getRow()@pre) \in {EMP, DWO}
 	 * and getCol()+1 < getEnv().getWidth()
