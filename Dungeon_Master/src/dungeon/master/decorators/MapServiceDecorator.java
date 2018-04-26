@@ -11,6 +11,10 @@ public class MapServiceDecorator implements MapService{
 		this.map = map;
 	}
 
+	public MapService getDelegate(){
+		return map;
+	}
+	
 	public int getHeight() {
 		return map.getHeight();
 	}

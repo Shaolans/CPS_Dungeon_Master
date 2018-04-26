@@ -13,6 +13,20 @@ public interface EditMapService extends MapService /*refine*/ {
 	
 	
 	/* Invariants */
+	/* \inv isReachable(x1,y1,x2,y2) = exists P in Array[int,int], P[0]=(x1,y1) and P[size(P)-1]=(x2,y2)
+	 * and forall i in [1;size(P)-1], (P[i-1]=(u,v) and P[i](s,t)) \implies (u-s)²+(v-t)^2=1
+	 * and forall i in [1;size(P)-2], P[i-1]=(u,v) \implies getCellNature(u,v) != WALL
+	 * 
+	 * \inv isReady() = exists xi,yi,xo,yo in intxintxintxint
+	 *  getCellNature(xi,yi) = IN and getCellNature(xo,yo) = OUT
+	 * 		 and isReachable(xi,yi,xo,yo)
+	 *     	 and forall x,y in intxint, x != xi or y != yi \implies getCellNature(x,y) != IN
+	 * 		 and forall x,y in intxint, x != xo or y != yo \implies getCellNature(x,y) != OUT
+	 *  forall x,y in int, getCellNature(x,y) in {DNO, DNC} \implies getCellNature(x+1,y) = getCellNature(x-1,y) = EMP and
+	 *  getCellNature(x,y-1) = getCellNature(x,y+1) = WLL
+	 *  forall x,y in int, getCellNature(x,y) in {DWO, DWC} \implies getCellNature(x+1,y) = getCellNature(x-1,y) = WLL and
+	 *  getCellNature(x,y-1) = getCellNature(x,y+1) = EMP
+	 */
 	
 	/* Constructors*/
 	//NONE

@@ -31,7 +31,7 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 	}
 	
 	
-	public void checkInvariants(){
+	public void checkInvariant(){
 		// NONE
 	}
 
@@ -45,12 +45,12 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		}
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		super.init(w, h);
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		/*postconditions*/
 		if(!(getHeight()==h && getWidth()==w)){
@@ -69,7 +69,7 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		}
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		/*capture */
 		
@@ -84,7 +84,7 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		super.openDoor(x,y);
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		/*postconditions */
 		
@@ -118,7 +118,7 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		}
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		/*capture */
 		
@@ -133,7 +133,7 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		super.closeDoor(x,y);
 		
 		/*invariants*/
-		checkInvariants();
+		checkInvariant();
 		
 		/*postconditions */
 		

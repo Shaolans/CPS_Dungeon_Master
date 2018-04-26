@@ -12,7 +12,8 @@ public interface EngineService {
 	
 	/* Invariants */
 	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getEnvi() == getEnvi()
-	// \inv \forall i in [0;getEntities().size()-1], getEnvi().getCellContent(getEntity(i).getCol(), getEntity(i).getRow()) == getEntity(i)
+	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getCol() = x and getEntity(i).getRow() == y \implies   
+	// getEnvi().getCellContent(x,y) == getEntity(i)
 	
 	
 	/* Constructors */
