@@ -26,6 +26,10 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 
 	@Override
 	public Cell getCellNature(int x, int y) {
+		/* Preconditions */
+		if(!(0 <= x && x <= getWidth() && 0 <= y && y <= getHeight())) {
+			throw new PreconditionError("0<=x<getWidth() and 0<=y<getHeigth() does not hold");
+		}
 		
 		return super.getCellNature(x, y);
 	}
