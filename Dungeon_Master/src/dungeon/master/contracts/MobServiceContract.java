@@ -20,11 +20,11 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 	}
 	
 	public void checkInvariant() {
-		if(!(0 <= getCol() && getEnv().getWidth() < getCol())){
+		if(!(0 <= getCol() && getCol() < getEnv().getWidth())){
 			throw new InvariantError("0 <= getCol() <= getEnv().getWidth() does not hold");
 		}
 		
-		if(!(0 <= getRow() && getEnv().getHeight() < getRow())){
+		if(!(0 <= getRow() && getRow() < getEnv().getHeight())){
 			throw new InvariantError("0 <= getRow() <= getEnv().getHeight() does not hold");
 		}
 		
@@ -37,12 +37,13 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 	
 
 	@Override
-	public void init(EnvironmentService env, int row, int col, Dir dir) {
+	public void init(EnvironmentService env, int col, int row, Dir dir) {
 		/* Preconditions */
-		if(!(0 <= row && env.getHeight() < row)) throw new PreconditionError("0 <= row <= env.getHeight() does not hold");
-		if(!(0 <= col && env.getWidth() < col)) throw new PreconditionError("0 <= col <= env.getWidth() does not hold");
 		
-		super.init(env, row, col, dir);
+		if(!(0 <= row && row < env.getHeight())) throw new PreconditionError("0 <= row <= env.getHeight() does not hold");
+		if(!(0 <= col && col < env.getWidth())) throw new PreconditionError("0 <= col <= env.getWidth() does not hold");
+
+		super.init(env, col, row, dir);
 		
 		/* Invariants */
 		checkInvariant();
@@ -86,16 +87,16 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 		}
 		
 		
-		if(getFace() == Dir.E) {
+		if(getFace() == Dir.W) {
 			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
 					col_atpre+1 < getEnv().getWidth() &&
 					getEnv().getCellContent(col_atpre+1, row_atpre) == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
-					throw new PostconditionError("getFace()@pre == E ... does not hold");
+					throw new PostconditionError("getFace()@pre == W ... does not hold");
 				}
 			}else {
 				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
-					throw new PostconditionError("getFace()@pre == E ... does not hold");
+					throw new PostconditionError("getFace()@pre == W ... does not hold");
 				}
 			}
 		}
@@ -114,16 +115,16 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 			}
 		}
 		
-		if(getFace() == Dir.W) {
+		if(getFace() == Dir.E) {
 			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
 					col_atpre-1 >= 0 &&
 					getEnv().getCellContent(col_atpre-1, row_atpre) == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
-					throw new PostconditionError("getFace()@pre == W ... does not hold");
+					throw new PostconditionError("getFace()@pre == E ... does not hold");
 				}
 			}else {
 				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
-					throw new PostconditionError("getFace()@pre == W ... does not hold");
+					throw new PostconditionError("getFace()@pre == E ... does not hold");
 				}
 			}
 		}
@@ -161,7 +162,7 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 		}
 		
 		
-		if(getFace() == Dir.W) {
+		if(getFace() == Dir.E) {
 			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
 					col_atpre+1 < getEnv().getWidth() &&
 					getEnv().getCellContent(col_atpre+1, row_atpre) == null) {
@@ -189,7 +190,7 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 			}
 		}
 		
-		if(getFace() == Dir.E) {
+		if(getFace() == Dir.W) {
 			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
 					col_atpre-1 >= 0 &&
 					getEnv().getCellContent(col_atpre-1, row_atpre) == null) {
@@ -312,7 +313,7 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 		int col_atpre = getCol();
 		
 		/* run */
-		super.turnR();
+		super.strafeL();
 		
 		checkInvariant();
 		
@@ -388,7 +389,7 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 		int col_atpre = getCol();
 		
 		/* run */
-		super.turnL();
+		super.strafeR();
 		
 		checkInvariant();
 		

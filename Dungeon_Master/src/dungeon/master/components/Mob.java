@@ -32,7 +32,7 @@ public class Mob implements MobService {
 	}
 
 	@Override
-	public void init(EnvironmentService env, int row, int col, Dir dir) {
+	public void init(EnvironmentService env, int col, int row, Dir dir) {
 		this.env = env;
 		this.row = row;
 		this.col = col;
@@ -48,7 +48,7 @@ public class Mob implements MobService {
 			row++;
 		}
 		
-		if(face == Dir.E &&
+		if(face == Dir.W &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row) == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
@@ -62,7 +62,7 @@ public class Mob implements MobService {
 			row--;
 		}
 		
-		if(face == Dir.W &&
+		if(face == Dir.E &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row) == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
@@ -82,7 +82,7 @@ public class Mob implements MobService {
 			row++;
 		}
 		
-		if(face == Dir.W &&
+		if(face == Dir.E &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row) == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
@@ -96,7 +96,7 @@ public class Mob implements MobService {
 			row--;
 		}
 		
-		if(face == Dir.E &&
+		if(face == Dir.W &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row) == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
@@ -106,18 +106,18 @@ public class Mob implements MobService {
 
 	@Override
 	public void turnL() {
-		if(face == Dir.N) face = Dir.W;
-		if(face == Dir.W) face = Dir.S;
-		if(face == Dir.S) face = Dir.E;
-		if(face == Dir.E) face = Dir.N;
+		if(face == Dir.N) { face = Dir.W; return; }
+		if(face == Dir.W) { face = Dir.S; return; }
+		if(face == Dir.S) { face = Dir.E; return; }
+		if(face == Dir.E) { face = Dir.N; return; }
 	}
 
 	@Override
 	public void turnR() {
-		if(face == Dir.N) face = Dir.E;
-		if(face == Dir.W) face = Dir.N;
-		if(face == Dir.S) face = Dir.W;
-		if(face == Dir.E) face = Dir.S;
+		if(face == Dir.N) { face = Dir.E; return; }
+		if(face == Dir.W) { face = Dir.N; return; }
+		if(face == Dir.S) { face = Dir.W; return; }
+		if(face == Dir.E) { face = Dir.S; return; }
 	}
 
 	@Override

@@ -27,10 +27,10 @@ public interface MobService {
 	
 	/* Constructors */
 	
-	/* \pre 0 <= col <= getEnv().getWidth()
-	 * \pre 0 <= row <= getEnv().getHeight()
+	/* \pre 0 <= col < getEnv().getWidth()
+	 * \pre 0 <= row < getEnv().getHeight()
 	 */
-	public void init(EnvironmentService env, int row, int col, Dir dir);
+	public void init(EnvironmentService env, int col, int row, Dir dir);
 	/* \post getEnv() = env
 	 * \post getCol() = col
 	 * \post getRow() = row
@@ -57,14 +57,14 @@ public interface MobService {
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre
 	 * 
-	 * \post getFace()@pre == E \implies
+	 * \post getFace()@pre == W \implies
 	 *  getEnv().getCellNature(getCol()@pre+1, getRow()@pre) \in {EMP, DWO}
 	 * and getCol()@pre + 1 < getEnv().getWidth()
 	 * and getEnv().getCellContent(getCol()@pre+1, getRow()@pre) == No
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre + 1
 	 * 
-	 * \post getFace()@pre == E \implies
+	 * \post getFace()@pre == W \implies
 	 *  getEnv().getCellNature(getCol()@pre+1, getRow()@pre) \not \in {EMP, DWO}
 	 * or getCol()@pre + 1 >= getEnv().getWidth()
 	 * or getEnv().getCellContent(getCol()@pre+1, getRow()@pre) != No
@@ -85,14 +85,14 @@ public interface MobService {
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre
 	 * 
-	 * \post getFace()@pre == W \implies
+	 * \post getFace()@pre == E \implies
 	 *  getEnv().getCellNature(getCol()@pre-1, getRow()@pre) \in {EMP, DWO}
 	 * and getCol()@pre-1 >= 0
 	 * and getEnv().getCellContent(getCol()@pre-1, getRow()@pre) == No
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre-1
 	 * 
-	 * \post getFace()@pre == W \implies
+	 * \post getFace()@pre == E \implies
 	 *  getEnv().getCellNature(getCol()@pre-1, getRow()@pre) \not \in {EMP, DWO}
 	 * and getCol()@pre-1 < 0
 	 * and getEnv().getCellContent(getCol()@pre-1, getRow()@pre) != No
@@ -115,14 +115,14 @@ public interface MobService {
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre
 	 * 
-	 * \post getFace()@pre == E \implies
+	 * \post getFace()@pre == W \implies
 	 *  getEnv().getCellNature(getCol()@pre-1, getRow()@pre) \in {EMP, DWO}
 	 * and getCol()@pre-1 >= 0
 	 * and getEnv().getCellContent(getCol()@pre-1, getRow()@pre) == No
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre-1
 	 * 
-	 * \post getFace()@pre == E \implies
+	 * \post getFace()@pre == W \implies
 	 *  getEnv().getCellNature(getCol()@pre-1, getRow()@pre) \not \in {EMP, DWO}
 	 * and getCol()@pre-1 < 0
 	 * and getEnv().getCellContent(getCol()@pre-1, getRow()@pre) != No
@@ -143,14 +143,14 @@ public interface MobService {
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre
 	 * 
-	 * \post getFace()@pre == W \implies
+	 * \post getFace()@pre == E \implies
 	 *  getEnv().getCellNature(getCol()@pre+1, getRow()@pre) \in {EMP, DWO}
 	 * and getCol()@pre + 1 < getEnv().getWidth()
 	 * and getEnv().getCellContent(getCol()@pre+1, getRow()@pre) == No
 	 * \implies
 	 * getRow() = getRow()@pre and getCol() = getCol()@pre + 1
 	 * 
-	 * \post getFace()@pre == W \implies
+	 * \post getFace()@pre == E \implies
 	 *  getEnv().getCellNature(getCol()@pre+1, getRow()@pre) \not \in {EMP, DWO}
 	 * or getCol()@pre + 1 >= getEnv().getWidth()
 	 * or getEnv().getCellContent(getCol()@pre+1, getRow()@pre) != No

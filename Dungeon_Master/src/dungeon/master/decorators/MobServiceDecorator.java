@@ -28,8 +28,8 @@ public class MobServiceDecorator implements MobService {
 		return decorator.getFace();
 	}
 
-	public void init(EnvironmentService env, int row, int col, Dir dir) {
-		decorator.init(env, row, col, dir);
+	public void init(EnvironmentService env, int col, int row, Dir dir) {
+		decorator.init(env, col, row, dir);
 	}
 
 	public void forward() {
