@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dungeon.master.enumerations.Cell;
+import dungeon.master.enumerations.Pair;
 import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PostconditionError;
 import dungeon.master.exceptions.PreconditionError;
@@ -76,28 +77,12 @@ public class EditMapServiceContract extends MapServiceContract implements
 		
 	}
 	
-	class Pair<T,U>{
-		private T value1;
-		private U value2;
-		
-		public Pair(T t, U u){
-			value1 = t;
-			value2 = u;
-		}
-		
-		public T getValue1(){
-			return value1;
-		}
-		
-		public U getValue2(){
-			return value2;
-		}
-	}
+	
 	
 	public boolean existReachable(int x1, int y1, int x2, int y2){
 		Cell [][]tab = new Cell[getWidth()][getHeight()];
 		for(int i = 0; i < getWidth(); i++){
-			for(int j = 0; i < getHeight(); j++){
+			for(int j = 0; j < getHeight(); j++){
 				tab[i][j] = getCellNature(i, j);
 			}
 		}

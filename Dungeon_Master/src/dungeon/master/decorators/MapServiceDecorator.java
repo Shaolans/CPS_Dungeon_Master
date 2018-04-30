@@ -39,6 +39,11 @@ public class MapServiceDecorator implements MapService{
 		map.closeDoor(x, y);
 	}
 
+	@Override
+	public Cell[][] getArray() {
+		return map.getArray();
+	}
+
 	
 
 }

@@ -1,6 +1,5 @@
 package dungeon.master.components;
 
-import java.util.Vector;
 
 import dungeon.master.enumerations.Option;
 import dungeon.master.services.EnvironmentService;
@@ -8,25 +7,23 @@ import dungeon.master.services.MobService;
 
 public class Environment extends Map implements EnvironmentService {
 	
-	Vector<Vector<Option<MobService>>>  mobMap;
+	Option<MobService> mobMap[][];
 	
-	public Environment(){
-		mobMap = new Vector<Vector<Option<MobService>>>(getHeight());
-		
-		for(int i=0; i<getHeight(); i++){
-			mobMap.add(new Vector<Option<MobService>>(getWidth()));
-			
-		}
+	@SuppressWarnings("unchecked")
+	@Override
+	public void init(int w, int h) {
+		super.init(w, h);
+		mobMap = (Option<MobService>[][]) new Option[w][h];
 	}
 	
 	@Override
 	public Option<MobService> getCellContent(int x, int y) {
-		return mobMap.get(x).get(y);
+		return mobMap[x][y];
 	}
 	
 	@Override
 	public void closeDoor(int col, int row){
-		if(getCellContent(col, row).getValue()==null){
+		if(getCellContent(col, row)==null){
 			super.closeDoor(col, row);
 		}
 	}

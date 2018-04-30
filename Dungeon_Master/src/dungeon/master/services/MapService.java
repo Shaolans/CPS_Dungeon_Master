@@ -54,7 +54,8 @@ public interface MapService {
 	
 	
 	
-	
+	//permet les tests
+	public Cell[][] getArray();
 	
 	
 }

@@ -48,9 +48,6 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 			throw new PreconditionError("w>0 && h>0 does not hold");
 		}
 		
-		/*invariants*/
-		checkInvariant();
-		
 		super.init(w, h);
 		
 		/*invariants*/
@@ -130,10 +127,9 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		
 		for(int i=0; i<getWidth(); i++){
 			for(int j=0; j<getHeight(); j++){
-				mapGrille_atPre[i][j] = getCellNature(x,y);
+				mapGrille_atPre[i][j] = getCellNature(i,j);
 			}
 		}
-		
 		super.closeDoor(x,y);
 		
 		/*invariants*/
@@ -151,7 +147,6 @@ public class MapServiceContract extends MapServiceDecorator implements MapServic
 		
 		for(int i=0; i<getWidth(); i++){
 			for(int j=0; j<getHeight(); j++){
-				
 				if(i!=x && j!=y){
 					if(mapGrille_atPre[i][j]!=getCellNature(i,j)){
 						throw new PostconditionError("\\forall u in [0, getWidth()-1] \\forall v in [0, getHeight()-1] \\with (u!=x or v!=y) 	\\impl getCellNature(x,y) = getCellNature(x,y)@pre	");

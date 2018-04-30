@@ -4,7 +4,7 @@ import dungeon.master.enumerations.Cell;
 import dungeon.master.services.MapService;
 
 public class Map implements MapService {
-	private Cell[][] cellmap;
+	protected Cell[][] cellmap;
 	
 	public Map(){
 		
@@ -28,6 +28,11 @@ public class Map implements MapService {
 	@Override
 	public void init(int w, int h) {
 		cellmap = new Cell[w][h];
+		for(int i = 0; i < w; i++) {
+			for(int j = 0; j < h; j++) {
+				cellmap[i][j] = Cell.EMP;
+			}
+		}
 	}
 
 	@Override
@@ -47,6 +52,11 @@ public class Map implements MapService {
 			cellmap[x][y] = Cell.DNC;
 		}
 
+	}
+
+	@Override
+	public Cell[][] getArray() {
+		return cellmap;
 	}
 
 }
