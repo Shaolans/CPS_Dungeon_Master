@@ -172,6 +172,48 @@ public class EnvironmentServiceContract extends EnvironmentServiceDecorator impl
 		}
 		
 	}
-
+	
+	@Override
+	public void setCellContent(int col, int row, MobService mob) {
+		/* Preconditions */
+		if(!(0 <= col && col < getHeight() && 0 <= row && row < getWidth())) {
+			throw new PreconditionError("0 <= col < getHeight() and 0 <= row < getWidth() does not hold");
+		}
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Capture */
+		@SuppressWarnings("unchecked")
+		Option<MobService> map[][] = new Option[getWidth()][getHeight()];
+		for(int i = 0; i < getWidth(); i++) {
+			for(int j = 0; j < getHeight(); j++) {
+				map[i][j] = getCellContent(i, j);
+			}
+		}
+		
+		/* Run */
+		super.setCellContent(col, row, mob);
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Postconditions */
+		if(!(getCellContent(col, row).getValue() == mob)) {
+			throw new PostconditionError("getCellContent(col, row) == Option<Mob>(mob) does not hold");
+		}
+		
+		for(int i = 0; i < getWidth(); i++) {
+			for(int j = 0; j < getHeight(); j++) {
+				if(i != col || j != row) {
+					if(!(getCellContent(i, j) == map[i][j])) {
+						throw new PostconditionError("\\forall x \\in [0;getHeight()-1], \\forall y \\in [0;getWidth()-] and x!=col and y!=row,"
+								+ " getCellContent(x,y) = getCellContent(x,y)@pre does not hold");
+					}
+				}
+			}
+		}
+		
+	}
 	
 }

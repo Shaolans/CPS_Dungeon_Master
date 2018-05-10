@@ -8,11 +8,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dungeon.master.components.Environment;
+import dungeon.master.components.Mob;
 import dungeon.master.contracts.EnvironmentServiceContract;
 import dungeon.master.enumerations.Cell;
+import dungeon.master.enumerations.Option;
 import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.MobService;
 
 public class EnvironmentTest {
 	private EnvironmentService env;
@@ -27,6 +30,54 @@ public class EnvironmentTest {
 	@After
 	public void afterTests() {
 		env = null;
+	}
+	
+	@Test
+	public void setCellContentTransitionTest_1() {
+		//cas positif
+		try {
+			env.init(10, 20);
+			Mob m = new Mob();
+			@SuppressWarnings("unchecked")
+			Option<MobService> map[][] = new Option[10][20];
+			
+			env.setCellContent(5, 5, m);
+			
+			assertTrue(env.getCellContent(5, 5).getValue() == m);
+			for(int i = 0; i < 10; i++) {
+				for(int j = 0; j < 20; j++) {
+					if(i != 5 || j != 5) {
+						assertTrue(map[i][j] == env.getCellContent(i, j));
+					}
+				}
+			}
+		}catch(InvariantError ie) {
+			fail();
+		}
+	}
+	
+	
+	@Test
+	public void setCellContentPreTest_1() {
+		//cas positif
+		try {
+			env.init(10, 20);
+			env.setCellContent(1, 2, new Mob());
+		}catch(PreconditionError pe) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void setCellContentPreTest_2() {
+		//cas negatif
+		try {
+			env.init(10, 20);
+			env.setCellContent(1, 96, new Mob());
+			fail();
+		}catch(PreconditionError pe) {
+			
+		}
 	}
 	
 	

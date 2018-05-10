@@ -16,12 +16,12 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 	}
 	
 	public void checkInvariant(){
-		if(!(0 <= getCol() && getEnv().getWidth() < getCol())){
-			throw new InvariantError("0 <= getCol() <= getEnv().getWidth() does not hold");
+		if(!(0 <= getCol() && getCol() < getEnv().getWidth())){
+			throw new InvariantError("0 <= getCol() < getEnv().getWidth() does not hold");
 		}
 		
-		if(!(0 <= getRow() && getEnv().getHeight() < getRow())){
-			throw new InvariantError("0 <= getRow() <= getEnv().getHeight() does not hold");
+		if(!(0 <= getRow() && getRow() < getEnv().getHeight())){
+			throw new InvariantError("0 <= getRow() < getEnv().getHeight() does not hold");
 		}
 		
 		if(!(getEnv().getCellNature(getCol(), getRow()) != Cell.WLL ||
@@ -48,9 +48,9 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 			throw new PreconditionError("h > 0 does not hold");
 		}
 		
-		if(!(0 <= row && env.getHeight() < row)) throw new PreconditionError("0 <= row <= env.getHeight() does not hold");
-		if(!(0 <= col && env.getWidth() < col)) throw new PreconditionError("0 <= col <= env.getWidth() does not hold");
-		if(!(3 <= hp && hp <= 4)) throw new PreconditionError("03 <= hp && hp <= 4 does not hold");
+		if(!(0 <= row && row < env.getHeight())) throw new PreconditionError("0 <= row <= env.getHeight() does not hold");
+		if(!(0 <= col && col < env.getWidth())) throw new PreconditionError("0 <= col <= env.getWidth() does not hold");
+		if(!(3 <= hp && hp <= 4)) throw new PreconditionError("0 <= hp && hp <= 4 does not hold");
 		
 		getDelegate().init(env, col, row, dir, hp);
 		
@@ -488,7 +488,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 			throw new PostconditionError("getCol()@pre - 1 <= getCol() <= getCol()@pre + 1 does not hold");
 		}
 		
-		if(!(row_atpre-1 <= getCol() && getRow() <= row_atpre+1)) {
+		if(!(row_atpre-1 <= getRow() && getRow() <= row_atpre+1)) {
 			throw new PostconditionError("getRow()@pre - 1 <= getRow() <= getRow()@pre + 1 does not hold");
 		}
 	}

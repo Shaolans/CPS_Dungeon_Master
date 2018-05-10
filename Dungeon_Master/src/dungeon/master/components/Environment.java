@@ -28,4 +28,9 @@ public class Environment extends Map implements EnvironmentService {
 		}
 	}
 
+	@Override
+	public void setCellContent(int col, int row, MobService mob) {
+		mobMap[col][row] = new Option<MobService>(mob);
+	}
+
 }

@@ -114,6 +114,7 @@ public class EditMap extends Map implements EditMapService {
 		int yo = out.getValue2();
 		
 		boolean res = (getCellNature(xi, yi) == Cell.IN && getCellNature(xo, yo) == Cell.OUT);
+		
 		res = res & isReachable(xi, yi, xo, yo);
 		
 		for(int i = 0; i < getWidth(); i++){

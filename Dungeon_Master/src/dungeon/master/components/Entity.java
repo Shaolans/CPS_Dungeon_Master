@@ -9,6 +9,7 @@ public abstract class Entity extends Mob implements EntityService {
 
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir, int hp) {
+		super.init(env, col, row, dir);
 		this.hp = hp;
 
 	}

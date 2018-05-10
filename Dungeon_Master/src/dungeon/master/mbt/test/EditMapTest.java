@@ -29,6 +29,51 @@ public class EditMapTest {
 	}
 	
 	@Test
+	public void isReadyTransitionTest_1() {
+		//cas positif
+		try {
+			ems.init(10, 20);
+			assertTrue(ems.isReady());
+		}catch(PreconditionError ex) {
+			fail();
+		}catch(InvariantError ie) {
+			fail();
+		}
+		
+	}
+	
+	@Test
+	public void isReadyTransitionTest_2() {
+		//cas negatif
+		try {
+			ems.init(10, 20);
+			ems.setNature(0, 0, Cell.IN);
+			ems.setNature(0, 19, Cell.OUT);
+			assertTrue(!ems.isReady());
+		}catch(PreconditionError ex) {
+			fail();
+		}catch(InvariantError ie) {
+			fail();
+		}
+		
+	}
+	
+	@Test
+	public void isReachableTransitionTest_1() {
+		//cas positif
+		try {
+			ems.init(10, 20);
+			ems.setNature(0, 0, Cell.IN);
+			ems.setNature(0, 19, Cell.OUT);
+			assertTrue(ems.isReachable(0, 0, 0, 19));
+		}catch(PreconditionError ex) {
+			fail();
+		}catch(InvariantError ie) {
+			fail();
+		}
+		
+	}
+	@Test
 	public void setNatureTransitionTest_1() {
 		//cas positif
 		Cell copy[][] = new Cell[10][20];

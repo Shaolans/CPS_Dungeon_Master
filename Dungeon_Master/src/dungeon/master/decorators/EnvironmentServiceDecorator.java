@@ -51,4 +51,9 @@ public class EnvironmentServiceDecorator extends MapServiceDecorator implements 
 		
 	}
 
+	@Override
+	public void setCellContent(int col, int row, MobService mob) {
+		getDelegate().setCellContent(col, row, mob);
+	}
+
 }
