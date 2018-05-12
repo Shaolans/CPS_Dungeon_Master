@@ -25,6 +25,7 @@ public class EngineServiceContract extends EngineServiceDecorator implements Eng
 			
 			int x = getEntity(i).getCol();
 			int y = getEntity(i).getRow();
+			
 			if(!(getEnvi().getCellContent(x, y).getValue() == getEntity(i))) {
 				throw new InvariantError("\\inv \\forall i in [0;getEntities().size()-1], getEnvi().getCellContent(getEntity(i).getCol(), getEntity(i).getRow()) == getEntity(i)");
 			}

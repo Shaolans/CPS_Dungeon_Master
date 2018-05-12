@@ -6,10 +6,10 @@ import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
 public class Mob implements MobService {
-	private EnvironmentService env;
-	private int col;
-	private int row;
-	private Dir face;
+	protected EnvironmentService env;
+	protected int col;
+	protected int row;
+	protected Dir face;
 	
 	@Override
 	public EnvironmentService getEnv() {

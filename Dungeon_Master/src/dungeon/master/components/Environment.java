@@ -14,6 +14,11 @@ public class Environment extends Map implements EnvironmentService {
 	public void init(int w, int h) {
 		super.init(w, h);
 		mobMap = (Option<MobService>[][]) new Option[w][h];
+		for(int i = 0; i < w; i++) {
+			for(int j = 0; j < h; j++) {
+				mobMap[i][j] = new Option<MobService>();
+			}
+		}
 	}
 	
 	@Override

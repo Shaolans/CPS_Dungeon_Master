@@ -1,13 +1,16 @@
 package dungeon.master.mbt.test;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import dungeon.master.components.Cow;
-import dungeon.master.components.EditMap;
 import dungeon.master.components.Engine;
 import dungeon.master.components.Environment;
 import dungeon.master.contracts.CowServiceContract;
@@ -18,6 +21,7 @@ import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.CowService;
 import dungeon.master.services.EngineService;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.MobService;
 
 public class EngineTest {
 	private EngineService es;
@@ -27,7 +31,7 @@ public class EngineTest {
 	public void beforeTests() {
 		es = new EngineServiceContract(new Engine());
 		env = new EnvironmentServiceContract(new Environment());
-		env.init(10, 10);
+		env.init(10, 15);
 	}
 	
 	
@@ -35,6 +39,63 @@ public class EngineTest {
 	public void afterTests() {
 		es = null;
 		env = null;
+	}
+	
+	@Test
+	public void addEntityTransTest_1() {
+		//cas positif
+		try {
+			es.init(env);
+			CowService cow1 = new CowServiceContract(new Cow());
+			cow1.init(env, 0, 5, Dir.N);
+			env.setCellContent(0, 5, cow1);
+			
+			int oldsize = es.getEntities().size();
+			List<MobService> oldentities = new ArrayList<>(es.getEntities());
+			
+			es.addEntity(cow1);
+			assertTrue(oldsize + 1 == es.getEntities().size());
+			for(int i = 0; i < oldsize; i++) {
+				assertTrue(oldentities.get(i) == es.getEntity(i));
+			}
+		}catch(PreconditionError pe) {
+			fail();
+		}
+	}
+	
+	
+	@Test
+	public void removeEntityTransTest_1() {
+		//cas positif
+		try {
+			es.init(env);
+			CowService cow1 = new CowServiceContract(new Cow());
+			cow1.init(env, 0, 5, Dir.N);
+			env.setCellContent(0, 5, cow1);
+			es.addEntity(cow1);
+			
+			CowService cow2 = new CowServiceContract(new Cow());
+			cow2.init(env, 3, 4, Dir.N);
+			env.setCellContent(3, 4, cow2);
+			es.addEntity(cow2);
+			
+			CowService cow3 = new CowServiceContract(new Cow());
+			cow3.init(env, 8, 4, Dir.N);
+			env.setCellContent(8, 4, cow3);
+			es.addEntity(cow3);
+			
+			
+			int oldsize = es.getEntities().size();
+			List<MobService> oldentities = new ArrayList<>(es.getEntities());
+			
+			es.removeEntity(0);
+			assertTrue(oldsize - 1 == es.getEntities().size());
+			for(int i = 1; i < es.getEntities().size(); i++) {
+				assertTrue(oldentities.get(i) == es.getEntity(i-1));
+			}
+		}catch(PreconditionError pe) {
+			fail();
+		}
 	}
 	
 	@Test
@@ -55,7 +116,7 @@ public class EngineTest {
 	
 	@Test
 	public void removeEntityPreTest_2() {
-		//cas negatof
+		//cas negatif
 		try {
 			es.init(env);
 			es.removeEntity(52);

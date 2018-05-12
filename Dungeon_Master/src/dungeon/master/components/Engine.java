@@ -35,12 +35,14 @@ public class Engine implements EngineService {
 
 	@Override
 	public void removeEntity(int i) {
+		envi.setCellContent(entities.get(i).getCol(), entities.get(i).getRow(), null);
 		entities.remove(i);
 	}
 
 	@Override
 	public void addEntity(EntityService entity) {
 		entities.add(entity);
+		envi.setCellContent(entity.getCol(), entity.getRow(), entity);
 	}
 
 	@Override
