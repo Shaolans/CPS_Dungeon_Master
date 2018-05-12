@@ -43,28 +43,29 @@ public class Mob implements MobService {
 	public void forward() {
 		if(face == Dir.N &&
 				row+1 < env.getHeight() &&
-				env.getCellContent(col, row+1) == null &&
+				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
+			
 			row++;
 		}
 		
 		if(face == Dir.W &&
 				col+1 < env.getWidth() &&
-				env.getCellContent(col+1, row) == null &&
+				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
 		}
 		
 		if(face == Dir.S &&
 				row-1 >= 0 &&
-				env.getCellContent(col, row-1) == null &&
+				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
 		}
 		
 		if(face == Dir.E &&
 				col-1 >= 0 &&
-				env.getCellContent(col-1, row) == null &&
+				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
 		}
@@ -77,28 +78,28 @@ public class Mob implements MobService {
 	public void backward() {
 		if(face == Dir.S &&
 				row+1 < env.getHeight() &&
-				env.getCellContent(col, row+1) == null &&
+				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
 			row++;
 		}
 		
 		if(face == Dir.E &&
 				col+1 < env.getWidth() &&
-				env.getCellContent(col+1, row) == null &&
+				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
 		}
 		
 		if(face == Dir.N &&
 				row-1 >= 0 &&
-				env.getCellContent(col, row-1) == null &&
+				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
 		}
 		
 		if(face == Dir.W &&
 				col-1 >= 0 &&
-				env.getCellContent(col-1, row) == null &&
+				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
 		}
@@ -124,28 +125,28 @@ public class Mob implements MobService {
 	public void strafeL() {
 		if(face == Dir.N &&
 				col+1 < env.getWidth() &&
-				env.getCellContent(col+1, row) == null &&
+				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
 		}
 		
 		if(face == Dir.E &&
 				row+1 < env.getHeight() &&
-				env.getCellContent(col, row+1) == null &&
+				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
 			row++;
 		}
 		
 		if(face == Dir.S &&
 				col-1 >= 0 &&
-				env.getCellContent(col-1, row) == null &&
+				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
 		}
 		
 		if(face == Dir.W &&
 				row-1 >= 0 &&
-				env.getCellContent(col, row-1) == null &&
+				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
 		}
@@ -155,28 +156,28 @@ public class Mob implements MobService {
 	public void strafeR() {
 		if(face == Dir.S &&
 				col+1 < env.getWidth() &&
-				env.getCellContent(col+1, row) == null &&
+				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
 		}
 		
 		if(face == Dir.W &&
 				row+1 < env.getHeight() &&
-				env.getCellContent(col, row+1) == null &&
+				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
 			row++;
 		}
 		
 		if(face == Dir.N &&
 				col-1 >= 0 &&
-				env.getCellContent(col-1, row) == null &&
+				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
 		}
 		
 		if(face == Dir.E &&
 				row-1 >= 0 &&
-				env.getCellContent(col, row-1) == null &&
+				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
 		}
