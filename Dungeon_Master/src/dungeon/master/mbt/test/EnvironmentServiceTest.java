@@ -17,7 +17,7 @@ import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
-public class EnvironmentTest {
+public class EnvironmentServiceTest {
 	private EnvironmentService env;
 	
 	

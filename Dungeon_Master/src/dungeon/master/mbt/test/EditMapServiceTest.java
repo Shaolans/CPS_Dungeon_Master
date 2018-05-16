@@ -14,7 +14,7 @@ import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.EditMapService;
 
-public class EditMapTest {
+public class EditMapServiceTest {
 	private EditMapService ems;
 	
 	@Before

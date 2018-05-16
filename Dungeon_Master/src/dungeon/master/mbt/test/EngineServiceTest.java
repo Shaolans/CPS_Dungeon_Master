@@ -23,7 +23,7 @@ import dungeon.master.services.EngineService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
-public class EngineTest {
+public class EngineServiceTest {
 	private EngineService es;
 	private EnvironmentService env;
 	
