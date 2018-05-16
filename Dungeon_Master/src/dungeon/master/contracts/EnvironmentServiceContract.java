@@ -22,7 +22,7 @@ public class EnvironmentServiceContract extends EnvironmentServiceDecorator impl
 	@Override
 	public void closeDoor(int x, int y) {
 		/* preconditions */
-		if(getCellContent(x, y) != null) {
+		if(getCellContent(x, y).getValue() != null) {
 			throw new PreconditionError("getCellContent(x,y) == No does not hold");
 		}
 		

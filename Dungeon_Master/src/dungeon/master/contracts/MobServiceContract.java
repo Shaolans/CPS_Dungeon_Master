@@ -418,6 +418,8 @@ public class MobServiceContract extends MobServiceDecorator implements MobServic
 				}
 			}else {
 				if(!(getRow()==row_atpre && getCol()==col_atpre)) {
+					System.out.println(row_atpre+" "+col_atpre);
+					System.out.println(getRow()+" "+getCol());
 					throw new PostconditionError("getFace()@pre == E ... (StrafeR) does not hold");
 				}
 			}

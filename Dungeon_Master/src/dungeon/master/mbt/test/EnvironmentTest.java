@@ -40,14 +40,18 @@ public class EnvironmentTest {
 			Mob m = new Mob();
 			@SuppressWarnings("unchecked")
 			Option<MobService> map[][] = new Option[10][20];
-			
+			for(int i = 0; i < map.length; i++){
+				for(int j = 0; j < map[0].length; j++){
+					map[i][j] = env.getCellContent(i, j);
+				}
+			}
 			env.setCellContent(5, 5, m);
 			
 			assertTrue(env.getCellContent(5, 5).getValue() == m);
 			for(int i = 0; i < 10; i++) {
 				for(int j = 0; j < 20; j++) {
 					if(i != 5 || j != 5) {
-						assertTrue(map[i][j] == env.getCellContent(i, j));
+						assertTrue(map[i][j].getValue() == env.getCellContent(i, j).getValue());
 					}
 				}
 			}
@@ -335,6 +339,7 @@ public class EnvironmentTest {
 			
 			env.closeDoor(2, 5);
 		}catch(PreconditionError pe) {
+			pe.printStackTrace();
 			fail();
 		}
 		

@@ -28,7 +28,7 @@ public class Environment extends Map implements EnvironmentService {
 	
 	@Override
 	public void closeDoor(int col, int row){
-		if(getCellContent(col, row)==null){
+		if(getCellContent(col, row).getValue()==null){
 			super.closeDoor(col, row);
 		}
 	}
