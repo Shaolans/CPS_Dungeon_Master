@@ -38,7 +38,6 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.N);
 			mob.strafeL();
-			System.out.println(mob.getCol()+" "+mob.getRow());
 			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			ie.printStackTrace();
