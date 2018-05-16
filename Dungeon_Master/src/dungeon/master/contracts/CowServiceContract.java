@@ -117,7 +117,6 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 					col_atpre+1 < getEnv().getWidth() &&
 					getEnv().getCellContent(col_atpre+1, row_atpre).getValue() == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
-					System.out.println(getCol()+" "+getRow());
 					throw new PostconditionError("getFace()@pre == W ... does not hold");
 				}
 			}else {

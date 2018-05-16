@@ -38,8 +38,10 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.N);
 			mob.strafeL();
+			System.out.println(mob.getCol()+" "+mob.getRow());
 			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
+			ie.printStackTrace();
 			fail();
 		}
 	}
@@ -314,7 +316,7 @@ public class MobServiceTest {
 	public void initPreTest_1() {
 		//cas positif
 		try {
-			mob.init(env, 0, 5, Dir.N);
+			mob.init(env, 3, 5, Dir.N);
 		}catch(PreconditionError pe) {
 			fail();
 		}

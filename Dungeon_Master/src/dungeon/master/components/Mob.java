@@ -47,6 +47,9 @@ public class Mob implements MobService {
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
 			
 			row++;
+			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
+			env.setCellContent(col, row-1, null);
+			
 		}
 		
 		if(face == Dir.W &&
@@ -54,6 +57,8 @@ public class Mob implements MobService {
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
+			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
+			env.setCellContent(col-1, row, null);
 		}
 		
 		if(face == Dir.S &&
@@ -61,6 +66,8 @@ public class Mob implements MobService {
 				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
+			env.setCellContent(col, row, env.getCellContent(col, row+1).getValue());
+			env.setCellContent(col, row+1, null);
 		}
 		
 		if(face == Dir.E &&
@@ -68,6 +75,8 @@ public class Mob implements MobService {
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
+			env.setCellContent(col, row, env.getCellContent(col+1, row).getValue());
+			env.setCellContent(col+1, row, null);
 		}
 		
 		
@@ -81,6 +90,8 @@ public class Mob implements MobService {
 				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
 			row++;
+			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
+			env.setCellContent(col, row-1, null);
 		}
 		
 		if(face == Dir.E &&
@@ -88,6 +99,8 @@ public class Mob implements MobService {
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
+			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
+			env.setCellContent(col-1, row, null);
 		}
 		
 		if(face == Dir.N &&
@@ -95,6 +108,8 @@ public class Mob implements MobService {
 				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
+			env.setCellContent(col, row, env.getCellContent(col, row+1).getValue());
+			env.setCellContent(col, row+1, null);
 		}
 		
 		if(face == Dir.W &&
@@ -102,6 +117,8 @@ public class Mob implements MobService {
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
+			env.setCellContent(col, row, env.getCellContent(col+1, row).getValue());
+			env.setCellContent(col+1, row, null);
 		}
 	}
 
@@ -128,6 +145,8 @@ public class Mob implements MobService {
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
+			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
+			env.setCellContent(col-1, row, null);
 		}
 		
 		if(face == Dir.E &&
@@ -135,6 +154,8 @@ public class Mob implements MobService {
 				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
 			row++;
+			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
+			env.setCellContent(col, row-1, null);
 		}
 		
 		if(face == Dir.S &&
@@ -142,6 +163,8 @@ public class Mob implements MobService {
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
+			env.setCellContent(col, row, env.getCellContent(col+1, row).getValue());
+			env.setCellContent(col+1, row, null);
 		}
 		
 		if(face == Dir.W &&
@@ -149,6 +172,8 @@ public class Mob implements MobService {
 				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
+			env.setCellContent(col, row, env.getCellContent(col, row+1).getValue());
+			env.setCellContent(col, row+1, null);
 		}
 	}
 
@@ -159,6 +184,8 @@ public class Mob implements MobService {
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
 			col++;
+			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
+			env.setCellContent(col-1, row, null);
 		}
 		
 		if(face == Dir.W &&
@@ -166,6 +193,8 @@ public class Mob implements MobService {
 				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO)){
 			row++;
+			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
+			env.setCellContent(col, row-1, null);
 		}
 		
 		if(face == Dir.N &&
@@ -173,6 +202,8 @@ public class Mob implements MobService {
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
 			col--;
+			env.setCellContent(col, row, env.getCellContent(col+1, row).getValue());
+			env.setCellContent(col+1, row, null);
 		}
 		
 		if(face == Dir.E &&
@@ -180,6 +211,8 @@ public class Mob implements MobService {
 				env.getCellContent(col, row-1).getValue() == null &&
 				(env.getCellNature(col, row-1) == Cell.EMP || env.getCellNature(col, row-1) == Cell.DNO)){
 			row--;
+			env.setCellContent(col, row, env.getCellContent(col, row+1).getValue());
+			env.setCellContent(col, row+1, null);
 		}
 	}
 

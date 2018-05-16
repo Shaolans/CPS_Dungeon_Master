@@ -8,6 +8,7 @@ public class Cow extends Entity implements CowService {
 	@Override
 	public void step() {
 		int step = (int)(Math.random()*6);
+		
 		switch(step) {
 		case 0:
 			if(face == Dir.N && row+1 < env.getHeight() ||

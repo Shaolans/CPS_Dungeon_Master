@@ -5,10 +5,13 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
+	CowServiceTest.class,
+	EngineServiceTest.class,
 	MapServiceTest.class,
-	MobTest.class,
+	MobServiceTest.class,
 	EditMapServiceTest.class,
-	EnvironmentServiceTest.class})
+	EnvironmentServiceTest.class,
+	PlayerServiceTest.class})
 public class RunAllTests {
 
 }

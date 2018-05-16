@@ -2,7 +2,9 @@ package dungeon.master.decorators;
 
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Command;
+import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
+import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
 
@@ -34,6 +36,16 @@ public class PlayerServiceDecorator extends EntityServiceDecorator implements Pl
 	@Override
 	public boolean isViewable(int col, int row) {
 		return getDelegate().isViewable(col, row);
+	}
+	
+	@Override
+	public void init(EnvironmentService env, int col, int row, Dir dir) {
+		getDelegate().init(env, col, row, dir);
+	}
+	
+	@Override
+	public void init(EnvironmentService env, int col, int row, Dir dir, int hp){
+		getDelegate().init(env, col, row, dir, hp);
 	}
 
 }
