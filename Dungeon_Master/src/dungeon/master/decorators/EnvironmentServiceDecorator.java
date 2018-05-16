@@ -5,8 +5,8 @@ import dungeon.master.enumerations.Option;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
-public class EnvironmentServiceDecorator extends MapServiceDecorator implements EnvironmentService {
-	
+public class EnvironmentServiceDecorator extends EditMapServiceDecorator implements EnvironmentService {
+
 	public EnvironmentServiceDecorator(EnvironmentService delegate) {
 		super(delegate);
 	}
@@ -14,7 +14,7 @@ public class EnvironmentServiceDecorator extends MapServiceDecorator implements 
 	public EnvironmentService getDelegate() {
 		return (EnvironmentService)map;
 	}
-	
+
 	@Override
 	public Option<MobService> getCellContent(int x, int y) {
 		return getDelegate().getCellContent(x, y);
@@ -48,7 +48,7 @@ public class EnvironmentServiceDecorator extends MapServiceDecorator implements 
 	@Override
 	public void closeDoor(int col, int row) {
 		getDelegate().closeDoor(col, row);
-		
+
 	}
 
 	@Override
