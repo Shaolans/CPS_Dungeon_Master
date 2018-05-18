@@ -9,11 +9,11 @@ import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
 
 public class PlayerServiceDecorator extends EntityServiceDecorator implements PlayerService {
-	
+
 	public PlayerServiceDecorator(PlayerService ps) {
 		super(ps);
 	}
-	
+
 	public PlayerService getDelegate() {
 		return (PlayerService)super.getDelegate();
 	}
@@ -37,15 +37,20 @@ public class PlayerServiceDecorator extends EntityServiceDecorator implements Pl
 	public boolean isViewable(int col, int row) {
 		return getDelegate().isViewable(col, row);
 	}
-	
+
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir) {
 		getDelegate().init(env, col, row, dir);
 	}
-	
+
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir, int hp){
 		getDelegate().init(env, col, row, dir, hp);
+	}
+
+	@Override
+	public void setLastCom(Command cmd) {
+		getDelegate().setLastCom(cmd);
 	}
 
 }

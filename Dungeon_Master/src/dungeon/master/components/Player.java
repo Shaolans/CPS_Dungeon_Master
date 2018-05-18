@@ -105,4 +105,9 @@ public class Player extends Entity implements PlayerService {
 
 	}
 
+	@Override
+	public void setLastCom(Command cmd) {
+		last = new Option<Command>(cmd);
+	}
+
 }
