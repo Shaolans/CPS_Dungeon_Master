@@ -131,7 +131,7 @@ public class PlayerServiceTest extends MobServiceTest {
 		try{
 			player.setLastCom(Command.RR);
 			player.step();
-			assertTrue(player.getCol() == 4 && player.getRow() == 7);
+			assertTrue(player.getCol() == 6 && player.getRow() == 7);
 		}catch(PostconditionError ie){
 			fail();
 		}
@@ -142,7 +142,7 @@ public class PlayerServiceTest extends MobServiceTest {
 		try{
 			player.setLastCom(Command.LL);
 			player.step();
-			assertTrue(player.getCol() == 6 && player.getRow() == 7);
+			assertTrue(player.getCol() == 4 && player.getRow() == 7);
 		}catch(PostconditionError ie){
 			fail();
 		}

@@ -25,7 +25,7 @@ public class RunningGameTest {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 100; i++){
 			String cmd = sc.nextLine();
 			switch(cmd){
 			case "FF":

@@ -38,7 +38,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.N);
 			mob.strafeL();
-			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			ie.printStackTrace();
 			fail();
@@ -50,7 +50,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.S);
 			mob.strafeL();
-			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			fail();
 		}
@@ -83,7 +83,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.N);
 			mob.strafeR();
-			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			fail();
 		}
@@ -94,7 +94,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.S);
 			mob.strafeR();
-			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			fail();
 		}
@@ -231,7 +231,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.E);
 			mob.forward();
-			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			fail();
 		}
@@ -253,7 +253,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.W);
 			mob.forward();
-			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			fail();
 		}
@@ -281,7 +281,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.W);
 			mob.backward();
-			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			fail();
 		}
@@ -303,7 +303,7 @@ public class MobServiceTest {
 		try {
 			mob.init(env, 5, 7, Dir.E);
 			mob.backward();
-			assertTrue(mob.getCol() == 6 && mob.getRow() == 7);
+			assertTrue(mob.getCol() == 4 && mob.getRow() == 7);
 		}catch(InvariantError ie) {
 			fail();
 		}

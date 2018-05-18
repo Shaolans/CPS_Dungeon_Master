@@ -52,7 +52,7 @@ public class Mob implements MobService {
 			
 		}
 		
-		if(face == Dir.W &&
+		if(face == Dir.E &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
@@ -70,7 +70,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row+1, null);
 		}
 		
-		if(face == Dir.E &&
+		if(face == Dir.W &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
@@ -94,7 +94,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row-1, null);
 		}
 		
-		if(face == Dir.E &&
+		if(face == Dir.W &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
@@ -112,7 +112,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row+1, null);
 		}
 		
-		if(face == Dir.W &&
+		if(face == Dir.E &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
@@ -140,7 +140,7 @@ public class Mob implements MobService {
 
 	@Override
 	public void strafeL() {
-		if(face == Dir.N &&
+		if(face == Dir.S &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
@@ -158,7 +158,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row-1, null);
 		}
 		
-		if(face == Dir.S &&
+		if(face == Dir.N &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
@@ -179,7 +179,7 @@ public class Mob implements MobService {
 
 	@Override
 	public void strafeR() {
-		if(face == Dir.S &&
+		if(face == Dir.N &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO)){
@@ -197,7 +197,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row-1, null);
 		}
 		
-		if(face == Dir.N &&
+		if(face == Dir.S &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
 				(env.getCellNature(col-1, row) == Cell.EMP || env.getCellNature(col-1, row) == Cell.DWO)){
