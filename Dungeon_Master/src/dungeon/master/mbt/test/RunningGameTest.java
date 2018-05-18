@@ -6,20 +6,24 @@ import dungeon.master.components.Cow;
 import dungeon.master.components.Engine;
 import dungeon.master.components.Environment;
 import dungeon.master.components.Player;
+import dungeon.master.contracts.CowServiceContract;
+import dungeon.master.contracts.EngineServiceContract;
+import dungeon.master.contracts.EnvironmentServiceContract;
+import dungeon.master.contracts.PlayerServiceContract;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 
 public class RunningGameTest {
 
 	public static void main(String[] args) {
-		Environment env = new Environment();
+		EnvironmentServiceContract env = new EnvironmentServiceContract(new Environment());
 		env.init(15, 20);
-		Engine e = new Engine();
+		EngineServiceContract e = new EngineServiceContract(new Engine());
 		e.init(env);
-		Cow cow = new Cow();
+		CowServiceContract cow = new CowServiceContract(new Cow());
 		cow.init(env, 6, 7, Dir.N, 3);
-		Player player = new Player();
-		player.init(env, 5, 4, Dir.N);
+		PlayerServiceContract player = new PlayerServiceContract(new Player());
+		player.init(env, 5, 7, Dir.N, 100);
 		e.addEntity(cow);
 		e.addEntity(player);
 		

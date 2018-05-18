@@ -8,6 +8,7 @@ import dungeon.master.exceptions.PostconditionError;
 import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.CowService;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.MobService;
 
 public class CowServiceContract extends CowServiceDecorator implements CowService {
 	
@@ -91,6 +92,12 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		/* Capture */
 		int row_atpre = getRow();
 		int col_atpre = getCol();
+		MobService existmob_atpre[][] = new MobService[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < existmob_atpre.length; i++){
+			for(int j = 0; j < existmob_atpre[0].length; j++){
+				existmob_atpre[i][j] = getEnv().getCellContent(i, j).getValue();
+			}
+		}
 		
 		super.forward();
 		
@@ -100,7 +107,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.N) {
 			if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
 					row_atpre+1 < getEnv().getHeight() &&
-					getEnv().getCellContent(col_atpre, row_atpre+1).getValue() == null) {
+					existmob_atpre[col_atpre][row_atpre+1] == null) {
 				if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == N ... does not hold");
 				}
@@ -115,7 +122,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.E) {
 			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
 					col_atpre+1 < getEnv().getWidth() &&
-					getEnv().getCellContent(col_atpre+1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre+1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 					throw new PostconditionError("getFace()@pre == E ... does not hold");
 				}
@@ -129,7 +136,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.S) {
 			if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
 					row_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre, row_atpre-1).getValue() == null) {
+							existmob_atpre[col_atpre][row_atpre-1] == null) {
 				if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == S ... does not hold");
 				}
@@ -143,7 +150,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.W) {
 			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
 					col_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre-1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre-1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 					throw new PostconditionError("getFace()@pre == W ... does not hold");
 				}
@@ -166,6 +173,12 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		/* Capture */
 		int row_atpre = getRow();
 		int col_atpre = getCol();
+		MobService existmob_atpre[][] = new MobService[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < existmob_atpre.length; i++){
+			for(int j = 0; j < existmob_atpre[0].length; j++){
+				existmob_atpre[i][j] = getEnv().getCellContent(i, j).getValue();
+			}
+		}
 		
 		super.backward();
 		
@@ -175,7 +188,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.S) {
 			if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
 					row_atpre+1 < getEnv().getHeight() &&
-					getEnv().getCellContent(col_atpre, row_atpre+1).getValue() == null) {
+					existmob_atpre[col_atpre][row_atpre+1] == null) {
 				if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == N ... does not hold");
 				}
@@ -190,7 +203,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.W) {
 			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
 					col_atpre+1 < getEnv().getWidth() &&
-					getEnv().getCellContent(col_atpre+1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre+1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 					throw new PostconditionError("getFace()@pre == W ... does not hold");
 				}
@@ -204,7 +217,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.N) {
 			if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
 					row_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre, row_atpre-1).getValue() == null) {
+					existmob_atpre[col_atpre][row_atpre-1] == null) {
 				if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == S ... does not hold");
 				}
@@ -218,7 +231,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.E) {
 			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
 					col_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre-1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre-1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 					throw new PostconditionError("getFace()@pre == E ... does not hold");
 				}
@@ -336,6 +349,12 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		/* Capture */
 		int row_atpre = getRow();
 		int col_atpre = getCol();
+		MobService existmob_atpre[][] = new MobService[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < existmob_atpre.length; i++){
+			for(int j = 0; j < existmob_atpre[0].length; j++){
+				existmob_atpre[i][j] = getEnv().getCellContent(i, j).getValue();
+			}
+		}
 		
 		/* run */
 		super.strafeL();
@@ -346,7 +365,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.S) {
 			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
 					col_atpre+1 < getEnv().getWidth() &&
-					getEnv().getCellContent(col_atpre+1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre+1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 					throw new PostconditionError("getFace()@pre == N ... (StrafeL) does not hold");
 				}
@@ -361,7 +380,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.E) {
 			if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
 					row_atpre+1 < getEnv().getHeight() &&
-					getEnv().getCellContent(col_atpre, row_atpre+1).getValue() == null) {
+					existmob_atpre[col_atpre][row_atpre+1] == null) {
 				if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == E ... (StrafeL) does not hold");
 				}
@@ -375,7 +394,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.W) {
 			if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
 					row_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre, row_atpre-1).getValue() == null) {
+					existmob_atpre[col_atpre][row_atpre-1] == null) {
 				if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == W ... (StrafeL) does not hold");
 				}
@@ -389,7 +408,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.N) {
 			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
 					col_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre-1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre-1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 					throw new PostconditionError("getFace()@pre == S ... (StrafeL) does not hold");
 				}
@@ -412,6 +431,12 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		/* Capture */
 		int row_atpre = getRow();
 		int col_atpre = getCol();
+		MobService existmob_atpre[][] = new MobService[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < existmob_atpre.length; i++){
+			for(int j = 0; j < existmob_atpre[0].length; j++){
+				existmob_atpre[i][j] = getEnv().getCellContent(i, j).getValue();
+			}
+		}
 		
 		/* run */
 		super.strafeR();
@@ -422,7 +447,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.N) {
 			if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
 					col_atpre+1 < getEnv().getWidth() &&
-					getEnv().getCellContent(col_atpre+1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre+1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 					throw new PostconditionError("getFace()@pre == N ... (StrafeR) does not hold");
 				}
@@ -437,7 +462,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.W) {
 			if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
 					row_atpre+1 < getEnv().getHeight() &&
-					getEnv().getCellContent(col_atpre, row_atpre+1).getValue() == null) {
+					existmob_atpre[col_atpre][row_atpre+1] == null) {
 				if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == E ... (StrafeR) does not hold");
 				}
@@ -451,7 +476,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.E) {
 			if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
 					row_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre, row_atpre-1).getValue() == null) {
+					existmob_atpre[col_atpre][row_atpre-1] == null) {
 				if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 					throw new PostconditionError("getFace()@pre == W ... (StrafeR) does not hold");
 				}
@@ -465,7 +490,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(getFace() == Dir.S) {
 			if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
 					col_atpre-1 >= 0 &&
-					getEnv().getCellContent(col_atpre-1, row_atpre).getValue() == null) {
+					existmob_atpre[col_atpre-1][row_atpre] == null) {
 				if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 					throw new PostconditionError("getFace()@pre == S ... (StrafeR) does not hold");
 				}

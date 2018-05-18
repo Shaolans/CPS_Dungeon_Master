@@ -17,6 +17,12 @@ public class Player extends Entity implements PlayerService {
 		return last;
 	}
 
+	
+	@Override
+	public void init(dungeon.master.services.EnvironmentService env, int col, int row, dungeon.master.enumerations.Dir dir, int hp) {
+		super.init(env, col, row, dir, hp);
+		last = new Option<Command>();
+	};
 	@Override
 	public Option<MobService> getContent(int col, int row) {
 		return env.getCellContent(getCol()+col, getRow()+row);
