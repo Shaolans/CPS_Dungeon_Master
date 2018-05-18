@@ -176,7 +176,9 @@ public class EnvironmentServiceContract extends EnvironmentServiceDecorator impl
 	@Override
 	public void setCellContent(int col, int row, MobService mob) {
 		/* Preconditions */
-		if(!(0 <= col && col < getHeight() && 0 <= row && row < getWidth())) {
+		if(!(0 <= col && col < getWidth() && 0 <= row && row < getHeight())) {
+			System.out.println(col + " "+getHeight());
+			System.out.println(row+" "+getWidth());
 			throw new PreconditionError("0 <= col < getHeight() and 0 <= row < getWidth() does not hold");
 		}
 		

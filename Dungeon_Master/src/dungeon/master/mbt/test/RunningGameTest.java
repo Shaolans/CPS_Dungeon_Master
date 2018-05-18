@@ -55,14 +55,14 @@ public class RunningGameTest {
 			
 			e.step();
 			
-			for(int k = 0; k < 15; k++){
-				for(int j = 0; j < 20; j++){
-					if(player.getCol() == k && player.getRow() == j){
+			for(int k = 0; k < 20; k++){
+				for(int j = 0; j < 15; j++){
+					if(player.getCol() == j && player.getRow() == k){
 						System.out.print("P  "+"  ");
-					}else if(cow.getCol() == k && cow.getRow() == j){
+					}else if(cow.getCol() == j && cow.getRow() == k){
 						System.out.print("C  "+"  ");
 					}else{
-						System.out.print(env.getCellNature(k, j)+"  ");
+						System.out.print(env.getCellNature(j, k)+"  ");
 					}
 				}
 				System.out.println();
