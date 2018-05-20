@@ -483,7 +483,7 @@ public class MainWindow {
 		em.init(15, 15);
 		pm.init(em, 0, 0, Dir.S);
 		
-		map.setOnKeyPressed(e->{
+		scene.setOnKeyReleased(e->{
 			if(e.getCode()== KeyCode.DOWN){
 				pm.setLastCom(Command.BB);
 				pm.step();

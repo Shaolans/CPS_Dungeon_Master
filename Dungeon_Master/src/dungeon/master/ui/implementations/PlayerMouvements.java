@@ -17,6 +17,7 @@ public class PlayerMouvements implements PlayerService {
 	private PlayerService joueur ;
 	private ImageView face, faceD, faceG, droite, droiteD, droiteG,
 		derriere, derriereD, derriereG, gauche, gaucheD, gaucheG;
+	private ImageView current;
 	
 	public PlayerMouvements(PlayerService p, List<ImageView> mouvements){
 		joueur = p;
@@ -81,13 +82,24 @@ public class PlayerMouvements implements PlayerService {
 		
 		StackPane sp = (StackPane) em.grille.getChildren().get(0);
 		sp.getChildren().add(face);
+		current = face;
 		
 		joueur.init(env, col, row, dir);
 	}
 
 	@Override
 	public void forward() {
-		// TODO Auto-generated method stub
+		
+		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
+		StackPane sp;
+		
+		if(current==face){
+			sp = (StackPane)em.grille.getChildren().get(getRow()*em.getHeight()+getCol());
+			sp.getChildren().remove(face);
+			sp = (StackPane)em.grille.getChildren().get((getRow()+1)*em.getHeight()+getCol());
+			sp.getChildren().add(face);
+		}
+		
 		joueur.forward();
 	}
 
@@ -153,7 +165,27 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
+		if(joueur.getLastCom().getValue()==Command.FF){
+			this.forward();
+		}
+		
+		if(joueur.getLastCom().getValue()==Command.BB){
+			this.forward();
+		}
+		
+		if(joueur.getLastCom().getValue()==Command.RR){
+			this.forward();
+		}
+		if(joueur.getLastCom().getValue()==Command.LL){
+			this.forward();
+		}
+		if(joueur.getLastCom().getValue()==Command.TR){
+			this.forward();
+		}
+		if(joueur.getLastCom().getValue()==Command.TL){
+			this.forward();
+		}
+		
 		joueur.step();
 	}
 
