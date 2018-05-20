@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import dungeon.master.components.Environment;
 import dungeon.master.components.Player;
+import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.ui.implementations.EnvironmentMouvements;
 import dungeon.master.ui.implementations.PlayerMouvements;
@@ -33,6 +34,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.Border;
+import javafx.scene.input.KeyCode;
 
 
 
@@ -480,6 +482,28 @@ public class MainWindow {
 		
 		em.init(15, 15);
 		pm.init(em, 0, 0, Dir.S);
+		
+		map.setOnKeyPressed(e->{
+			if(e.getCode()== KeyCode.DOWN){
+				pm.setLastCom(Command.BB);
+				pm.step();
+			}
+			if(e.getCode()== KeyCode.UP){
+				pm.setLastCom(Command.FF);
+				pm.step();
+			}
+			
+			if(e.getCode()== KeyCode.RIGHT){
+				pm.setLastCom(Command.RR);
+				pm.step();
+			}
+			
+			if(e.getCode()== KeyCode.LEFT){
+				pm.setLastCom(Command.LL);
+				pm.step();
+			}
+			
+		});
 		
 		stage.setScene(scene);
 		

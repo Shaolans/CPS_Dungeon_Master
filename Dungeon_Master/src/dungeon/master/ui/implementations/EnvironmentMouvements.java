@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 public class EnvironmentMouvements implements EnvironmentService {
 	
 	private EnvironmentService env;
-	private GridPane grille;
+	GridPane grille;
 
 	public EnvironmentMouvements(EnvironmentService env, GridPane grille) {
 		this.env = env;

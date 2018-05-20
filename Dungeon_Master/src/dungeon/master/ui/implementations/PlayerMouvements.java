@@ -10,6 +10,7 @@ import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 
 public class PlayerMouvements implements PlayerService {
 	
@@ -75,6 +76,11 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir) {
+		
+		EnvironmentMouvements em = (EnvironmentMouvements) env;
+		
+		StackPane sp = (StackPane) em.grille.getChildren().get(0);
+		sp.getChildren().add(face);
 		
 		joueur.init(env, col, row, dir);
 	}
