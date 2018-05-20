@@ -13,6 +13,7 @@ import org.junit.Test;
 import dungeon.master.components.Cow;
 import dungeon.master.components.Engine;
 import dungeon.master.components.Environment;
+import dungeon.master.components.Player;
 import dungeon.master.contracts.CowServiceContract;
 import dungeon.master.contracts.EngineServiceContract;
 import dungeon.master.contracts.EnvironmentServiceContract;
@@ -22,6 +23,7 @@ import dungeon.master.services.CowService;
 import dungeon.master.services.EngineService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
+import dungeon.master.services.PlayerService;
 
 public class EngineServiceTest {
 	private EngineService es;
@@ -45,7 +47,9 @@ public class EngineServiceTest {
 	public void addEntityTransTest_1() {
 		//cas positif
 		try {
-			es.init(env);
+			PlayerService player = new Player();
+			player.init(env, 7, 2, Dir.N, 100);
+			es.init(env, player);
 			CowService cow1 = new CowServiceContract(new Cow());
 			cow1.init(env, 0, 5, Dir.N);
 			env.setCellContent(0, 5, cow1);
@@ -68,7 +72,9 @@ public class EngineServiceTest {
 	public void removeEntityTransTest_1() {
 		//cas positif
 		try {
-			es.init(env);
+			PlayerService player = new Player();
+			player.init(env, 7, 2, Dir.N, 100);
+			es.init(env, player);
 			CowService cow1 = new CowServiceContract(new Cow());
 			cow1.init(env, 0, 5, Dir.N);
 			env.setCellContent(0, 5, cow1);
@@ -102,7 +108,9 @@ public class EngineServiceTest {
 	public void removeEntityPreTest_1() {
 		//cas positif
 		try {
-			es.init(env);
+			PlayerService player = new Player();
+			player.init(env, 7, 2, Dir.N, 100);
+			es.init(env, player);
 			CowService cow = new CowServiceContract(new Cow());
 			cow.init(env, 0, 5, Dir.N);
 			env.setCellContent(0, 5, cow);
@@ -118,7 +126,9 @@ public class EngineServiceTest {
 	public void removeEntityPreTest_2() {
 		//cas negatif
 		try {
-			es.init(env);
+			PlayerService player = new Player();
+			player.init(env, 7, 2, Dir.N, 100);
+			es.init(env, player);
 			es.removeEntity(52);
 			fail();
 		}catch(PreconditionError pe) {
@@ -130,7 +140,9 @@ public class EngineServiceTest {
 	public void stepPreTest_1() {
 		//cas positif
 		try {
-			es.init(env);
+			PlayerService player = new Player();
+			player.init(env, 7, 2, Dir.N, 100);
+			es.init(env, player);
 			CowService cow = new CowServiceContract(new Cow());
 			cow.init(env, 0, 5, Dir.N, 3);
 			env.setCellContent(0, 5, cow);

@@ -19,11 +19,11 @@ public class RunningGameTest {
 		EnvironmentServiceContract env = new EnvironmentServiceContract(new Environment());
 		env.init(15, 20);
 		EngineServiceContract e = new EngineServiceContract(new Engine());
-		e.init(env);
-		CowServiceContract cow = new CowServiceContract(new Cow());
-		cow.init(env, 6, 7, Dir.N, 3);
 		PlayerServiceContract player = new PlayerServiceContract(new Player());
 		player.init(env, 5, 7, Dir.N, 100);
+		e.init(env, player);
+		CowServiceContract cow = new CowServiceContract(new Cow());
+		cow.init(env, 6, 7, Dir.N, 3);
 		e.addEntity(cow);
 		e.addEntity(player);
 		
@@ -55,14 +55,14 @@ public class RunningGameTest {
 			
 			e.step();
 			
-			for(int k = 0; k < 20; k++){
-				for(int j = 0; j < 15; j++){
-					if(player.getCol() == j && player.getRow() == k){
+			for(int k = 0; k < 15; k++){
+				for(int j = 0; j < 20; j++){
+					if(player.getCol() == k && player.getRow() == j){
 						System.out.print("P  "+"  ");
-					}else if(cow.getCol() == j && cow.getRow() == k){
+					}else if(cow.getCol() == k && cow.getRow() == j){
 						System.out.print("C  "+"  ");
 					}else{
-						System.out.print(env.getCellNature(j, k)+"  ");
+						System.out.print(env.getCellNature(k, j)+"  ");
 					}
 				}
 				System.out.println();

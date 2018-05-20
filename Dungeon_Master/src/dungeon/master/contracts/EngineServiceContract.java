@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dungeon.master.decorators.EngineServiceDecorator;
+import dungeon.master.enumerations.Cell;
 import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PostconditionError;
 import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.EngineService;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.PlayerService;
 
 public class EngineServiceContract extends EngineServiceDecorator implements EngineService {
 
@@ -30,12 +32,34 @@ public class EngineServiceContract extends EngineServiceDecorator implements Eng
 				throw new InvariantError("\\inv \\forall i in [0;getEntities().size()-1], getEnvi().getCellContent(getEntity(i).getCol(), getEntity(i).getRow()) == getEntity(i)");
 			}
 		}
+		
+		int xi = 0;
+		int yi = 0;
+		boolean res;
+		for(int i = 0; i < getEnvi().getWidth(); i++) {
+			for(int j = 0; j < getEnvi().getHeight(); j++) {
+				if(getEnvi().getCellNature(i, j) == Cell.OUT) {
+					xi = i;
+					yi = j;
+				}
+			}
+		}
+		
+		if(getPlayer().getCol() == xi && getPlayer().getRow() == yi) {
+			res = true;
+		}else {
+			res = false;
+		}
+		
+		if(!(isFinished() == res)) {
+			throw new InvariantError(" \\inv isFinished == getEnvi().getCellNature(i,j) == Cell.OUT \\impl i == getPlayer().getCol() && j == getPlayer().getRow()does not hold");
+		}
 	}
 	
 	@Override
-	public void init(EnvironmentService env) {
+	public void init(EnvironmentService env, PlayerService player) {
 		
-		super.init(env);
+		super.init(env, player);
 		
 		checkInvariant();
 	}

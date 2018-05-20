@@ -3,13 +3,16 @@ package dungeon.master.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import dungeon.master.enumerations.Cell;
 import dungeon.master.services.EngineService;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.PlayerService;
 
 public class Engine implements EngineService {
 	private List<EntityService> entities;
 	private EnvironmentService envi;
+	private PlayerService player;
 	
 	@Override
 	public EnvironmentService getEnvi() {
@@ -27,9 +30,10 @@ public class Engine implements EngineService {
 	}
 
 	@Override
-	public void init(EnvironmentService env) {
+	public void init(EnvironmentService env, PlayerService player) {
 		entities = new ArrayList<>();
 		envi = env;
+		this.player = player;
 
 	}
 
@@ -51,5 +55,30 @@ public class Engine implements EngineService {
 			ent.step();
 		}
 	}
+
+	@Override
+	public PlayerService getPlayer() {
+		return player;
+	}
+
+	@Override
+	public boolean isFinished() {
+		int xi = 0;
+		int yi = 0;
+		for(int i = 0; i < getEnvi().getWidth(); i++) {
+			for(int j = 0; j < getEnvi().getHeight(); j++) {
+				if(getEnvi().getCellNature(i, j) == Cell.OUT) {
+					xi = i;
+					yi = j;
+				}
+			}
+		}
+		
+		if(getPlayer().getCol() == xi && getPlayer().getRow() == yi) {
+			return true;
+		}
+		return false;
+	}
+
 
 }
