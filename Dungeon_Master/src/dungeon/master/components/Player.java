@@ -35,6 +35,9 @@ public class Player extends Entity implements PlayerService {
 
 	@Override
 	public boolean isViewable(int col, int row) {
+		if(!(col+this.col < env.getWidth() && col+this.col >= 0 && row+this.row < env.getHeight() && row+this.row < env.getHeight())) {
+			return false;
+		}
 		if((col <= 1 || -1 <= col) && (row <= 1 || row >= -1)){
 			return true;
 		}

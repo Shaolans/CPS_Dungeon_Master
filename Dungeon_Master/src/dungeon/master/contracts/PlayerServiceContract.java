@@ -74,74 +74,143 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			v = r.nextInt(3)-1;
 
 			Dir dir = getFace();
-			Option<MobService> content = getContent(u, v);
-			Cell nature = getNature(u,v);
+			Option<MobService> content;
+			Cell nature;
 
-			if( dir==Dir.N && !(content.getValue() == getEnv().getCellContent(getCol()+u, getRow()+v).getValue())){
-				throw new InvariantError("\\inv getFace()==N \\implies getContent(u,v) = getEnv().getCellContent(getCol()+u,getRow()+v) does not hold");
+			if(getCol()+u >= 0 && getCol()+u < getEnv().getWidth() && getRow()+v >= 0 && getRow()+v < getEnv().getHeight()) {
+				content = getContent(u, v);
+				nature = getNature(u,v);
+				if( dir==Dir.N && !(content.getValue() == getEnv().getCellContent(getCol()+u, getRow()+v).getValue())){
+					throw new InvariantError("\\inv getFace()==N \\implies getContent(u,v) = getEnv().getCellContent(getCol()+u,getRow()+v) does not hold");
+				}
+				
+				if(dir==Dir.N && !(nature == getEnv().getCellNature(getCol()+u, getRow()+v))){
+					throw new InvariantError("\\inv getFace()==N \\implies getNature(u,v) = getEnv().getCellNature(getCol()+u,getRow()+v) does not hold");
+				}
 			}
-
-			if( dir==Dir.N && !(nature == getEnv().getCellNature(getCol()+u, getRow()+v))){
-				throw new InvariantError("\\inv getFace()==N \\implies getNature(u,v) = getEnv().getCellNature(getCol()+u,getRow()+v) does not hold");
+			
+	
+			if(getCol()-u >= 0 && getCol()-u < getEnv().getWidth() && getRow()-v >= 0 && getRow()-v < getEnv().getHeight()) {
+				content = getContent(-u, -v);
+				nature = getNature(-u,-v);
+				if(dir==Dir.S && !(content.getValue() == getEnv().getCellContent(getCol()-u, getRow()-v).getValue())){
+					throw new InvariantError("\\inv getFace()==S \\implies getContent(u,v) = getEnv().getCellContent(getCol()-u,getRow()-v) does not hold");
+				}
+				if(dir==Dir.S && !(nature == getEnv().getCellNature(getCol()-u, getRow()-v))){
+					throw new InvariantError("\\inv getFace()==S \\implies getNature(u,v) = getEnv().getCellNature(getCol()-u,getRow()-v) does not hold");
+				}
 			}
-
-			if( dir==Dir.S && !(content.getValue() == getEnv().getCellContent(getCol()-u, getRow()-v).getValue())){
-				throw new InvariantError("\\inv getFace()==S \\implies getContent(u,v) = getEnv().getCellContent(getCol()-u,getRow()-v) does not hold");
+	
+			
+			if(getCol()+v >= 0 && getCol()+v < getEnv().getWidth() && getRow()-u >= 0 && getRow()-u < getEnv().getHeight()) {
+				content = getContent(v, -u);
+				nature = getNature(v,-u);
+				if(dir==Dir.E && !(content.getValue() == getEnv().getCellContent(getCol()+v, getRow()-u).getValue())){
+					throw new InvariantError("\\inv getFace()==E \\implies getContent(u,v) = getEnv().getCellContent(getCol()+u,getRow()-v) does not hold");
+				}
+				if(dir==Dir.E && !(nature == getEnv().getCellNature(getCol()+v, getRow()-u))){
+					System.out.println(getEnv().getCellNature(getCol()+v, getRow()-u));
+					System.out.println(nature);
+					throw new InvariantError("\\inv getFace()==E \\implies getNature(u,v) = getEnv().getCellNature(getCol()+u,getRow()-v) does not hold");
+				}
 			}
-
-			if( dir==Dir.S && !(nature == getEnv().getCellNature(getCol()-u, getRow()-v))){
-				throw new InvariantError("\\inv getFace()==S \\implies getNature(u,v) = getEnv().getCellNature(getCol()-u,getRow()-v) does not hold");
+			
+	
+			
+	
+			if( getCol()-v >= 0 && getCol()-v < getEnv().getWidth() && getRow()+u >= 0 && getRow()+u < getEnv().getHeight() ) {
+				content = getContent(-v, u);
+				nature = getNature(-v,u);
+				if(dir==Dir.W && !(content.getValue() == getEnv().getCellContent(getCol()-v, getRow()+u).getValue())){
+					throw new InvariantError("\\inv getFace()==W \\implies getContent(u,v) = getEnv().getCellContent(getCol()-u,getRow()+v) does not hold");
+				}
+				if(dir==Dir.W && !(nature == getEnv().getCellNature(getCol()-v, getRow()+u))){
+					throw new InvariantError("\\inv getFace()==W \\implies getNature(u,v) = getEnv().getCellNature(getCol()-u,getRow()+v) does not hold");
+				}
 			}
-
-			if( dir==Dir.E && !(content.getValue() == getEnv().getCellContent(getCol()+v, getRow()-u).getValue())){
-				throw new InvariantError("\\inv getFace()==E \\implies getContent(u,v) = getEnv().getCellContent(getCol()+u,getRow()-v) does not hold");
-			}
-
-			if( dir==Dir.E && !(nature == getEnv().getCellNature(getCol()+v, getRow()-u))){
-				throw new InvariantError("\\inv getFace()==E \\implies getNature(u,v) = getEnv().getCellNature(getCol()+u,getRow()-v) does not hold");
-			}
-
-			if( dir==Dir.W && !(content.getValue() == getEnv().getCellContent(getCol()-v, getRow()+u).getValue())){
-				throw new InvariantError("\\inv getFace()==W \\implies getContent(u,v) = getEnv().getCellContent(getCol()-u,getRow()+v) does not hold");
-			}
-
-			if( dir==Dir.W && !(nature == getEnv().getCellNature(getCol()-v, getRow()+u))){
-				throw new InvariantError("\\inv getFace()==W \\implies getNature(u,v) = getEnv().getCellNature(getCol()-u,getRow()+v) does not hold");
-			}
+			
 
 
 		}
 
 		for(int u = -1; u< 1; u++){
 			for(int v = -1; v<1; v++){
-				if( !isViewable(u, v) ){
-					throw new InvariantError("\\inv \\forall u,v \\in [-1,1]x[-1,1], !isViewable(u,v) does not hold");
+				if(getCol()+u < getEnv().getWidth() && getCol()+u >= 0 && getRow()+v < getEnv().getHeight() && getRow()+v >= 0) {
+					if( !isViewable(u, v) ){
+						throw new InvariantError("\\inv \\forall u,v \\in [-1,1]x[-1,1], !isViewable(u,v) does not hold");
+					}
+				}else {
+					if( !!isViewable(u, v) ){
+						throw new InvariantError("\\inv \\forall u,v \\in [-1,1]x[-1,1], !isViewable(u,v) does not hold");
+					}
 				}
+					
 			}
 		}
-
-		if( !(isViewable(-1, 2) == (getNature(-1, 1) != Cell.WLL && getNature(-1, 1) != Cell.DWC && getNature(-1, 1) != Cell.DNC ) ) ){
-			throw new InvariantError("\\inv isViewable(-1,2) = getNature(-1,1) \not \\in {WALL, DWC, DNC} does not hold");
+		
+		if(getCol()-1 < getEnv().getWidth() && getCol()-1 >= 0 && getRow()+2 < getEnv().getHeight() && getRow()+2 >= 0) {
+			if( !(isViewable(-1, 2) == (getNature(-1, 1) != Cell.WLL && getNature(-1, 1) != Cell.DWC && getNature(-1, 1) != Cell.DNC ) ) ){
+				throw new InvariantError("\\inv isViewable(-1,2) = getNature(-1,1) \not \\in {WALL, DWC, DNC} does not hold");
+			}
+		}else {
+			if(!!isViewable(-1, 2)) {
+				throw new InvariantError("\\inv isViewable(-1,2) = getNature(-1,1) \not \\in {WALL, DWC, DNC} does not hold");
+			}
 		}
+		
+		
+		if(getCol() < getEnv().getWidth() && getCol() >= 0 && getRow()+2 < getEnv().getHeight() && getRow()+2 >= 0) {
 
-		if( !(isViewable(0, 2) == (getNature(0, 1)!= Cell.WLL && getNature(0, 1)!= Cell.DWC && getNature(0, 1) != Cell.DNC ) ) ){
-			throw new InvariantError("\\inv isViewable(0,2) = getNature(0,1) \not \\in {WALL, DWC, DNC} does not hold");
+			if( !(isViewable(0, 2) == (getNature(0, 1)!= Cell.WLL && getNature(0, 1)!= Cell.DWC && getNature(0, 1) != Cell.DNC ) ) ){
+				throw new InvariantError("\\inv isViewable(0,2) = getNature(0,1) \not \\in {WALL, DWC, DNC} does not hold");
+			}
+		}else {
+			if( !!isViewable(0, 2) ){
+				throw new InvariantError("\\inv isViewable(0,2) = getNature(0,1) \not \\in {WALL, DWC, DNC} does not hold");
+			}
 		}
-
-		if( !(isViewable(1, 2) == (getNature(1, 1)!= Cell.WLL && getNature(1, 1)!= Cell.DWC && getNature(1, 1) != Cell.DNC ) ) ){
-			throw new InvariantError("\\inv isViewable(1,2) = getNature(1,1) \not \\in {WALL, DWC, DNC} does not hold");
+		
+		if(getCol()+1 < getEnv().getWidth() && getCol()+1 >= 0 && getRow()+2 < getEnv().getHeight() && getRow()+2 >= 0) {
+		
+			if( !(isViewable(1, 2) == (getNature(1, 1)!= Cell.WLL && getNature(1, 1)!= Cell.DWC && getNature(1, 1) != Cell.DNC ) ) ){
+				throw new InvariantError("\\inv isViewable(1,2) = getNature(1,1) \not \\in {WALL, DWC, DNC} does not hold");
+			}
+		}else {
+			if( !!(isViewable(1, 2))){
+				throw new InvariantError("\\inv isViewable(1,2) = getNature(1,1) \not \\in {WALL, DWC, DNC} does not hold");
+			}
 		}
-
-		if( !(isViewable(-1, 3) == (getNature(-1, 2)!= Cell.WLL && getNature(-1, 2)!= Cell.DWC && getNature(-1, 2) != Cell.DNC ) && isViewable(-1, 2) ) ){
-			throw new InvariantError("\\inv isViewable(-1,3) = getNature(-1,2) \\not \\in {WALL, DWC, DNC} and isViewable(-1,2) does not hold");
+		
+		if(getCol()-1 < getEnv().getWidth() && getCol()-1 >= 0 && getRow()+3 < getEnv().getHeight() && getRow()+3 >= 0) {
+		
+			if( !(isViewable(-1, 3) == (getNature(-1, 2)!= Cell.WLL && getNature(-1, 2)!= Cell.DWC && getNature(-1, 2) != Cell.DNC ) && isViewable(-1, 2) ) ){
+				throw new InvariantError("\\inv isViewable(-1,3) = getNature(-1,2) \\not \\in {WALL, DWC, DNC} and isViewable(-1,2) does not hold");
+			}
+		}else {
+			if( !!(isViewable(-1, 3))) {
+				throw new InvariantError("\\inv isViewable(-1,3) = getNature(-1,2) \\not \\in {WALL, DWC, DNC} and isViewable(-1,2) does not hold");
+			}
 		}
-
-		if( !(isViewable(0, 3) == (getNature(0, 2)!= Cell.WLL && getNature(0, 2)!= Cell.DWC && getNature(0, 2) != Cell.DNC ) && isViewable(0, 2) ) ){
-			throw new InvariantError("\\inv isViewable(0,3) = getNature(0,2) \\not \\in {WALL, DWC, DNC} and isViewable(0,2) does not hold");
+		
+		if(getCol() < getEnv().getWidth() && getCol() >= 0 && getRow()+3 < getEnv().getHeight() && getRow()+3 >= 0) {
+			
+			if( !(isViewable(0, 3) == (getNature(0, 2)!= Cell.WLL && getNature(0, 2)!= Cell.DWC && getNature(0, 2) != Cell.DNC ) && isViewable(0, 2) ) ){
+				throw new InvariantError("\\inv isViewable(0,3) = getNature(0,2) \\not \\in {WALL, DWC, DNC} and isViewable(0,2) does not hold");
+			}
+		}else {
+			if( !!(isViewable(0, 3))) {
+				throw new InvariantError("\\inv isViewable(0,3) = getNature(0,2) \\not \\in {WALL, DWC, DNC} and isViewable(0,2) does not hold");
+			}
 		}
-
-		if( !(isViewable(1, 3) == (getNature(1, 2)!= Cell.WLL && getNature(1, 2)!= Cell.DWC && getNature(1, 2) != Cell.DNC ) && isViewable(1, 2) ) ){
-			throw new InvariantError("\\inv isViewable(1,3) = getNature(1,2) \\not \\in {WALL, DWC, DNC} and isViewable(1,2) does not hold");
+		
+		if(getCol()+1 < getEnv().getWidth() && getCol()+1 >= 0 && getRow()+3 < getEnv().getHeight() && getRow()+3 >= 0) {
+			if( !(isViewable(1, 3) == (getNature(1, 2)!= Cell.WLL && getNature(1, 2)!= Cell.DWC && getNature(1, 2) != Cell.DNC ) && isViewable(1, 2) ) ){
+				throw new InvariantError("\\inv isViewable(1,3) = getNature(1,2) \\not \\in {WALL, DWC, DNC} and isViewable(1,2) does not hold");
+			}
+		}else {
+			if( !!(isViewable(1, 3))){
+				throw new InvariantError("\\inv isViewable(1,3) = getNature(1,2) \\not \\in {WALL, DWC, DNC} and isViewable(1,2) does not hold");
+			}
 		}
 
 
