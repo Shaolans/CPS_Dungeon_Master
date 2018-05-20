@@ -51,7 +51,7 @@ public class MainWindow {
 
 		try {
 
-			File f = new File("/users/nfs/Etu1/3301571/git/CPS_Dungeon_Master/Dungeon_Master/images/tiny-Complete-Spritesheet-32x32-fruits.png");
+			File f = new File("./images/tiny-Complete-Spritesheet-32x32-fruits.png");
 			BufferedImage bigImg = ImageIO.read(f);
 
 			for (int i = 0; i < rows; i++)
