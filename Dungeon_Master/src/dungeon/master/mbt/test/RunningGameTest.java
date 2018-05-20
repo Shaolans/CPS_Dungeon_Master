@@ -19,11 +19,11 @@ public class RunningGameTest {
 		EnvironmentServiceContract env = new EnvironmentServiceContract(new Environment());
 		env.init(15, 20);
 		EngineServiceContract e = new EngineServiceContract(new Engine());
-		e.init(env);
-		CowServiceContract cow = new CowServiceContract(new Cow());
-		cow.init(env, 6, 7, Dir.N, 3);
 		PlayerServiceContract player = new PlayerServiceContract(new Player());
 		player.init(env, 5, 7, Dir.N, 100);
+		e.init(env, player);
+		CowServiceContract cow = new CowServiceContract(new Cow());
+		cow.init(env, 6, 7, Dir.N, 3);
 		e.addEntity(cow);
 		e.addEntity(player);
 		

@@ -10,14 +10,18 @@ public interface EngineService {
 	
 	public EntityService getEntity(int i);
 	
+	public PlayerService getPlayer();
+	
+	public boolean isFinished();
+	
 	/* Invariants */
 	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getEnvi() == getEnvi()
 	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getCol() = x and getEntity(i).getRow() == y \implies   
 	// getEnvi().getCellContent(x,y) == getEntity(i)
-	
+	// isFinished == getEnvi().getCellNature(i,j) == Cell.OUT \impl i == getPlayer().getCol() && j == getPlayer().getRow()
 	
 	/* Constructors */
-	public void init(EnvironmentService env);
+	public void init(EnvironmentService env, PlayerService player);
 	
 	/* Operators */
 	
@@ -35,5 +39,7 @@ public interface EngineService {
 	
 	// \pre \forall i in [0;getEntities().size()-1], getEntity(i).getHp() > 0
 	public void step();
+	
+	
 
 }

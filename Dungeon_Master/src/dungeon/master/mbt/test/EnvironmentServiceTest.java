@@ -17,18 +17,21 @@ import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
-public class EnvironmentServiceTest {
+public class EnvironmentServiceTest extends EditMapServiceTest {
 	private EnvironmentService env;
 	
 	
 	@Before
 	public void beforeTests() {
+		super.beforeTests();
 		env = new EnvironmentServiceContract(new Environment());
+		ems = env;
 	}
 	
 	
 	@After
 	public void afterTests() {
+		super.afterTests();
 		env = null;
 	}
 	

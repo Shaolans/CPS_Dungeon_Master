@@ -741,7 +741,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		/* PostConditions */
 		if(lastcom_atpre.getValue() == Command.FF) {
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -756,7 +756,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -770,7 +770,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -784,7 +784,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
@@ -801,7 +801,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.BB) {
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -816,7 +816,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -830,7 +830,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -844,7 +844,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
@@ -860,7 +860,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.LL) {
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -875,7 +875,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -889,7 +889,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -903,7 +903,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
@@ -919,7 +919,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.RR) {
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -934,7 +934,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -948,7 +948,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -962,7 +962,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
