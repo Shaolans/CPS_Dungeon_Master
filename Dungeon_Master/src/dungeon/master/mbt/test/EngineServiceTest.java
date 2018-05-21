@@ -48,7 +48,7 @@ public class EngineServiceTest {
 		//cas positif
 		try {
 			PlayerService player = new Player();
-			player.init(env, 7, 2, Dir.N, 100);
+			player.init(env, 7, 2, Dir.N, 100, 10);
 			es.init(env, player);
 			CowService cow1 = new CowServiceContract(new Cow());
 			cow1.init(env, 0, 5, Dir.N);
@@ -73,7 +73,7 @@ public class EngineServiceTest {
 		//cas positif
 		try {
 			PlayerService player = new Player();
-			player.init(env, 7, 2, Dir.N, 100);
+			player.init(env, 7, 2, Dir.N, 100, 10);
 			es.init(env, player);
 			CowService cow1 = new CowServiceContract(new Cow());
 			cow1.init(env, 0, 5, Dir.N);
@@ -109,7 +109,7 @@ public class EngineServiceTest {
 		//cas positif
 		try {
 			PlayerService player = new Player();
-			player.init(env, 7, 2, Dir.N, 100);
+			player.init(env, 7, 2, Dir.N, 100, 10);
 			es.init(env, player);
 			CowService cow = new CowServiceContract(new Cow());
 			cow.init(env, 0, 5, Dir.N);
@@ -127,7 +127,7 @@ public class EngineServiceTest {
 		//cas negatif
 		try {
 			PlayerService player = new Player();
-			player.init(env, 7, 2, Dir.N, 100);
+			player.init(env, 7, 2, Dir.N, 100, 10);
 			es.init(env, player);
 			es.removeEntity(52);
 			fail();
@@ -141,10 +141,10 @@ public class EngineServiceTest {
 		//cas positif
 		try {
 			PlayerService player = new Player();
-			player.init(env, 7, 2, Dir.N, 100);
+			player.init(env, 7, 2, Dir.N, 100, 10);
 			es.init(env, player);
 			CowService cow = new CowServiceContract(new Cow());
-			cow.init(env, 0, 5, Dir.N, 3);
+			cow.init(env, 0, 5, Dir.N, 3, 10);
 			env.setCellContent(0, 5, cow);
 			es.addEntity(cow);
 			es.step();

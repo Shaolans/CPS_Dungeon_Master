@@ -49,11 +49,15 @@ public class Engine implements EngineService {
 		envi.setCellContent(entity.getCol(), entity.getRow(), entity);
 	}
 
+	public void clean() {
+		entities.removeIf(e->e.getHp() <= 0);
+	}
 	@Override
 	public void step() {
 		for(EntityService ent: entities) {
 			ent.step();
 		}
+		
 	}
 
 	@Override

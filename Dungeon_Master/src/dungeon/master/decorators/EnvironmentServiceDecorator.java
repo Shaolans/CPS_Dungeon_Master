@@ -2,6 +2,7 @@ package dungeon.master.decorators;
 
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Option;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
@@ -16,7 +17,7 @@ public class EnvironmentServiceDecorator extends EditMapServiceDecorator impleme
 	}
 
 	@Override
-	public Option<MobService> getCellContent(int x, int y) {
+	public Option<EntityService> getCellContent(int x, int y) {
 		return getDelegate().getCellContent(x, y);
 	}
 
@@ -52,7 +53,7 @@ public class EnvironmentServiceDecorator extends EditMapServiceDecorator impleme
 	}
 
 	@Override
-	public void setCellContent(int col, int row, MobService mob) {
+	public void setCellContent(int col, int row, EntityService mob) {
 		getDelegate().setCellContent(col, row, mob);
 	}
 

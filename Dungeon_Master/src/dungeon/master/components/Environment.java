@@ -2,27 +2,28 @@ package dungeon.master.components;
 
 
 import dungeon.master.enumerations.Option;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
 public class Environment extends EditMap implements EnvironmentService {
 
-	Option<MobService> mobMap[][];
+	Option<EntityService> mobMap[][];
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init(int w, int h) {
 		super.init(w, h);
-		mobMap = (Option<MobService>[][]) new Option[w][h];
+		mobMap = (Option<EntityService>[][]) new Option[w][h];
 		for(int i = 0; i < w; i++) {
 			for(int j = 0; j < h; j++) {
-				mobMap[i][j] = new Option<MobService>();
+				mobMap[i][j] = new Option<EntityService>();
 			}
 		}
 	}
 
 	@Override
-	public Option<MobService> getCellContent(int x, int y) {
+	public Option<EntityService> getCellContent(int x, int y) {
 		return mobMap[x][y];
 	}
 
@@ -34,8 +35,8 @@ public class Environment extends EditMap implements EnvironmentService {
 	}
 
 	@Override
-	public void setCellContent(int col, int row, MobService mob) {
-		mobMap[col][row] = new Option<MobService>(mob);
+	public void setCellContent(int col, int row, EntityService mob) {
+		mobMap[col][row] = new Option<EntityService>(mob);
 	}
 
 }

@@ -10,6 +10,7 @@ import dungeon.master.enumerations.Option;
 import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PostconditionError;
 import dungeon.master.exceptions.PreconditionError;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
@@ -74,7 +75,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			v = r.nextInt(3)-1;
 
 			Dir dir = getFace();
-			Option<MobService> content;
+			Option<EntityService> content;
 			Cell nature;
 
 			if(getCol()+u >= 0 && getCol()+u < getEnv().getWidth() && getRow()+v >= 0 && getRow()+v < getEnv().getHeight()) {
@@ -220,8 +221,12 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 	}
 
 	@Override
-	public void init(EnvironmentService env, int col, int row, Dir dir, int hp) {
+	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage) {
 		/* preconditions */
+		if(!(damage >= 0)) {
+			throw new PreconditionError("damage >= 0 does not hold");
+		}
+		
 		if(!(hp > 0)){
 			throw new PreconditionError("h > 0 does not hold");
 		}
@@ -229,7 +234,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		if(!(0 <= row && row < env.getHeight())) throw new PreconditionError("0 <= row <= env.getHeight() does not hold");
 		if(!(0 <= col && col < env.getWidth())) throw new PreconditionError("0 <= col <= env.getWidth() does not hold");
 
-		getDelegate().init(env, col, row, dir, hp);
+		getDelegate().init(env, col, row, dir, hp, damage);
 
 
 		/* Invariants */
@@ -686,7 +691,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 	}
 
 	@Override
-	public Option<MobService> getContent(int col, int row){
+	public Option<EntityService> getContent(int col, int row){
 		/* Preconditions */
 		if(!((col==-1 || col == 0 || col == 1) && (row == -1 || row == 0 || row == 1 || row == 2 || row == 3))){
 			throw new PreconditionError("col \\in {-1,0,1} and y \\in {-1,+3} does not hold");

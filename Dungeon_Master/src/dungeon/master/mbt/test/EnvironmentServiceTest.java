@@ -7,13 +7,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import dungeon.master.components.Cow;
+import dungeon.master.components.Entity;
 import dungeon.master.components.Environment;
 import dungeon.master.components.Mob;
 import dungeon.master.contracts.EnvironmentServiceContract;
 import dungeon.master.enumerations.Cell;
+import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
 import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PreconditionError;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 
@@ -40,9 +44,10 @@ public class EnvironmentServiceTest extends EditMapServiceTest {
 		//cas positif
 		try {
 			env.init(10, 20);
-			Mob m = new Mob();
+			EntityService m = new Cow();
+			m.init(env, 5, 7, Dir.N, 2, 10);
 			@SuppressWarnings("unchecked")
-			Option<MobService> map[][] = new Option[10][20];
+			Option<EntityService> map[][] = new Option[10][20];
 			for(int i = 0; i < map.length; i++){
 				for(int j = 0; j < map[0].length; j++){
 					map[i][j] = env.getCellContent(i, j);
@@ -69,7 +74,7 @@ public class EnvironmentServiceTest extends EditMapServiceTest {
 		//cas positif
 		try {
 			env.init(10, 20);
-			env.setCellContent(1, 2, new Mob());
+			env.setCellContent(1, 2, new Cow());
 		}catch(PreconditionError pe) {
 			fail();
 		}
@@ -80,7 +85,7 @@ public class EnvironmentServiceTest extends EditMapServiceTest {
 		//cas negatif
 		try {
 			env.init(10, 20);
-			env.setCellContent(1, 96, new Mob());
+			env.setCellContent(1, 96, new Cow());
 			fail();
 		}catch(PreconditionError pe) {
 			

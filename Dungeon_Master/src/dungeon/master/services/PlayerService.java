@@ -12,7 +12,7 @@ public interface PlayerService extends EntityService {
 	public Option<Command> getLastCom();
 
 	// \pre col \in {-1,0,1} and y \in {-1,+3}
-	public Option<MobService> getContent(int col, int row);
+	public Option<EntityService> getContent(int col, int row);
 
 	// \pre col \in {-1,0,1} and y \in {-1,+3}
 	public Cell getNature(int col, int row);

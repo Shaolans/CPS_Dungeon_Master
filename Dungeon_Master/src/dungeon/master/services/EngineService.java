@@ -41,5 +41,9 @@ public interface EngineService {
 	public void step();
 	
 	
+	public void clean();
+	/* \post \forall i in [0;getEntities().size()-1], getEntity(i).getHp() > 0
+	 */
+	
 
 }

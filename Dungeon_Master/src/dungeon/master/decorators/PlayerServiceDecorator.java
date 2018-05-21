@@ -4,6 +4,7 @@ import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
@@ -24,7 +25,7 @@ public class PlayerServiceDecorator extends EntityServiceDecorator implements Pl
 	}
 
 	@Override
-	public Option<MobService> getContent(int col, int row) {
+	public Option<EntityService> getContent(int col, int row) {
 		return getDelegate().getContent(col, row);
 	}
 
@@ -44,8 +45,8 @@ public class PlayerServiceDecorator extends EntityServiceDecorator implements Pl
 	}
 
 	@Override
-	public void init(EnvironmentService env, int col, int row, Dir dir, int hp){
-		getDelegate().init(env, col, row, dir, hp);
+	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage){
+		getDelegate().init(env, col, row, dir, hp, damage);
 	}
 
 	@Override

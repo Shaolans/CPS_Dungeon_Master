@@ -44,8 +44,11 @@ public class EntityServiceContract extends EntityServiceDecorator implements
 	}
 
 	@Override
-	public void init(EnvironmentService env, int col, int row, Dir dir, int hp) {
+	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage) {
 		/* preconditions */
+		if(!(damage >= 0)) {
+			throw new PreconditionError("damage >= 0 does not hold");
+		}
 		if(!(hp > 0)){
 			throw new PreconditionError("h > 0 does not hold");
 		}
@@ -53,7 +56,7 @@ public class EntityServiceContract extends EntityServiceDecorator implements
 		if(!(0 <= row && env.getHeight() < row)) throw new PreconditionError("0 <= row <= env.getHeight() does not hold");
 		if(!(0 <= col && env.getWidth() < col)) throw new PreconditionError("0 <= col <= env.getWidth() does not hold");
 		
-		getDelegate().init(env, col, row, dir, hp);
+		getDelegate().init(env, col, row, dir, hp, damage);
 		
 		
 		/* Invariants */
@@ -489,6 +492,56 @@ public class EntityServiceContract extends EntityServiceDecorator implements
 			}
 		}
 		
+	}
+	
+	@Override
+	public void attack() {
+		/* Preconditions */
+		//NONE
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Capture */
+		int hp_atpre[][] = new int[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < getEnv().getWidth(); i++) {
+			for(int j = 0; j < getEnv().getHeight(); j++) {
+				if(getEnv().getCellContent(i, j).getValue() != null) {
+					hp_atpre[i][j] = getEnv().getCellContent(i, j).getValue().getHp();
+				}
+			}
+		}
+		
+		/* Run */
+		getDelegate().attack();
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Postcondtions */
+		if(getFace() == Dir.N && getRow()+1 < getEnv().getHeight() && getEnv().getCellContent(getCol(), getRow()+1).getValue() != null) {
+			if(!(getHp() == hp_atpre[getCol()][getRow()+1] - getDamage())) {
+				throw new PostconditionError("Damage does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.S && getRow()-1 >0 && getEnv().getCellContent(getCol(), getRow()-1).getValue() != null) {
+			if(!(getHp() == hp_atpre[getCol()][getRow()-1] - getDamage())) {
+				throw new PostconditionError("Damage does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.W && getCol()-1 >= 0 && getEnv().getCellContent(getCol()-1, getRow()).getValue() != null) {
+			if(!(getHp() == hp_atpre[getCol()-1][getRow()] - getDamage())) {
+				throw new PostconditionError("Damage does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && getEnv().getCellContent(getCol()+1, getRow()).getValue() != null) {
+			if(!(getHp() == hp_atpre[getCol()+1][getRow()] - getDamage())) {
+				throw new PostconditionError("Damage does not hold");
+			}
+		}
 	}
 
 }

@@ -37,7 +37,6 @@ public class Mob implements MobService {
 		this.row = row;
 		this.col = col;
 		this.face = dir;
-		env.setCellContent(col, row, this);
 	}
 
 	@Override

@@ -120,7 +120,6 @@ public class EditMapServiceTest {
 		//cas positif
 		try {
 			ems.init(10, 20);
-			
 			ems.setNature(0, -1, Cell.IN);
 			fail();
 		}catch(PreconditionError ex) {
