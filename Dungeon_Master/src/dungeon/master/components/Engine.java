@@ -49,11 +49,25 @@ public class Engine implements EngineService {
 		envi.setCellContent(entity.getCol(), entity.getRow(), entity);
 	}
 
+	public void clean() {
+		List<EntityService> todelete = new ArrayList<>();
+		for(EntityService ent: entities) {
+			if(ent.getHp() <= 0) {
+				todelete.add(ent);
+			}
+		}
+		for(EntityService ent: todelete) {
+			getEnvi().setCellContent(ent.getCol(), ent.getRow(), null);
+		}
+		
+		entities.removeIf(e->e.getHp() <= 0);
+	}
 	@Override
 	public void step() {
 		for(EntityService ent: entities) {
 			ent.step();
 		}
+		
 	}
 
 	@Override

@@ -21,10 +21,10 @@ public class RunningGameTest {
 		env.init(15, 20);
 		EngineServiceContract e = new EngineServiceContract(new Engine());
 		PlayerServiceContract player = new PlayerServiceContract(new Player());
-		player.init(env, 5, 7, Dir.N, 100);
+		player.init(env, 5, 7, Dir.N, 100, 10);
 		e.init(env, player);
 		CowServiceContract cow = new CowServiceContract(new Cow());
-		cow.init(env, 6, 7, Dir.N, 3);
+		cow.init(env, 6, 7, Dir.N, 3, 10);
 		e.addEntity(cow);
 		e.addEntity(player);
 		env.setNature(5, 10, Cell.DNO);
@@ -57,8 +57,12 @@ public class RunningGameTest {
 			case "CL":
 				player.closeDoor();
 				break;
+			case "ATK":
+				player.attack();
+				break;
 			}
 			
+			e.clean();
 			e.step();
 			
 			for(int k = 0; k < 15; k++){
@@ -74,6 +78,7 @@ public class RunningGameTest {
 				System.out.println();
 			}
 		}
+		sc.close();
 		
 
 	}

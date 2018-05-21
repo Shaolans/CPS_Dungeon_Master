@@ -1,5 +1,7 @@
 package dungeon.master.contracts;
 
+import java.awt.Checkbox;
+import java.security.cert.CertPathChecker;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,6 +157,27 @@ public class EngineServiceContract extends EngineServiceDecorator implements Eng
 		
 		/* Postconditions */
 		//NONE
+	}
+	
+	@Override
+	public void clean() {
+		/* Preconditions */
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Run */
+		super.clean();
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Postconditions */
+		for(int i = 0; i < getEntities().size(); i++) {
+			if(!(getEntity(i).getHp()>0)) {
+				throw new PreconditionError("\\forall i in [0;getEntities().size()-1], getEntity(i).getHp() > 0 does not hold");
+			}
+		}
 	}
 
 }

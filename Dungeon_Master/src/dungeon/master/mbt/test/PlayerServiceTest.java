@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import dungeon.master.components.Cow;
 import dungeon.master.components.Player;
 import dungeon.master.contracts.PlayerServiceContract;
 import dungeon.master.enumerations.Cell;
@@ -24,7 +25,7 @@ public class PlayerServiceTest extends MobServiceTest {
 		super.beforeTests();
 		player = new PlayerServiceContract(new Player());
 		mob = player;
-		player.init(env, 5, 7, Dir.N, 10);
+		player.init(env, 5, 7, Dir.N, 10, 10);
 	}
 	
 	@After
@@ -33,6 +34,17 @@ public class PlayerServiceTest extends MobServiceTest {
 		player = null;
 	}
 	
+	public void attackTransitionTest_1() {
+		try {
+			player.setLastCom(Command.BB);
+			Cow cow = new Cow();
+			cow.init(env, 5, 8, Dir.N, 3, 0);
+			player.attack();
+			assertTrue(cow.getHp() == -7);
+		}catch(Error e) {
+			fail();
+		}
+	}
 	
 	@Test
 	public void closeDoorTransitionTest_1() {
@@ -55,7 +67,7 @@ public class PlayerServiceTest extends MobServiceTest {
 	public void closeDoorTransitionTest_2() {
 		try {
 			
-			player.init(env, 5, 7, Dir.S, 10);
+			player.init(env, 5, 7, Dir.S, 10, 10);
 			player.setLastCom(Command.BB);
 			env.setNature(5, 6, Cell.DWO);
 			player.closeDoor();
@@ -91,7 +103,7 @@ public class PlayerServiceTest extends MobServiceTest {
 	public void openDoorTransitionTest_2() {
 		try {
 			
-			player.init(env, 5, 7, Dir.S, 10);
+			player.init(env, 5, 7, Dir.S, 10, 10);
 			player.setLastCom(Command.BB);
 			env.setNature(5, 6, Cell.DWC);
 			player.openDoor();

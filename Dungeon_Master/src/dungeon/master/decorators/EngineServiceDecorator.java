@@ -51,6 +51,12 @@ public class EngineServiceDecorator implements EngineService {
 	public boolean isFinished() {
 		return this.delegate.isFinished();	
 	}
+
+	@Override
+	public void clean() {
+		delegate.clean();
+		
+	}
 	
 	
 }

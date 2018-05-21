@@ -8,11 +8,14 @@ import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
 import dungeon.master.exceptions.InvariantError;
+import dungeon.master.exceptions.PostconditionError;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
 
 public class Player extends Entity implements PlayerService {
 	private Option<Command> last;
+	
 	
 	@Override
 	public Option<Command> getLastCom() {
@@ -21,12 +24,13 @@ public class Player extends Entity implements PlayerService {
 
 	
 	@Override
-	public void init(dungeon.master.services.EnvironmentService env, int col, int row, dungeon.master.enumerations.Dir dir, int hp) {
-		super.init(env, col, row, dir, hp);
+	public void init(dungeon.master.services.EnvironmentService env, int col, int row, dungeon.master.enumerations.Dir dir, int hp, int damage) {
+		super.init(env, col, row, dir, hp, damage);
+		
 		last = new Option<Command>();
 	};
 	@Override
-	public Option<MobService> getContent(int col, int row) {
+	public Option<EntityService> getContent(int col, int row) {
 		return env.getCellContent(getCol()+col, getRow()+row);
 	}
 
@@ -114,6 +118,7 @@ public class Player extends Entity implements PlayerService {
 		case TR:
 			turnR();
 			break;
+		default:
 		}
 		setLastCom(Command.NONE);
 
@@ -197,5 +202,7 @@ public class Player extends Entity implements PlayerService {
 		}
 		
 	}
+
+
 
 }

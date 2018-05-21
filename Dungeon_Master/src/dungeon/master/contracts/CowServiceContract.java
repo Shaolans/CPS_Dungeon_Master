@@ -55,8 +55,12 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 	}
 	
 	@Override
-	public void init(EnvironmentService env, int col, int row, Dir dir, int hp) {
+	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage) {
 		/* preconditions */
+		if(!(damage >= 0)) {
+			throw new PreconditionError("damage >= 0 does not hold");
+		}
+		
 		if(!(hp > 0)){
 			throw new PreconditionError("h > 0 does not hold");
 		}
@@ -65,7 +69,7 @@ public class CowServiceContract extends CowServiceDecorator implements CowServic
 		if(!(0 <= col && col < env.getWidth())) throw new PreconditionError("0 <= col <= env.getWidth() does not hold");
 		if(!(3 <= hp && hp <= 4)) throw new PreconditionError("0 <= hp && hp <= 4 does not hold");
 		
-		getDelegate().init(env, col, row, dir, hp);
+		getDelegate().init(env, col, row, dir, hp, damage);
 		
 		
 		/* Invariants */

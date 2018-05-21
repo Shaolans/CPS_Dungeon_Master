@@ -9,7 +9,7 @@ public class Cow extends Entity implements CowService {
 	public void step() {
 		int step = (int)(Math.random()*6);
 		
-		switch(step) {
+		/*switch(step) {
 		case 0:
 			if(face == Dir.N && row+1 < env.getHeight() ||
 			face == Dir.S && row-1 >= 0 ||
@@ -49,7 +49,11 @@ public class Cow extends Entity implements CowService {
 		case 5:
 			turnR();
 			break;
-		}
+		}*/
 	}
+
+	
+
+	
 
 }
