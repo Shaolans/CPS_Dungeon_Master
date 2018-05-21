@@ -175,9 +175,8 @@ public class PlayerMouvements implements PlayerService {
 				break;
 		}
 		
-		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
-		sp.getChildren().remove(1);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		sp.getChildren().remove(1);
 		sp.getChildren().add(current);
 		
 		
@@ -207,9 +206,8 @@ public class PlayerMouvements implements PlayerService {
 				break;
 		}
 		
-		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
-		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		sp.getChildren().remove(1);
 		sp.getChildren().add(current);
 		
 		

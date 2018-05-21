@@ -499,21 +499,77 @@ public class MainWindow {
 		
 		scene.setOnKeyPressed(e->{
 			if(e.getCode()== KeyCode.DOWN){
-				pm.setLastCom(Command.BB);
+				
+				switch(pm.getFace()){
+					case E:
+						pm.setLastCom(Command.BB);
+						break;
+					case W :
+						pm.setLastCom(Command.BB);
+						break;
+					case N :
+						pm.setLastCom(Command.RR);
+						break;
+					case S :
+						pm.setLastCom(Command.LL);
+						break;
+				}
+				
+				
 				pm.step();
 			}
 			if(e.getCode()== KeyCode.UP){
-				pm.setLastCom(Command.FF);
+				switch(pm.getFace()){
+				case E:
+					pm.setLastCom(Command.FF);
+					break;
+				case W :
+					pm.setLastCom(Command.FF);
+					break;
+				case N :
+					pm.setLastCom(Command.LL);
+					break;
+				case S :
+					pm.setLastCom(Command.RR);
+					break;
+				}
 				pm.step();
 			}
 			
 			if(e.getCode()== KeyCode.RIGHT){
-				pm.setLastCom(Command.LL);
+				switch(pm.getFace()){
+				case E:
+					pm.setLastCom(Command.LL);
+					break;
+				case W :
+					pm.setLastCom(Command.RR);
+					break;
+				case N :
+					pm.setLastCom(Command.FF);
+					break;
+				case S :
+					pm.setLastCom(Command.BB);
+					break;
+				}
+
 				pm.step();
 			}
 			
 			if(e.getCode()== KeyCode.LEFT){
-				pm.setLastCom(Command.RR);
+				switch(pm.getFace()){
+				case E:
+					pm.setLastCom(Command.RR);
+					break;
+				case W :
+					pm.setLastCom(Command.LL);
+					break;
+				case N :
+					pm.setLastCom(Command.BB);
+					break;
+				case S :
+					pm.setLastCom(Command.FF);
+					break;
+				}
 				pm.step();
 			}
 			
