@@ -90,7 +90,7 @@ public class PlayerMouvements implements PlayerService {
 		
 		ImageView current = null ;
 		
-		switch(oldDir){
+		switch(getFace()){
 			case E :
 				current = face;
 				break;
@@ -125,7 +125,7 @@ public class PlayerMouvements implements PlayerService {
 		
 		ImageView current = null ;
 		
-		switch(oldDir){
+		switch(getFace()){
 			case E :
 				current = face;
 				break;
@@ -223,7 +223,7 @@ public class PlayerMouvements implements PlayerService {
 		
 		ImageView current = null ;
 		
-		switch(oldDir){
+		switch(getFace()){
 			case E :
 				current = face;
 				break;
