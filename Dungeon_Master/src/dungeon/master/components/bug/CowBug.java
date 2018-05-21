@@ -1,9 +1,9 @@
-package dungeon.master.components;
+package dungeon.master.components.bug;
 
 import dungeon.master.enumerations.Dir;
 import dungeon.master.services.CowService;
 
-public class Cow extends Entity implements CowService {
+public class CowBug extends EntityBug implements CowService {
 
 	@Override
 	public void step() {
@@ -15,7 +15,8 @@ public class Cow extends Entity implements CowService {
 			face == Dir.S && row-1 >= 0 ||
 			face == Dir.E && col-1 >= 0 ||
 			face == Dir.W && col+1 < env.getWidth()) {
-				forward();				
+				forward();
+				forward();
 			}
 			break;
 		case 1:
