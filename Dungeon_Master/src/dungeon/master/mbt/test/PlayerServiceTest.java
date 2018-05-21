@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import dungeon.master.components.Player;
 import dungeon.master.contracts.PlayerServiceContract;
+import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.exceptions.InvariantError;
@@ -31,6 +32,79 @@ public class PlayerServiceTest extends MobServiceTest {
 		super.afterTests();
 		player = null;
 	}
+	
+	
+	@Test
+	public void closeDoorTransitionTest_1() {
+		try {
+			
+			player.setLastCom(Command.BB);
+			env.setNature(5, 8, Cell.DNO);
+			player.closeDoor();
+			
+			assertTrue(player.getCol() == 5 && player.getRow() == 7 && env.getCellNature(5, 8) == Cell.DNC);
+		}catch(PostconditionError pe) {
+			fail();
+		}catch(InvariantError ie) {
+			ie.printStackTrace();
+			fail();
+		}
+	}
+	
+	@Test
+	public void closeDoorTransitionTest_2() {
+		try {
+			
+			player.init(env, 5, 7, Dir.S, 10);
+			player.setLastCom(Command.BB);
+			env.setNature(5, 6, Cell.DWO);
+			player.closeDoor();
+			
+			assertTrue(player.getCol() == 5 && player.getRow() == 7 && env.getCellNature(5, 6) == Cell.DWC);
+		}catch(PostconditionError pe) {
+			fail();
+		}catch(InvariantError ie) {
+			ie.printStackTrace();
+			fail();
+		}
+	}
+	
+	
+	@Test
+	public void openDoorTransitionTest_1() {
+		try {
+			
+			player.setLastCom(Command.BB);
+			env.setNature(5, 8, Cell.DNC);
+			player.openDoor();
+			
+			assertTrue(player.getCol() == 5 && player.getRow() == 7 && env.getCellNature(5, 8) == Cell.DNO);
+		}catch(PostconditionError pe) {
+			fail();
+		}catch(InvariantError ie) {
+			ie.printStackTrace();
+			fail();
+		}
+	}
+	
+	@Test
+	public void openDoorTransitionTest_2() {
+		try {
+			
+			player.init(env, 5, 7, Dir.S, 10);
+			player.setLastCom(Command.BB);
+			env.setNature(5, 6, Cell.DWC);
+			player.openDoor();
+			
+			assertTrue(player.getCol() == 5 && player.getRow() == 7 && env.getCellNature(5, 6) == Cell.DWO);
+		}catch(PostconditionError pe) {
+			fail();
+		}catch(InvariantError ie) {
+			ie.printStackTrace();
+			fail();
+		}
+	}
+	
 	
 	@Test
 	public void setLastComTransitionTest_1(){

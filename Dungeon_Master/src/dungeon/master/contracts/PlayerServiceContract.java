@@ -137,6 +137,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			for(int v = -1; v<1; v++){
 				if(getCol()+u < getEnv().getWidth() && getCol()+u >= 0 && getRow()+v < getEnv().getHeight() && getRow()+v >= 0) {
 					if( !isViewable(u, v) ){
+						System.out.println(u+" "+v);
 						throw new InvariantError("\\inv \\forall u,v \\in [-1,1]x[-1,1], !isViewable(u,v) does not hold");
 					}
 				}else {
@@ -162,6 +163,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		if(getCol() < getEnv().getWidth() && getCol() >= 0 && getRow()+2 < getEnv().getHeight() && getRow()+2 >= 0) {
 
 			if( !(isViewable(0, 2) == (getNature(0, 1)!= Cell.WLL && getNature(0, 1)!= Cell.DWC && getNature(0, 1) != Cell.DNC ) ) ){
+				System.out.println(isViewable(0, 2));
+				System.out.println((getNature(0, 1)!= Cell.WLL && getNature(0, 1)!= Cell.DWC && getNature(0, 1) != Cell.DNC ));
 				throw new InvariantError("\\inv isViewable(0,2) = getNature(0,1) \not \\in {WALL, DWC, DNC} does not hold");
 			}
 		}else {
@@ -183,7 +186,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		
 		if(getCol()-1 < getEnv().getWidth() && getCol()-1 >= 0 && getRow()+3 < getEnv().getHeight() && getRow()+3 >= 0) {
 		
-			if( !(isViewable(-1, 3) == (getNature(-1, 2)!= Cell.WLL && getNature(-1, 2)!= Cell.DWC && getNature(-1, 2) != Cell.DNC ) && isViewable(-1, 2) ) ){
+			if( !(isViewable(-1, 3) == ((getNature(-1, 2)!= Cell.WLL && getNature(-1, 2)!= Cell.DWC && getNature(-1, 2) != Cell.DNC ) && isViewable(-1, 2) )) ){
 				throw new InvariantError("\\inv isViewable(-1,3) = getNature(-1,2) \\not \\in {WALL, DWC, DNC} and isViewable(-1,2) does not hold");
 			}
 		}else {
@@ -194,7 +197,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		
 		if(getCol() < getEnv().getWidth() && getCol() >= 0 && getRow()+3 < getEnv().getHeight() && getRow()+3 >= 0) {
 			
-			if( !(isViewable(0, 3) == (getNature(0, 2)!= Cell.WLL && getNature(0, 2)!= Cell.DWC && getNature(0, 2) != Cell.DNC ) && isViewable(0, 2) ) ){
+			if( !(isViewable(0, 3) == ((getNature(0, 2)!= Cell.WLL && getNature(0, 2)!= Cell.DWC && getNature(0, 2) != Cell.DNC ) && isViewable(0, 2) )) ){
 				throw new InvariantError("\\inv isViewable(0,3) = getNature(0,2) \\not \\in {WALL, DWC, DNC} and isViewable(0,2) does not hold");
 			}
 		}else {
@@ -204,7 +207,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		}
 		
 		if(getCol()+1 < getEnv().getWidth() && getCol()+1 >= 0 && getRow()+3 < getEnv().getHeight() && getRow()+3 >= 0) {
-			if( !(isViewable(1, 3) == (getNature(1, 2)!= Cell.WLL && getNature(1, 2)!= Cell.DWC && getNature(1, 2) != Cell.DNC ) && isViewable(1, 2) ) ){
+			if( !(isViewable(1, 3) == ((getNature(1, 2)!= Cell.WLL && getNature(1, 2)!= Cell.DWC && getNature(1, 2) != Cell.DNC ) && isViewable(1, 2)) ) ){
 				throw new InvariantError("\\inv isViewable(1,3) = getNature(1,2) \\not \\in {WALL, DWC, DNC} and isViewable(1,2) does not hold");
 			}
 		}else {
@@ -741,7 +744,10 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		/* PostConditions */
 		if(lastcom_atpre.getValue() == Command.FF) {
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
+				System.out.println(getEnv().getCellNature(col_atpre, row_atpre+1));
+				System.out.println(existmob_atpre[col_atpre][row_atpre+1]);
+				System.out.println(row_atpre+1);
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -756,7 +762,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -770,7 +776,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -784,7 +790,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
@@ -801,7 +807,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.BB) {
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -816,7 +822,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -830,7 +836,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -844,7 +850,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
@@ -860,7 +866,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.LL) {
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -875,7 +881,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -889,7 +895,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -903,7 +909,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
@@ -919,7 +925,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.RR) {
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						col_atpre+1 < getEnv().getWidth() &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
@@ -934,7 +940,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						row_atpre+1 < getEnv().getHeight() &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
@@ -948,7 +954,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DWO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						row_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
@@ -962,7 +968,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DNO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
+				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						col_atpre-1 >= 0 &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
@@ -1036,9 +1042,149 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 		}
 	}
+	
+	
+	@Override
+	public void openDoor() {
+		/* Preconditions */
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Capture */
+		Cell nature_atpre[][] = new Cell[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < getEnv().getWidth(); i++) {
+			for(int j = 0; j < getEnv().getHeight(); j++) {
+				nature_atpre[i][j] = getEnv().getCellNature(i, j);
+			}
+		}
+		
+		/* Run */
+		getDelegate().openDoor();
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Postconditions */
+		if(getFace() == Dir.N && getRow()+1 < getEnv().getHeight() && nature_atpre[getCol()][getRow()+1] == Cell.DWC) {
+			if(!(getEnv().getCellNature(getCol(), getRow()+1) == Cell.DWO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.N && getRow()+1 < getEnv().getHeight() && nature_atpre[getCol()][getRow()+1] == Cell.DNC) {
+			if(!(getEnv().getCellNature(getCol(), getRow()+1) == Cell.DNO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.S && getRow()-1 >= 0 && nature_atpre[getCol()][getRow()-1] == Cell.DWC) {
+			if(!(getEnv().getCellNature(getCol(), getRow()-1) == Cell.DWO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.S && getRow()-1 >= 0 && nature_atpre[getCol()][getRow()-1] == Cell.DNC) {
+			if(!(getEnv().getCellNature(getCol(), getRow()-1) == Cell.DNO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && nature_atpre[getCol()+1][getRow()] == Cell.DWC) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && nature_atpre[getCol()+1][getRow()] == Cell.DNC) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DNO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.DWC) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.DNC) {
+			if(!(getEnv().getCellNature(getCol()-1, getRow()) == Cell.DNO)) {
+				throw new InvariantError("OpenDoor player does not hold");
+			}
+		}
+	}
 
-
-
-
+	
+	@Override
+	public void closeDoor() {
+		/* Preconditions */
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Capture */
+		Cell nature_atpre[][] = new Cell[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < getEnv().getWidth(); i++) {
+			for(int j = 0; j < getEnv().getHeight(); j++) {
+				nature_atpre[i][j] = getEnv().getCellNature(i, j);
+			}
+		}
+		
+		/* Run */
+		getDelegate().closeDoor();
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Postconditions */
+		if(getFace() == Dir.N && getRow()+1 < getEnv().getHeight() && nature_atpre[getCol()][getRow()+1] == Cell.DWO) {
+			if(!(getEnv().getCellNature(getCol(), getRow()+1) == Cell.DWC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.N && getRow()+1 < getEnv().getHeight() && nature_atpre[getCol()][getRow()+1] == Cell.DNO) {
+			if(!(getEnv().getCellNature(getCol(), getRow()+1) == Cell.DNC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.S && getRow()-1 >= 0 && nature_atpre[getCol()][getRow()-1] == Cell.DWO) {
+			if(!(getEnv().getCellNature(getCol(), getRow()-1) == Cell.DWC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.S && getRow()-1 >= 0 && nature_atpre[getCol()][getRow()-1] == Cell.DNO) {
+			if(!(getEnv().getCellNature(getCol(), getRow()-1) == Cell.DNC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && nature_atpre[getCol()+1][getRow()] == Cell.DWO) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && nature_atpre[getCol()+1][getRow()] == Cell.DNO) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DNC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.DWO) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.DNO) {
+			if(!(getEnv().getCellNature(getCol()-1, getRow()) == Cell.DNC)) {
+				throw new InvariantError("CloseDoor player does not hold");
+			}
+		}
+	}
 
 }

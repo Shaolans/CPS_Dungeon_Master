@@ -6,5 +6,5 @@ public enum Command {
 	RR,
 	LL,
 	TL,
-	TR
+	TR, NONE
 }

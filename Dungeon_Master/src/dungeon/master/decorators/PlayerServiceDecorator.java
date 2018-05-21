@@ -53,4 +53,15 @@ public class PlayerServiceDecorator extends EntityServiceDecorator implements Pl
 		getDelegate().setLastCom(cmd);
 	}
 
+	@Override
+	public void openDoor() {
+		getDelegate().openDoor();
+		
+	}
+
+	@Override
+	public void closeDoor() {
+		getDelegate().closeDoor();
+	}
+
 }

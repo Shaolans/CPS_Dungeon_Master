@@ -10,6 +10,7 @@ import dungeon.master.contracts.CowServiceContract;
 import dungeon.master.contracts.EngineServiceContract;
 import dungeon.master.contracts.EnvironmentServiceContract;
 import dungeon.master.contracts.PlayerServiceContract;
+import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 
@@ -26,7 +27,7 @@ public class RunningGameTest {
 		cow.init(env, 6, 7, Dir.N, 3);
 		e.addEntity(cow);
 		e.addEntity(player);
-		
+		env.setNature(5, 10, Cell.DNO);
 		Scanner sc = new Scanner(System.in);
 		
 		for(int i = 0; i < 100; i++){
@@ -50,7 +51,12 @@ public class RunningGameTest {
 			case "TL":
 				player.setLastCom(Command.TL);
 				break;
-				
+			case "OP":
+				player.openDoor();
+				break;
+			case "CL":
+				player.closeDoor();
+				break;
 			}
 			
 			e.step();

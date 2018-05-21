@@ -48,4 +48,26 @@ public interface PlayerService extends EntityService {
 	 * \post getLastCom()@pre = TL \implies step() = TurnLeft()
 	 * \post getLastCom()@pre = TR \implies step() = TurnRight()
 	 */
+	
+	public void openDoor();
+	/* \post getFace() == N && getRow()+1 < getEnv().getHeight() && getEnv().getCellNature(getCol(), getRow()+1)@pre == Cell.DWC \impl getEnv().getCellNature(getCol(), getRow()+1) == Cell.DNO
+	 * \post getFace() == N && getRow()+1 < getEnv().getHeight() && getEnv().getCellNature(getCol(), getRow()+1)@pre == Cell.DNC \impl getEnv().getCellNature(getCol(), getRow()+1) == Cell.DWO
+	 * \post getFace() == S && getRow()-1 >= 0 && getEnv().getCellNature(getCol(), getRow()-1)@pre == Cell.DWC \impl getEnv().getCellNature(getCol(), getRow()-1) == Cell.DNO
+	 * \post getFace() == S && getRow()-1 >= 0 && getEnv().getCellNature(getCol(), getRow()-1)@pre == Cell.DNC \impl getEnv().getCellNature(getCol(), getRow()-1) == Cell.DWO
+	 * \post getFace() == E && getCol()+1 < getEnv().getWidth() && getEnv().getCellNature(getCol()+1, getRow())@pre == Cell.DWC \impl getEnv().getCellNature(getCol()+1, getRow()) == Cell.DNO
+	 * \post getFace() == E && getCol()+1 < getEnv().getWidth() && getEnv().getCellNature(getCol()+1, getRow())@pre == Cell.DNC \impl getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWO
+	 * \post getFace() == W && getCol()-1 >= 0 && getEnv().getCellNature(getCol()-1, getRow())@pre == Cell.DWC \impl getEnv().getCellNature(getCol()-1, getRow()) == Cell.DNO
+	 * \post getFace() == W && getCol()-1 >= 0&& getEnv().getCellNature(getCol()-1, getRow())@pre == Cell.DNC \impl getEnv().getCellNature(getCol()-1, getRow()) == Cell.DWO
+	 */
+	
+	public void closeDoor();
+	/* \post getFace() == N && getRow()+1 < getEnv().getHeight() && getEnv().getCellNature(getCol(), getRow()+1)@pre == Cell.DWO \impl getEnv().getCellNature(getCol(), getRow()+1) == Cell.DNC
+	 * \post getFace() == N && getRow()+1 < getEnv().getHeight() && getEnv().getCellNature(getCol(), getRow()+1)@pre == Cell.DNO \impl getEnv().getCellNature(getCol(), getRow()+1) == Cell.DWC
+	 * \post getFace() == S && getRow()-1 >= 0 && getEnv().getCellNature(getCol(), getRow()-1)@pre == Cell.DWO \impl getEnv().getCellNature(getCol(), getRow()-1) == Cell.DNC
+	 * \post getFace() == S && getRow()-1 >= 0 && getEnv().getCellNature(getCol(), getRow()-1)@pre == Cell.DNO \impl getEnv().getCellNature(getCol(), getRow()-1) == Cell.DWC
+	 * \post getFace() == E && getCol()+1 < getEnv().getWidth() && getEnv().getCellNature(getCol()+1, getRow())@pre == Cell.DWO \impl getEnv().getCellNature(getCol()+1, getRow()) == Cell.DNC
+	 * \post getFace() == E && getCol()+1 < getEnv().getWidth() && getEnv().getCellNature(getCol()+1, getRow())@pre == Cell.DNO \impl getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC
+	 * \post getFace() == W && getCol()-1 >= 0 && getEnv().getCellNature(getCol()-1, getRow())@pre == Cell.DWO \impl getEnv().getCellNature(getCol()-1, getRow()) == Cell.DNC
+	 * \post getFace() == W && getCol()-1 >= 0&& getEnv().getCellNature(getCol()-1, getRow())@pre == Cell.DNO \impl getEnv().getCellNature(getCol()-1, getRow()) == Cell.DWC
+	 */
 }

@@ -189,4 +189,16 @@ public class PlayerMouvements implements PlayerService {
 		joueur.step();
 	}
 
+	@Override
+	public void openDoor() {
+		joueur.openDoor();
+		
+	}
+
+	@Override
+	public void closeDoor() {
+		joueur.closeDoor();
+		
+	}
+
 }
