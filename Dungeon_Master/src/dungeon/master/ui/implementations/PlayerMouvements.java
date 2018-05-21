@@ -93,10 +93,11 @@ public class PlayerMouvements implements PlayerService {
 		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
 		StackPane sp;
 		
-		if(current==face){
-			sp = (StackPane)em.grille.getChildren().get(getRow()*em.getHeight()+getCol());
+		if(getFace()==Dir.E){
+			System.out.println(getCol()+" "+getRow());
+			sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
 			sp.getChildren().remove(face);
-			sp = (StackPane)em.grille.getChildren().get((getRow()+1)*em.getHeight()+getCol());
+			sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol()+1);
 			sp.getChildren().add(face);
 		}
 		

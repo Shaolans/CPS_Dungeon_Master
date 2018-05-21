@@ -4,7 +4,10 @@ import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Option;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.image.ImageView;
 
 public class EnvironmentMouvements implements EnvironmentService {
 	
@@ -49,13 +52,40 @@ public class EnvironmentMouvements implements EnvironmentService {
 	@Override
 	public Cell getCellNature(int x, int y) {
 		// TODO Auto-generated method stub
-		return null;
+		return env.getCellNature(x, y);
 	}
 
 	@Override
 	public void init(int w, int h) {
-		// TODO Auto-generated method stub
+		
 		env.init(w, h);
+		
+		int i=0, j=0;
+		for(Node n : grille.getChildren()){
+			StackPane sp = (StackPane) n;
+			ImageView im = (ImageView)sp.getChildren().get(sp.getChildren().size()-1);
+			
+			switch(im.getId()){
+				case "EMP":
+					env.setNature(i, j, Cell.EMP);
+					break;
+				case "OD":
+					env.setNature(i, j, Cell.DWO);
+					//env.setNature(i, j, Cell.DNC);
+					break;
+				case "CD":
+					env.setNature(i, j, Cell.DNO);
+					//env.setNature(i, j, Cell.DWC);
+					break;
+				case "OUT":
+					env.setNature(i, j, Cell.OUT);
+				
+			}
+			
+			i=(i+1)%getWidth();
+			if(i==0) j++;
+		}
+
 	}
 
 	@Override

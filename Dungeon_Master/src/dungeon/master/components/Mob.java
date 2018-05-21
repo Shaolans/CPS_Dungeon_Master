@@ -37,6 +37,7 @@ public class Mob implements MobService {
 		this.row = row;
 		this.col = col;
 		this.face = dir;
+		env.setCellContent(col, row, this);
 	}
 
 	@Override
@@ -51,12 +52,13 @@ public class Mob implements MobService {
 			env.setCellContent(col, row-1, null);
 			
 		}
-		
+		System.out.println("ICI "+col+" "+row+" "+env.getCellNature(col+1, row));
 		if(face == Dir.E &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO || env.getCellNature(col+1, row) == Cell.OUT)){
 			col++;
+			
 			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
 			env.setCellContent(col-1, row, null);
 		}

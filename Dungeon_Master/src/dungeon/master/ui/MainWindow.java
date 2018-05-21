@@ -76,6 +76,8 @@ public class MainWindow {
 	
 	private ImageView sortieUnique;
 	
+	private String id;
+	
 	private Background background;
 
 
@@ -392,7 +394,9 @@ public class MainWindow {
 			Node [] nodes = new Node[15];
 
 			for(int j=0; j<15; j++) {
-				nodes[j] = new StackPane(new ImageView(solImage));
+				ImageView iv = new ImageView(solImage);
+				nodes[j] = new StackPane(iv);
+				iv.setId("EMP");
 			}
 			g.addColumn(i, nodes);
 
@@ -400,22 +404,27 @@ public class MainWindow {
 
 		mur.setOnMouseClicked(e->{
 			selectedImage = murImage;
+			id = "WLL";
 		});
 
 		sol.setOnMouseClicked(e->{
 			selectedImage = solImage;
+			id = "EMP";
 		});
 
 		porteOuverte.setOnMouseClicked(e->{
 			selectedImage = porteOuverteImage;
+			id = "OD";
 		});
 
 		porteFermee.setOnMouseClicked(e->{
 			selectedImage = porteFermeeImage;
+			id = "CD";
 		});
 
 		sortie.setOnMouseClicked(e->{
 			selectedImage = sortieImage;
+			id = "OUT";
 		});
 
 		for(Node d : g.getChildren()) {
@@ -430,7 +439,9 @@ public class MainWindow {
 					iv = (ImageView)(ko.getChildren().get(1));
 					iv.setImage(selectedImage);
 				}
-
+				
+				iv.setId(id);
+				
 				if(selectedImage == sortieImage) {
 					if(sortieUnique != null) {
 						sortieUnique.setImage(solImage);
@@ -443,13 +454,16 @@ public class MainWindow {
 		effacer.setOnMouseClicked(e->{
 			for(Node d : g.getChildren()) {
 				StackPane ko = (StackPane)d;
-				if(ko.getChildren().size()==1)
-					ko.getChildren().add(new ImageView(solImage));
-				else {
-					ImageView interne = (ImageView)(ko.getChildren().get(1));
-					interne.setImage(solImage);
-
+				ImageView iv;
+				if(ko.getChildren().size()==1){
+					iv = new ImageView(solImage);
+					ko.getChildren().add(iv);
 				}
+				else {
+					iv = (ImageView)(ko.getChildren().get(1));
+					iv.setImage(solImage);
+				}
+				iv.setId(id);
 			}
 		});
 		
@@ -481,7 +495,7 @@ public class MainWindow {
 		EnvironmentMouvements em = new EnvironmentMouvements(new Environment(), grille);
 		
 		em.init(15, 15);
-		pm.init(em, 0, 0, Dir.S);
+		pm.init(em, 0, 0, Dir.E);
 		
 		scene.setOnKeyReleased(e->{
 			if(e.getCode()== KeyCode.DOWN){
