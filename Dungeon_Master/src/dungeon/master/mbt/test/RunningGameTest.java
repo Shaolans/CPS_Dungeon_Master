@@ -62,7 +62,7 @@ public class RunningGameTest {
 				break;
 			}
 			
-			
+			e.clean();
 			e.step();
 			
 			for(int k = 0; k < 15; k++){
