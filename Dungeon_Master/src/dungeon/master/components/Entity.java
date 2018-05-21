@@ -41,7 +41,7 @@ public abstract class Entity extends Mob implements EntityService {
 		}
 		
 		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && getEnv().getCellContent(getCol()+1, getRow()).getValue() != null) {
-			getEnv().getCellContent(getCol()-1, getRow()).getValue().setHp(getEnv().getCellContent(getCol()-1, getRow()).getValue().getHp()-getDamage());
+			getEnv().getCellContent(getCol()+1, getRow()).getValue().setHp(getEnv().getCellContent(getCol()+1, getRow()).getValue().getHp()-getDamage());
 		}
 	}
 	

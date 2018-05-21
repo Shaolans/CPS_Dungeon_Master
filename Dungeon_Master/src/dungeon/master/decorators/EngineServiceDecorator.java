@@ -57,6 +57,11 @@ public class EngineServiceDecorator implements EngineService {
 		delegate.clean();
 		
 	}
+
+	@Override
+	public boolean isOut() {
+		return delegate.isOut();
+	}
 	
 	
 }

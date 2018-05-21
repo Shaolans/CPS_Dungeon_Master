@@ -6,6 +6,7 @@ public interface CowService extends EntityService {
 
 	/* Constructors */
 	/* \pre h > 0
+	 * \pre damage >= 0
 	 * \pre 0 <= col <= env.getWidth()
 	 * \pre 0 <= row <= env.getHeight()
 	 */

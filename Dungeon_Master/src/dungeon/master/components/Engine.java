@@ -77,6 +77,11 @@ public class Engine implements EngineService {
 
 	@Override
 	public boolean isFinished() {
+		return isOut() && getPlayer().foundTreasure();
+	}
+
+	@Override
+	public boolean isOut() {
 		int xi = 0;
 		int yi = 0;
 		for(int i = 0; i < getEnvi().getWidth(); i++) {

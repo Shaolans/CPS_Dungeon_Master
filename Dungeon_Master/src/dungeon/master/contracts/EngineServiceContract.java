@@ -53,8 +53,12 @@ public class EngineServiceContract extends EngineServiceDecorator implements Eng
 			res = false;
 		}
 		
-		if(!(isFinished() == res)) {
-			throw new InvariantError(" \\inv isFinished == getEnvi().getCellNature(i,j) == Cell.OUT \\impl i == getPlayer().getCol() && j == getPlayer().getRow()does not hold");
+		if(!(isOut() == res)) {
+			throw new InvariantError(" \\inv isOut == getEnvi().getCellNature(i,j) == Cell.OUT \\impl i == getPlayer().getCol() && j == getPlayer().getRow() does not hold");
+		}
+		
+		if(!(isFinished() == (res && getPlayer().foundTreasure()))) {
+			throw new InvariantError(" \\inv isFinished() == (res && getPlayer().foundTreasure()) does not hold");
 		}
 	}
 	

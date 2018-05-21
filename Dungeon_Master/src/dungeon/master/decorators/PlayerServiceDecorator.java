@@ -6,7 +6,6 @@ import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
-import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
 
 public class PlayerServiceDecorator extends EntityServiceDecorator implements PlayerService {
@@ -63,6 +62,22 @@ public class PlayerServiceDecorator extends EntityServiceDecorator implements Pl
 	@Override
 	public void closeDoor() {
 		getDelegate().closeDoor();
+	}
+
+	@Override
+	public boolean foundTreasure() {
+		return getDelegate().foundTreasure();
+	}
+
+	@Override
+	public void setFoundTreasure(boolean b) {
+		getDelegate().setFoundTreasure(b);
+		
+	}
+
+	@Override
+	public void pickItem() {
+		getDelegate().pickItem();
 	}
 
 }

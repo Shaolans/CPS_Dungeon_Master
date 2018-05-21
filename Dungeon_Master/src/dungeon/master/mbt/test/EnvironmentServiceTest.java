@@ -8,9 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dungeon.master.components.Cow;
-import dungeon.master.components.Entity;
 import dungeon.master.components.Environment;
-import dungeon.master.components.Mob;
 import dungeon.master.contracts.EnvironmentServiceContract;
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Dir;
@@ -19,7 +17,6 @@ import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
-import dungeon.master.services.MobService;
 
 public class EnvironmentServiceTest extends EditMapServiceTest {
 	private EnvironmentService env;

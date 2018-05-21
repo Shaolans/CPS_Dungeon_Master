@@ -217,7 +217,18 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 		}
 
-
+		boolean res = true;
+		for(int i = 0; i < getEnv().getWidth(); i++) {
+			for(int j = 0; j < getEnv().getHeight(); j++) {
+				if(getEnv().getCellNature(i, j) == Cell.TRS) {
+					res = false;
+				}
+			}
+		}
+		
+		if(res != foundTreasure()) {
+			throw new InvariantError("\\inv foundTreasure = \\forall i,j \\in [0;getWidth()]x[0;getHeight], getEnv().getCellNature(i,j) != Cell.TRS does not hold");
+		}
 	}
 
 	@Override
@@ -1191,5 +1202,57 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 		}
 	}
+	
+	@Override
+	public void pickItem() {
+		/* Preconditions */
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Capture */
+		Cell nature_atpre[][] = new Cell[getEnv().getWidth()][getEnv().getHeight()];
+		for(int i = 0; i < getEnv().getWidth(); i++) {
+			for(int j = 0; j < getEnv().getHeight(); j++) {
+				nature_atpre[i][j] = getEnv().getCellNature(i, j);
+			}
+		}
+		
+		/* Run */
+		getDelegate().pickItem();
+		
+		/* Invariants */
+		checkInvariant();
+		
+		/* Postconditions */
+		if(getFace() == Dir.N && getRow()+1 < getEnv().getHeight() && nature_atpre[getCol()][getRow()+1] == Cell.TRS) {
+			if(!(getEnv().getCellNature(getCol(), getRow()+1) == Cell.EMP)) {
+				throw new InvariantError("pickItem player does not hold");
+			}
+		}
+		
+		if(getFace() == Dir.S && getRow()-1 >= 0 && nature_atpre[getCol()][getRow()-1] == Cell.TRS) {
+			if(!(getEnv().getCellNature(getCol(), getRow()-1) == Cell.DWC)) {
+				throw new InvariantError("pickItem player does not hold");
+			}
+		}
+		
+		
+		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && nature_atpre[getCol()+1][getRow()] == Cell.TRS) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC)) {
+				throw new InvariantError("pickItem player does not hold");
+			}
+		}
+		
 
+		
+		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.TRS) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC)) {
+				throw new InvariantError("pickItem player does not hold");
+			}
+		}
+		
+
+	}
+	
 }

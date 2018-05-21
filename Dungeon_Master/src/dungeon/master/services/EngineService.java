@@ -14,11 +14,14 @@ public interface EngineService {
 	
 	public boolean isFinished();
 	
+	public boolean isOut();
+	
 	/* Invariants */
 	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getEnvi() == getEnvi()
 	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getCol() = x and getEntity(i).getRow() == y \implies   
 	// getEnvi().getCellContent(x,y) == getEntity(i)
-	// isFinished == getEnvi().getCellNature(i,j) == Cell.OUT \impl i == getPlayer().getCol() && j == getPlayer().getRow()
+	// isOut == getEnvi().getCellNature(i,j) == Cell.OUT \impl i == getPlayer().getCol() && j == getPlayer().getRow()
+	// isFinished == getPlayer().foundTreasure() && isOut()
 	
 	/* Constructors */
 	public void init(EnvironmentService env, PlayerService player);

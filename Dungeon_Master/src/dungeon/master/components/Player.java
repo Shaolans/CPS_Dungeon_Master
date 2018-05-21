@@ -15,7 +15,7 @@ import dungeon.master.services.PlayerService;
 
 public class Player extends Entity implements PlayerService {
 	private Option<Command> last;
-	
+	private boolean foundTreasure;
 	
 	@Override
 	public Option<Command> getLastCom() {
@@ -200,6 +200,45 @@ public class Player extends Entity implements PlayerService {
 		if(getFace() == Dir.W && getCol()-1 >= 0 && getEnv().getCellNature(getCol()-1,getRow()) == Cell.DNO) {
 			getEnv().closeDoor(getCol()-1, getRow());
 		}
+		
+	}
+
+
+	@Override
+	public boolean foundTreasure() {
+		return foundTreasure;
+	}
+
+
+	@Override
+	public void setFoundTreasure(boolean b) {
+		foundTreasure = b;
+		
+	}
+
+
+	@Override
+	public void pickItem() {
+		if(getFace() == Dir.N && getRow()+1 < getEnv().getHeight() && getEnv().getCellNature(getCol(),getRow()+1) == Cell.TRS) {
+			getEnv().setNature(getCol(), getRow()+1, Cell.EMP);
+		}
+		
+		if(getFace() == Dir.S && getRow()-1 >= 0 && getEnv().getCellNature(getCol(),getRow()-1) == Cell.TRS) {
+			getEnv().setNature(getCol(), getRow()-1, Cell.EMP);
+		}
+
+		
+		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && getEnv().getCellNature(getCol()+1,getRow()) == Cell.TRS) {
+			getEnv().setNature(getCol()+1, getRow(), Cell.EMP);
+		}
+		
+
+		if(getFace() == Dir.W && getCol()-1 >= 0 && getEnv().getCellNature(getCol()-1,getRow()) == Cell.TRS) {
+			getEnv().setNature(getCol()-1, getRow(), Cell.EMP);
+		}
+		
+		foundTreasure = true;
+
 		
 	}
 

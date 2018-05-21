@@ -68,6 +68,16 @@ public class EnvironmentServiceContract extends EnvironmentServiceDecorator impl
 			}
 		}
 		
+		boolean treasure = false;
+		for(int i = 0; i < getWidth(); i++){
+			for(int j = 0; j < getHeight(); j++){
+				if(getCellNature(i,j) == Cell.TRS) {
+					treasure = true;
+				}
+			}
+		}
+		
+		res = res && treasure;
 		if(!(isReady() == res)){
 			throw new InvariantError("isReady() = exists xi,yi,xo,yo in intxintxintxint ... does not hold");
 		}

@@ -15,6 +15,7 @@ public class EditMap extends Map implements EditMapService {
 		super.init(w, h);
 		cellmap[0][0] = Cell.IN;
 		cellmap[w-1][h-1] = Cell.OUT;
+		cellmap[w/2][h/2] = Cell.TRS;
 	}
 	
 	
@@ -132,7 +133,15 @@ public class EditMap extends Map implements EditMapService {
 			}
 		}
 		
-		return res;
+		boolean treasure = false;
+		for(int i = 0; i < getWidth(); i++){
+			for(int j = 0; j < getHeight(); j++){
+				if(getCellNature(i,j) == Cell.TRS) {
+					treasure = true;
+				}
+			}
+		}
+		return res && treasure;
 	}
 
 	@Override
