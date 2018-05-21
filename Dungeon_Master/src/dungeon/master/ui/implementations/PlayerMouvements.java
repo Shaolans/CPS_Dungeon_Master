@@ -6,6 +6,7 @@ import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
@@ -43,17 +44,7 @@ public class PlayerMouvements implements PlayerService {
 		gaucheG = moves.get(11);
 		
 	}
-	
-	@Override
-	public int getHp() {
-		
-		return joueur.getHp();
-	}
 
-	@Override
-	public void init(EnvironmentService env, int col, int row, Dir dir, int hp) {
-		joueur.init(env, col, row, dir, hp);
-	}
 
 	@Override
 	public EnvironmentService getEnv() {
@@ -300,7 +291,7 @@ public class PlayerMouvements implements PlayerService {
 	}
 
 	@Override
-	public Option<MobService> getContent(int col, int row) {
+	public Option<EntityService> getContent(int col, int row) {
 		// TODO Auto-generated method stub
 		return joueur.getContent(col, row);
 	}
@@ -360,6 +351,36 @@ public class PlayerMouvements implements PlayerService {
 	public void closeDoor() {
 		joueur.closeDoor();
 		
+	}
+
+	@Override
+	public int getDamage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHp(int hp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getHp() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

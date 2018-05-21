@@ -2,6 +2,7 @@ package dungeon.master.ui.implementations;
 
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Option;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
 import javafx.scene.Node;
@@ -101,7 +102,7 @@ public class EnvironmentMouvements implements EnvironmentService {
 	}
 
 	@Override
-	public Option<MobService> getCellContent(int x, int y) {
+	public Option<EntityService> getCellContent(int x, int y) {
 		// TODO Auto-generated method stub
 		return env.getCellContent(x, y);
 	}
@@ -109,13 +110,15 @@ public class EnvironmentMouvements implements EnvironmentService {
 	@Override
 	public void closeDoor(int col, int row) {
 		// TODO Auto-generated method stub
-		env.closeDoor(col, row);
+		
 	}
 
 	@Override
-	public void setCellContent(int col, int row, MobService mob) {
+	public void setCellContent(int col, int row, EntityService mob) {
 		// TODO Auto-generated method stub
-		env.setCellContent(col, row, mob);
+		
 	}
+
+
 
 }
