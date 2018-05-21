@@ -2,13 +2,13 @@ package dungeon.master.ui.implementations;
 
 import java.util.List;
 
+import dungeon.master.decorators.EnvironmentServiceDecorator;
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
-import dungeon.master.services.MobService;
 import dungeon.master.services.PlayerService;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -23,6 +23,8 @@ public class PlayerMouvements implements PlayerService {
 	private int oldCol, oldRow;
 	private Dir oldDir;
 	private Command oldCommand;
+	
+	private EnvironmentMouvements em;
 	
 	public PlayerMouvements(PlayerService p, List<ImageView> mouvements){
 		joueur = p;
@@ -72,9 +74,8 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir) {
-		
-		EnvironmentMouvements em = (EnvironmentMouvements) env;
-		
+		EnvironmentServiceDecorator dec = (EnvironmentServiceDecorator) env;
+		em = (EnvironmentMouvements) dec.getDelegate();
 		StackPane sp = (StackPane) em.grille.getChildren().get(0);
 		sp.getChildren().add(face);
 		current = face;
@@ -84,8 +85,7 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void forward() {
-		
-		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
+
 		StackPane sp;
 		
 		ImageView current = null ;
@@ -119,8 +119,7 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void backward() {
-		
-		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
+
 		StackPane sp;
 		
 		ImageView current = null ;
@@ -153,7 +152,7 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void turnL() {
-		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
+
 		StackPane sp;
 		
 		ImageView current = null ;
@@ -184,7 +183,7 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void turnR() {
-		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
+	
 		StackPane sp;
 		
 		ImageView current = null ;
@@ -216,7 +215,7 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void strafeL() {
-		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
+	
 		StackPane sp;
 		
 		ImageView current = null ;
@@ -248,7 +247,7 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public void strafeR() {
-		EnvironmentMouvements em = (EnvironmentMouvements)getEnv();
+
 		StackPane sp;
 		
 		ImageView current = null ;

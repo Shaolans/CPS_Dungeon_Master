@@ -10,8 +10,11 @@ import javax.imageio.ImageIO;
 
 import dungeon.master.components.Environment;
 import dungeon.master.components.Player;
+import dungeon.master.contracts.EnvironmentServiceContract;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
+import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.PlayerService;
 import dungeon.master.ui.implementations.EnvironmentMouvements;
 import dungeon.master.ui.implementations.PlayerMouvements;
 import javafx.embed.swing.SwingFXUtils;
@@ -75,6 +78,7 @@ public class MainWindow {
 	private Image start;
 	
 	private ImageView sortieUnique;
+	private int xSortie=-1, ySortie=-1;
 	
 	private String id;
 	
@@ -311,7 +315,7 @@ public class MainWindow {
 	}
 
 	private void editerMap() {
-
+		
 		HBox hbox = new HBox();
 		VBox outils = new VBox();
 		VBox mapConst = new VBox();
@@ -426,8 +430,9 @@ public class MainWindow {
 			selectedImage = sortieImage;
 			id = "OUT";
 		});
-
+		int i=0;
 		for(Node d : g.getChildren()) {
+			if(i==0){ i++ ; continue;}
 			d.setOnMouseClicked(e->{
 				StackPane ko = (StackPane)d;
 				ImageView iv ;
@@ -446,6 +451,8 @@ public class MainWindow {
 					if(sortieUnique != null) {
 						sortieUnique.setImage(solImage);
 					}
+					xSortie = GridPane.getRowIndex(ko);
+					ySortie = GridPane.getColumnIndex(ko);
 					sortieUnique = iv;
 				}
 			});
@@ -472,13 +479,30 @@ public class MainWindow {
 		});
 		
 		valider.setOnMouseReleased(e->{
-			gameStart();
+			
+			if(sortieUnique == null){
+				System.out.println("Ajouter sortie");
+			}
+			else{
+				EnvironmentService test = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), g));
+				test.init(15, 15);
+				if(test.isReachable(new Integer(0), new Integer(0),new Integer(xSortie), new Integer(ySortie))){
+					for(Node d : g.getChildren()) {
+						d.setOnMouseClicked(e4->{});
+					}
+					gameStart();
+				}
+				else{
+					System.out.println("not reachable");
+				}
+			}
 		});
 
 		mapConst.getChildren().add(g);
 
 		grille = g;
 		stage.setScene(scene);
+
 
 	}
 
@@ -491,8 +515,9 @@ public class MainWindow {
 		
 		hbox.getChildren().addAll(outils, map);
 		
+		//PlayerService pm = new PlayerServiceContract( new PlayerMouvements(new Player(), playerMoves));
 		PlayerMouvements pm = new PlayerMouvements(new Player(), playerMoves);
-		EnvironmentMouvements em = new EnvironmentMouvements(new Environment(), grille);
+		EnvironmentService em = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), grille));
 		
 		em.init(15, 15);
 		pm.init(em, 0, 0, Dir.E);
@@ -582,6 +607,15 @@ public class MainWindow {
 				pm.setLastCom(Command.TR);
 				pm.step();
 			}
+			
+			if(e.getCode()== KeyCode.O){
+				pm.openDoor();
+			}
+			
+			if(e.getCode()== KeyCode.C){
+				pm.closeDoor();
+			}
+			
 			
 		});
 		

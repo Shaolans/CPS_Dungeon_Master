@@ -66,6 +66,8 @@ public class EnvironmentMouvements implements EnvironmentService {
 			StackPane sp = (StackPane) n;
 			ImageView im = (ImageView)sp.getChildren().get(sp.getChildren().size()-1);
 			
+			env.setNature(0, 0, Cell.IN);
+			
 			switch(im.getId()){
 				case "EMP":
 					env.setNature(i, j, Cell.EMP);
@@ -80,6 +82,10 @@ public class EnvironmentMouvements implements EnvironmentService {
 					break;
 				case "OUT":
 					env.setNature(i, j, Cell.OUT);
+					break;
+				case "WLL":
+					env.setNature(i, j, Cell.WLL);
+					break;
 				
 			}
 			
