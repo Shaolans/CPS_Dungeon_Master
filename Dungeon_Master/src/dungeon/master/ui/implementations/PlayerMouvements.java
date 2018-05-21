@@ -383,4 +383,22 @@ public class PlayerMouvements implements PlayerService {
 		return 0;
 	}
 
+	@Override
+	public boolean foundTreasure() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setFoundTreasure(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pickItem() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
