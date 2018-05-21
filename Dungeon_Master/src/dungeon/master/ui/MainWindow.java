@@ -158,29 +158,29 @@ public class MainWindow {
 		playerOneFace = SwingFXUtils.toFXImage(sprites[8*cols+3], null);
 		playerOneFaceD = SwingFXUtils.toFXImage(sprites[8*cols+4], null);
 		playerOneFaceG = SwingFXUtils.toFXImage(sprites[8*cols+5], null);
-		playerOneDroite = SwingFXUtils.toFXImage(sprites[10*cols+3], null);
-		playerOneDroiteD = SwingFXUtils.toFXImage(sprites[10*cols+4], null);
-		playerOneDroiteG = SwingFXUtils.toFXImage(sprites[10*cols+5], null);
-		playerOneDerriere = SwingFXUtils.toFXImage(sprites[9*cols+3], null);
-		playerOneDerriereD = SwingFXUtils.toFXImage(sprites[9*cols+4], null);
-		playerOneDerriereG = SwingFXUtils.toFXImage(sprites[9*cols+5], null);
-		playerOneGauche = SwingFXUtils.toFXImage(sprites[11*cols+3], null);
-		playerOneGaucheD = SwingFXUtils.toFXImage(sprites[11*cols+4], null);
-		playerOneGaucheG = SwingFXUtils.toFXImage(sprites[11*cols+5], null);
+		playerOneDroite = SwingFXUtils.toFXImage(sprites[9*cols+3], null);
+		playerOneDroiteD = SwingFXUtils.toFXImage(sprites[9*cols+4], null);
+		playerOneDroiteG = SwingFXUtils.toFXImage(sprites[9*cols+5], null);
+		playerOneDerriere = SwingFXUtils.toFXImage(sprites[11*cols+3], null);
+		playerOneDerriereD = SwingFXUtils.toFXImage(sprites[11*cols+4], null);
+		playerOneDerriereG = SwingFXUtils.toFXImage(sprites[11*cols+5], null);
+		playerOneGauche = SwingFXUtils.toFXImage(sprites[10*cols+3], null);
+		playerOneGaucheD = SwingFXUtils.toFXImage(sprites[10*cols+4], null);
+		playerOneGaucheG = SwingFXUtils.toFXImage(sprites[10*cols+5], null);
 		
 		
 		playerTwoFace = SwingFXUtils.toFXImage(sprites[8*cols], null);
 		playerTwoFaceD = SwingFXUtils.toFXImage(sprites[8*cols+1], null);
 		playerTwoFaceG = SwingFXUtils.toFXImage(sprites[8*cols+2], null);
-		playerTwoDroite = SwingFXUtils.toFXImage(sprites[10*cols], null);
-		playerTwoDroiteD = SwingFXUtils.toFXImage(sprites[10*cols+1], null);
-		playerTwoDroiteG = SwingFXUtils.toFXImage(sprites[10*cols+2], null);
-		playerTwoDerriere = SwingFXUtils.toFXImage(sprites[9*cols], null);
-		playerTwoDerriereD = SwingFXUtils.toFXImage(sprites[9*cols+1], null);
-		playerTwoDerriereG = SwingFXUtils.toFXImage(sprites[9*cols+2], null);
-		playerTwoGauche = SwingFXUtils.toFXImage(sprites[11*cols], null);
-		playerTwoGaucheD = SwingFXUtils.toFXImage(sprites[11*cols+1], null);
-		playerTwoGaucheG = SwingFXUtils.toFXImage(sprites[11*cols+2], null);
+		playerTwoDroite = SwingFXUtils.toFXImage(sprites[9*cols], null);
+		playerTwoDroiteD = SwingFXUtils.toFXImage(sprites[9*cols+1], null);
+		playerTwoDroiteG = SwingFXUtils.toFXImage(sprites[9*cols+2], null);
+		playerTwoDerriere = SwingFXUtils.toFXImage(sprites[11*cols], null);
+		playerTwoDerriereD = SwingFXUtils.toFXImage(sprites[11*cols+1], null);
+		playerTwoDerriereG = SwingFXUtils.toFXImage(sprites[11*cols+2], null);
+		playerTwoGauche = SwingFXUtils.toFXImage(sprites[10*cols], null);
+		playerTwoGaucheD = SwingFXUtils.toFXImage(sprites[10*cols+1], null);
+		playerTwoGaucheG = SwingFXUtils.toFXImage(sprites[10*cols+2], null);
 		
 		createMap = new Image("file:images/createMap.png");
 		selectMap = new Image("file:images/selectMap.png");
@@ -243,7 +243,7 @@ public class MainWindow {
 		});
 
 		b2.setOnMouseReleased(e->{
-			playerMoves.add(iv1);
+			playerMoves.add(iv2);
 			playerMoves.add(new ImageView(playerTwoFaceG));
 			playerMoves.add(new ImageView(playerTwoFaceD));
 			playerMoves.add(new ImageView(playerTwoDroite));
@@ -497,7 +497,7 @@ public class MainWindow {
 		em.init(15, 15);
 		pm.init(em, 0, 0, Dir.E);
 		
-		scene.setOnKeyReleased(e->{
+		scene.setOnKeyPressed(e->{
 			if(e.getCode()== KeyCode.DOWN){
 				pm.setLastCom(Command.BB);
 				pm.step();
@@ -508,12 +508,22 @@ public class MainWindow {
 			}
 			
 			if(e.getCode()== KeyCode.RIGHT){
-				pm.setLastCom(Command.RR);
+				pm.setLastCom(Command.LL);
 				pm.step();
 			}
 			
 			if(e.getCode()== KeyCode.LEFT){
-				pm.setLastCom(Command.LL);
+				pm.setLastCom(Command.RR);
+				pm.step();
+			}
+			
+			if(e.getCode()== KeyCode.S){
+				pm.setLastCom(Command.TL);
+				pm.step();
+			}
+			
+			if(e.getCode()== KeyCode.D){
+				pm.setLastCom(Command.TR);
 				pm.step();
 			}
 			
