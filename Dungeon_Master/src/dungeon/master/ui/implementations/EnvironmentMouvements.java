@@ -7,9 +7,11 @@ import java.util.Random;
 import dungeon.master.components.Cow;
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Option;
+import dungeon.master.services.CowService;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
+import dungeon.master.ui.MainWindow;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -79,20 +81,26 @@ public class EnvironmentMouvements implements EnvironmentService {
 			switch(im.getId()){
 				case "EMP":
 					env.setNature(i, j, Cell.EMP);
-
-					if(r.nextInt(20)==0) {
-						Cow c = new Cow();
+					System.out.println("AJOUT");
+					if(r.nextInt(80)==1) {
+						im = new ImageView(MainWindow.cowMoves.get(0).getImage());
+						im.setId("COW");
+						sp.getChildren().add(im);
+						CowService c = new CowMouvements(new Cow());
 						env.setCellContent(i, j, c);
 						Thread t = new Thread(new Runnable() {
 
 							@Override
 							public void run() {
-								c.step();
-								try {
-									Thread.sleep(500);
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+								while(c.getHp()>=0) {
+
+									c.step();
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
 							}
 						});
