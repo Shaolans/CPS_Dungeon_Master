@@ -77,7 +77,7 @@ public class Engine implements EngineService {
 
 	@Override
 	public boolean isFinished() {
-		return isOut() && getPlayer().foundTreasure();
+		return isOut() && getPlayer().foundTreasure() && !isLost();
 	}
 
 	@Override

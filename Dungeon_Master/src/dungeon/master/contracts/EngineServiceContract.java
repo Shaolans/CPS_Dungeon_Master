@@ -63,8 +63,8 @@ public class EngineServiceContract extends EngineServiceDecorator implements Eng
 		
 		
 		
-		if(!(isFinished() == (res && getPlayer().foundTreasure() && isLost()))) {
-			throw new InvariantError(" \\inv isFinished() == (res && getPlayer().foundTreasure()) does not hold");
+		if(!(isFinished() == (res && getPlayer().foundTreasure() && !isLost()))) {
+			throw new InvariantError(" \\inv isFinished() == (res && getPlayer().foundTreasure() && !isLost()) does not hold");
 		}
 	}
 	
