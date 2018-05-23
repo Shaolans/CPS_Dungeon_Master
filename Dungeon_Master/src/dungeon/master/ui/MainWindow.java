@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import dungeon.master.components.Environment;
 import dungeon.master.components.Player;
 import dungeon.master.contracts.EnvironmentServiceContract;
+import dungeon.master.contracts.PlayerServiceContract;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.services.EnvironmentService;
@@ -21,6 +22,8 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
@@ -55,8 +58,8 @@ public class MainWindow {
 	private int cols = 16;
 	private int spriteHeight = 32;
 	private int spriteWidth = 32;
-	
-	private Image murImage, porteOuverteImage, porteFermeeImage, solImage;
+
+	private Image murImage, porteFermeeNSImage, porteFermeeWEImage, solImage, tresorFermeImage;
 	private Image selectedImage;
 	private Image sortieImage;
 	private Image pageAccueil;
@@ -68,7 +71,7 @@ public class MainWindow {
 	private Image playerTwoFace, playerTwoFaceD, playerTwoFaceG, playerTwoDroite, playerTwoDroiteD,
 	playerTwoDroiteG, playerTwoDerriere, playerTwoDerriereG, playerTwoDerriereD, playerTwoGauche,
 	playerTwoGaucheD, playerTwoGaucheG;
-	
+
 	private Image createMap;
 	private Image selectMap;
 	private Image randomMap;
@@ -76,12 +79,14 @@ public class MainWindow {
 	private Image goBack2;
 	private Image clearMap;
 	private Image start;
-	
+
 	private ImageView sortieUnique;
+	private ImageView tresorUnique;
 	private int xSortie=-1, ySortie=-1;
-	
+	private int xTresor=-1, yTresor=-1;
+
 	private String id;
-	
+
 	private Background background;
 
 
@@ -120,7 +125,7 @@ public class MainWindow {
 
 		vbox.maxHeight(height);
 		vbox.maxWidth(width);
-		
+
 		//vbox.getChildren().add(close);
 
 		stage.setHeight(height);
@@ -150,15 +155,16 @@ public class MainWindow {
 
 	private void chargerImage() {
 		murImage = SwingFXUtils.toFXImage(sprites[0*cols+8], null);
-		porteOuverteImage = SwingFXUtils.toFXImage(sprites[0*cols+4], null);
-		porteFermeeImage = SwingFXUtils.toFXImage(sprites[0*cols+7], null);
+		porteFermeeNSImage = SwingFXUtils.toFXImage(sprites[0*cols+4], null);
+		porteFermeeWEImage = SwingFXUtils.toFXImage(sprites[0*cols+7], null);
 		solImage = SwingFXUtils.toFXImage(sprites[2*cols+14], null);
 		sortieImage = SwingFXUtils.toFXImage(sprites[7*cols+10], null);
 		arrierePlan = new Image("file:images/arriere_plan.png");
 		pageAccueil = new Image("file:images/page_accueil.png");
 		background = new Background(new BackgroundImage(arrierePlan, null, null, null, null));
 		choosePlayer = new Image("file:images/choosePlayer.png");
-		
+		tresorFermeImage =  SwingFXUtils.toFXImage(sprites[2*cols+4], null);
+
 		playerOneFace = SwingFXUtils.toFXImage(sprites[8*cols+3], null);
 		playerOneFaceD = SwingFXUtils.toFXImage(sprites[8*cols+4], null);
 		playerOneFaceG = SwingFXUtils.toFXImage(sprites[8*cols+5], null);
@@ -171,8 +177,8 @@ public class MainWindow {
 		playerOneGauche = SwingFXUtils.toFXImage(sprites[10*cols+3], null);
 		playerOneGaucheD = SwingFXUtils.toFXImage(sprites[10*cols+4], null);
 		playerOneGaucheG = SwingFXUtils.toFXImage(sprites[10*cols+5], null);
-		
-		
+
+
 		playerTwoFace = SwingFXUtils.toFXImage(sprites[8*cols], null);
 		playerTwoFaceD = SwingFXUtils.toFXImage(sprites[8*cols+1], null);
 		playerTwoFaceG = SwingFXUtils.toFXImage(sprites[8*cols+2], null);
@@ -185,16 +191,16 @@ public class MainWindow {
 		playerTwoGauche = SwingFXUtils.toFXImage(sprites[10*cols], null);
 		playerTwoGaucheD = SwingFXUtils.toFXImage(sprites[10*cols+1], null);
 		playerTwoGaucheG = SwingFXUtils.toFXImage(sprites[10*cols+2], null);
-		
+
 		createMap = new Image("file:images/createMap.png");
 		selectMap = new Image("file:images/selectMap.png");
 		randomMap = new Image("file:images/randomMap.png");
 		goBack = new Image("file:images/goBack.png");
-		
+
 		clearMap =  new Image("file:images/clearMap.png");
 		goBack2 = new Image("file:images/goBack2.png");
 		start = new Image("file:images/start.png");
-		
+
 	}
 
 	private void choosePlayer() {
@@ -202,14 +208,14 @@ public class MainWindow {
 		HBox hbox = new HBox();
 		VBox vbox = new VBox();
 		Scene scene = new Scene(vbox);
-		
+
 		Button b1 = new Button();
 		Button b2 = new Button();
-		
+
 		playerMoves = new ArrayList<>();
-		
+
 		//b1.setBackground(new Background(new BackgroundImage(playerOne, null, null, null,null)));
-		
+
 		ImageView iv1 = new ImageView(playerOneFace);
 		ImageView iv2 = new ImageView(playerTwoFace);
 		ImageView choose = new ImageView(choosePlayer);
@@ -218,7 +224,7 @@ public class MainWindow {
 		b2.setGraphic(iv2);
 
 		vbox.setBackground(background);
-		
+
 		hbox.getChildren().add(b1);
 		hbox.getChildren().add(b2);
 		HBox.setMargin(b1, new Insets(50, 200, 0, 0));
@@ -274,36 +280,36 @@ public class MainWindow {
 		Button mapEdit = new Button();
 
 		Button mapAlea = new Button();
-		
+
 		Button back = new Button();
-		
+
 		mapSelect.setGraphic(new ImageView(selectMap));
 		mapEdit.setGraphic(new ImageView(createMap));
 		mapAlea.setGraphic(new ImageView(randomMap));
 		back.setGraphic(new ImageView(goBack));
 
 		HBox hbox = new HBox();
-		
+
 		hbox.setBackground(background);
 
 		hbox.getChildren().addAll(mapSelect, mapEdit, mapAlea, back);
-		
+
 		for(Node n : hbox.getChildren()){
 			((Button)n).setMaxSize(50, 50);
 		}
 
 		hbox.setPadding(new Insets(300, 0, 0, 0));
-		
+
 		for(Node n : hbox.getChildren())
 			HBox.setMargin(n, new Insets(0,0,0, 40));
-		
+
 		Scene scene = new Scene(hbox);
 
 
 		mapEdit.setOnMouseReleased(e->{
 			editerMap();
 		});
-		
+
 		back.setOnMouseReleased(e->{
 			choosePlayer();
 		});
@@ -315,7 +321,7 @@ public class MainWindow {
 	}
 
 	private void editerMap() {
-		
+
 		HBox hbox = new HBox();
 		VBox outils = new VBox();
 		VBox mapConst = new VBox();
@@ -325,7 +331,7 @@ public class MainWindow {
 		Button effacer = new Button();
 		Button goback = new Button();
 		HBox boutons = new HBox();
-		
+
 		valider.setGraphic(new ImageView(start));
 		effacer.setGraphic(new ImageView(clearMap));
 		goback.setGraphic(new ImageView(goBack2));
@@ -337,24 +343,27 @@ public class MainWindow {
 		boutons.getChildren().addAll(effacer, valider, goback);
 
 		ImageView murIV = new ImageView(murImage);
-		ImageView porteOuverteIV = new ImageView(porteOuverteImage);
-		ImageView porteFermeeIV = new ImageView(porteFermeeImage);
+		ImageView porteFermeeNSIV = new ImageView(porteFermeeNSImage);
+		ImageView porteFermeeWEIV = new ImageView(porteFermeeWEImage);
 		ImageView solIV = new ImageView(solImage);
 		ImageView sortieIV = new ImageView(sortieImage);
-		
+		ImageView tresorFermeIV = new ImageView(tresorFermeImage);
+
 		Button mur = new Button();
-		Button porteOuverte = new Button();
-		Button porteFermee = new Button();
+		Button porteFermeeNS = new Button();
+		Button porteFermeeWE = new Button();
 		Button sol = new Button();
 		Button sortie = new Button();
-		
+		Button tresorFerme = new Button();
+
 		mur.setGraphic(murIV);
-		porteOuverte.setGraphic(porteOuverteIV);
-		porteFermee.setGraphic(porteFermeeIV);
+		porteFermeeNS.setGraphic(porteFermeeNSIV);
+		porteFermeeWE.setGraphic(porteFermeeWEIV);
 		sol.setGraphic(solIV);
 		sortie.setGraphic(sortieIV);
+		tresorFerme.setGraphic(tresorFermeIV);
 
-		outils.getChildren().addAll(mur, porteOuverte, porteFermee, sol, sortie);
+		outils.getChildren().addAll(mur, porteFermeeNS, porteFermeeWE, sol, sortie, tresorFerme);
 
 		for(Node n : outils.getChildren()) {
 			VBox.setMargin(n, new Insets(10));
@@ -364,17 +373,17 @@ public class MainWindow {
 
 		g.setLayoutX(480);
 		g.setLayoutY(480);
-		
+
 		outils.setMaxHeight(400);
-		
+
 		outils.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
 		outils.setPrefHeight(300);
-		
+
 		outils.setPadding(new Insets(60, 30, 0, 0));
 		mapConst.setPadding(new Insets(70,10,0,0));
 
 		boutons.setPadding(new Insets(10, 0, 0,30));
-		
+
 		outils.setBorder(new Border(new BorderStroke(Color.MAROON, BorderStrokeStyle.SOLID,null, BorderStroke.MEDIUM)));
 
 		for(Node n : boutons.getChildren()) {
@@ -384,13 +393,13 @@ public class MainWindow {
 		for(Node n : hbox.getChildren()) {
 			HBox.setMargin(n, new Insets(20,0,10,40));
 		}
-		
+
 		mapConst.setPadding(new Insets(0,0,20, 0));
-		
+
 		HBox.setMargin(g, new Insets(-90,0,0,0));
-		
+
 		Background backg = new Background(new BackgroundFill(Color.BLANCHEDALMOND, null,null));
-		
+
 		hbox.setBackground(backg);
 		vbox.setBackground(backg);
 
@@ -416,20 +425,26 @@ public class MainWindow {
 			id = "EMP";
 		});
 
-		porteOuverte.setOnMouseClicked(e->{
-			selectedImage = porteOuverteImage;
-			id = "OD";
+		porteFermeeNS.setOnMouseClicked(e->{
+			selectedImage = porteFermeeNSImage;
+			id = "DCN";
 		});
 
-		porteFermee.setOnMouseClicked(e->{
-			selectedImage = porteFermeeImage;
-			id = "CD";
+		porteFermeeWE.setOnMouseClicked(e->{
+			selectedImage = porteFermeeWEImage;
+			id = "DCW";
 		});
 
 		sortie.setOnMouseClicked(e->{
 			selectedImage = sortieImage;
 			id = "OUT";
 		});
+
+		tresorFerme.setOnMouseClicked(e->{
+			selectedImage = tresorFermeImage;
+			id = "TRS";
+		});
+
 		int i=0;
 		for(Node d : g.getChildren()) {
 			if(i==0){ i++ ; continue;}
@@ -444,9 +459,9 @@ public class MainWindow {
 					iv = (ImageView)(ko.getChildren().get(1));
 					iv.setImage(selectedImage);
 				}
-				
+
 				iv.setId(id);
-				
+
 				if(selectedImage == sortieImage) {
 					if(sortieUnique != null) {
 						sortieUnique.setImage(solImage);
@@ -455,6 +470,16 @@ public class MainWindow {
 					ySortie = GridPane.getColumnIndex(ko);
 					sortieUnique = iv;
 				}
+
+				if(selectedImage == tresorFermeImage) {
+					if(tresorUnique != null) {
+						tresorUnique.setImage(solImage);
+					}
+					tresorUnique = iv;
+					xTresor = GridPane.getRowIndex(ko);
+					yTresor = GridPane.getColumnIndex(ko);
+				}
+
 			});
 		}
 
@@ -473,29 +498,52 @@ public class MainWindow {
 				iv.setId(id);
 			}
 		});
-		
+
 		goback.setOnMouseReleased(e->{
 			chooseMap();
 		});
-		
+
 		valider.setOnMouseReleased(e->{
-			
+
 			if(sortieUnique == null){
-				System.out.println("Ajouter sortie");
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setContentText("Il faut ajouter une sortie !");
+				alert.showAndWait();
 			}
-			else{
-				EnvironmentService test = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), g));
-				test.init(15, 15);
-				if(test.isReachable(new Integer(0), new Integer(0),new Integer(xSortie), new Integer(ySortie))){
-					for(Node d : g.getChildren()) {
-						d.setOnMouseClicked(e4->{});
-					}
-					gameStart();
+			else {
+				if(tresorUnique == null) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setContentText("Il faut ajouter un trésor !");
+					alert.showAndWait();
 				}
 				else{
-					System.out.println("not reachable");
+					EnvironmentService test = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), g));
+					test.init(15, 15);
+					if(test.isReachable(new Integer(0), new Integer(0),new Integer(xSortie), new Integer(ySortie))){
+
+						if(test.isReachable(new Integer(0), new Integer(0),new Integer(xTresor), new Integer(yTresor))) {
+
+							for(Node d : g.getChildren()) {
+								d.setOnMouseClicked(e4->{});
+							}
+							gameStart();
+						}
+						else {
+							Alert alert = new Alert(AlertType.WARNING);
+							alert.setContentText("Il n'existe aucun chemin pour atteindre le trésor !");
+							alert.showAndWait();
+						}
+
+
+					}
+					else{
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setContentText("Il n'existe aucun chemin pour sortir du labyrinthe !");
+						alert.showAndWait();
+					}
 				}
 			}
+
 		});
 
 		mapConst.getChildren().add(g);
@@ -507,24 +555,24 @@ public class MainWindow {
 	}
 
 	private void gameStart() {
-		
+
 		HBox hbox = new HBox();
 		Scene scene = new Scene(hbox);
 		VBox outils = new VBox();
 		VBox map = new VBox(grille);
-		
+
 		hbox.getChildren().addAll(outils, map);
-		
-		//PlayerService pm = new PlayerServiceContract( new PlayerMouvements(new Player(), playerMoves));
-		PlayerMouvements pm = new PlayerMouvements(new Player(), playerMoves);
+
+		PlayerService pm = new PlayerServiceContract( new PlayerMouvements(new Player(), playerMoves));
+		//PlayerMouvements pm = new PlayerMouvements(new Player(), playerMoves);
 		EnvironmentService em = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), grille));
-		
+
 		em.init(15, 15);
 		pm.init(em, 0, 0, Dir.E);
-		
+
 		scene.setOnKeyPressed(e->{
 			if(e.getCode()== KeyCode.DOWN){
-				
+
 				switch(pm.getFace()){
 					case E:
 						pm.setLastCom(Command.BB);
@@ -539,8 +587,8 @@ public class MainWindow {
 						pm.setLastCom(Command.LL);
 						break;
 				}
-				
-				
+
+
 				pm.step();
 			}
 			if(e.getCode()== KeyCode.UP){
@@ -560,7 +608,7 @@ public class MainWindow {
 				}
 				pm.step();
 			}
-			
+
 			if(e.getCode()== KeyCode.RIGHT){
 				switch(pm.getFace()){
 				case E:
@@ -579,7 +627,7 @@ public class MainWindow {
 
 				pm.step();
 			}
-			
+
 			if(e.getCode()== KeyCode.LEFT){
 				switch(pm.getFace()){
 				case E:
@@ -597,30 +645,30 @@ public class MainWindow {
 				}
 				pm.step();
 			}
-			
+
 			if(e.getCode()== KeyCode.S){
 				pm.setLastCom(Command.TL);
 				pm.step();
 			}
-			
+
 			if(e.getCode()== KeyCode.D){
 				pm.setLastCom(Command.TR);
 				pm.step();
 			}
-			
+
 			if(e.getCode()== KeyCode.O){
 				pm.openDoor();
 			}
-			
+
 			if(e.getCode()== KeyCode.C){
 				pm.closeDoor();
 			}
-			
-			
+
+
 		});
-		
+
 		stage.setScene(scene);
-		
+
 	}
 
 }
