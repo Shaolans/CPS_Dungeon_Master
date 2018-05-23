@@ -53,12 +53,62 @@ public class CowMouvements implements CowService {
 
 	@Override
 	public void attack() {
+
 		cow.attack();
+		StackPane sp;
+		ImageView currentBis=null;
+
+		if(current==face) {
+			currentBis = faceD;
+		}
+		if(current==gauche) {
+			currentBis = gaucheD;
+		}
+		if(current==droite) {
+			currentBis = droiteD;
+		}
+		if(current==derriere) {
+			currentBis = derriereD;
+		}
+
+		if(current==faceD) {
+			currentBis = faceG;
+		}
+
+		if(current==faceG) {
+			currentBis = faceD;
+		}
+
+		if(current==gaucheD) {
+			currentBis = gaucheG;
+		}
+
+		if(current==droiteD) {
+			currentBis = droiteG;
+		}
+
+		if(current==derriereD) {
+			currentBis = derriereG;
+		}
+		if(current==derriereG) {
+			currentBis = derriereD;
+		}
+
+		if(current==gaucheG) {
+			currentBis = gaucheD;
+		}
+
+		if(current==droiteG) {
+			currentBis = droiteD;
+		}
 
 
+		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		sp.getChildren().remove(current);
+		sp.getChildren().add(currentBis);
+		current=currentBis;
 
 	}
-
 	@Override
 	public void setHp(int hp) {
 		cow.setHp(hp);
@@ -102,32 +152,36 @@ public class CowMouvements implements CowService {
 
 	@Override
 	public void forward() {
+
 		StackPane sp;
 
-
+		ImageView currentBis = null;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
-		sp.getChildren().add(current);
+		sp.getChildren().add(currentBis);
+		current = currentBis;
 
+
+		System.out.println(getFace());
 
 	}
 
@@ -135,59 +189,62 @@ public class CowMouvements implements CowService {
 	public void backward() {
 
 		StackPane sp;
-
-
+		ImageView currentBis = null;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
-		sp.getChildren().add(current);
+		sp.getChildren().add(currentBis);
+		current = currentBis;
+
 
 
 	}
 
 	@Override
 	public void turnL() {
-		StackPane sp;
 
+		StackPane sp;
+		ImageView currentBis = null;
 
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
 		sp.getChildren().remove(1);
+		current = currentBis;
 		sp.getChildren().add(current);
 
 
@@ -195,28 +252,34 @@ public class CowMouvements implements CowService {
 
 	@Override
 	public void turnR() {
+
 		StackPane sp;
+		ImageView currentBis = null;
+
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
 		sp.getChildren().remove(1);
+		current = currentBis;
 		sp.getChildren().add(current);
+
+
 
 	}
 
@@ -225,28 +288,29 @@ public class CowMouvements implements CowService {
 
 		StackPane sp;
 
-
+		ImageView currentBis = null;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		current = currentBis;
 		sp.getChildren().add(current);
 
 
@@ -254,30 +318,32 @@ public class CowMouvements implements CowService {
 
 	@Override
 	public void strafeR() {
+
 		StackPane sp;
 
-
+		ImageView currentBis= null;
 
 		switch(oldDir){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		current = currentBis;
 		sp.getChildren().add(current);
 	}
 
