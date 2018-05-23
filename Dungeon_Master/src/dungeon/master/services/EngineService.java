@@ -16,12 +16,15 @@ public interface EngineService {
 	
 	public boolean isOut();
 	
+	public boolean isLost();
+	
 	/* Invariants */
 	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getEnvi() == getEnvi()
 	// \inv \forall i in [0;getEntities().size()-1], getEntity(i).getCol() = x and getEntity(i).getRow() == y \implies   
 	// getEnvi().getCellContent(x,y) == getEntity(i)
 	// isOut == getEnvi().getCellNature(i,j) == Cell.OUT \impl i == getPlayer().getCol() && j == getPlayer().getRow()
-	// isFinished == getPlayer().foundTreasure() && isOut()
+	// isFinished == getPlayer().foundTreasure() && isOut() && !isLost()
+	// isLost == getPlayer().getHp() <= 0
 	
 	/* Constructors */
 	public void init(EnvironmentService env, PlayerService player);

@@ -99,5 +99,10 @@ public class Engine implements EngineService {
 		return false;
 	}
 
+	@Override
+	public boolean isLost() {
+		return getPlayer().getHp() <= 0;
+	}
+
 
 }

@@ -62,6 +62,12 @@ public class EngineServiceDecorator implements EngineService {
 	public boolean isOut() {
 		return delegate.isOut();
 	}
+
+	@Override
+	public boolean isLost() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }

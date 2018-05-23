@@ -35,6 +35,10 @@ public class EngineServiceContract extends EngineServiceDecorator implements Eng
 			}
 		}
 		
+		if(!(isLost() == (getPlayer().getHp() <= 0))){
+			throw new InvariantError("isLost == getPlayer().getHp() <= 0 does not hold");
+		}
+		
 		int xi = 0;
 		int yi = 0;
 		boolean res;
@@ -57,7 +61,9 @@ public class EngineServiceContract extends EngineServiceDecorator implements Eng
 			throw new InvariantError(" \\inv isOut == getEnvi().getCellNature(i,j) == Cell.OUT \\impl i == getPlayer().getCol() && j == getPlayer().getRow() does not hold");
 		}
 		
-		if(!(isFinished() == (res && getPlayer().foundTreasure()))) {
+		
+		
+		if(!(isFinished() == (res && getPlayer().foundTreasure() && isLost()))) {
 			throw new InvariantError(" \\inv isFinished() == (res && getPlayer().foundTreasure()) does not hold");
 		}
 	}
