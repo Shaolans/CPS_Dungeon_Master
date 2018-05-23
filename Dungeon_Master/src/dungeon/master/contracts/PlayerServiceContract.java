@@ -1192,7 +1192,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		}
 
 		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.DWO) {
-			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC)) {
+			if(!(getEnv().getCellNature(getCol()-1, getRow()) == Cell.DWC)) {
 				throw new InvariantError("CloseDoor player does not hold");
 			}
 		}

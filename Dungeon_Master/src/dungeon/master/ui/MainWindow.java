@@ -59,7 +59,7 @@ public class MainWindow {
 	private int spriteHeight = 32;
 	private int spriteWidth = 32;
 
-	private Image murImage, porteFermeeNSImage, porteFermeeWEImage, solImage, tresorFermeImage;
+	private Image murImage, porteFermeeNSImage, porteFermeeWEImage, solImage, tresorFermeImage, entreeImage, porteOuverteWEImage, porteOuverteNSImage;
 	private Image selectedImage;
 	private Image sortieImage;
 	private Image pageAccueil;
@@ -71,6 +71,13 @@ public class MainWindow {
 	private Image playerTwoFace, playerTwoFaceD, playerTwoFaceG, playerTwoDroite, playerTwoDroiteD,
 	playerTwoDroiteG, playerTwoDerriere, playerTwoDerriereG, playerTwoDerriereD, playerTwoGauche,
 	playerTwoGaucheD, playerTwoGaucheG;
+
+	private ImageView cowFace, cowFaceD, cowFaceG, cowDroite, cowDroiteD,
+	cowDroiteG, cowDerriere, cowDerriereG, cowDerriereD, cowGauche,
+	cowGaucheD, cowGaucheG;
+
+
+	private Image brouillardImage;
 
 	private Image createMap;
 	private Image selectMap;
@@ -91,6 +98,7 @@ public class MainWindow {
 
 
 	private List<ImageView> playerMoves;
+	public static List<ImageView> cowMoves;
 	private GridPane grille; //grille de StackPane
 
 	public MainWindow(Stage stage) {
@@ -155,8 +163,10 @@ public class MainWindow {
 
 	private void chargerImage() {
 		murImage = SwingFXUtils.toFXImage(sprites[0*cols+8], null);
-		porteFermeeNSImage = SwingFXUtils.toFXImage(sprites[0*cols+4], null);
-		porteFermeeWEImage = SwingFXUtils.toFXImage(sprites[0*cols+7], null);
+		porteFermeeNSImage = SwingFXUtils.toFXImage(sprites[0*cols+7], null);
+		porteFermeeWEImage = SwingFXUtils.toFXImage(sprites[0*cols+4], null);
+		porteOuverteWEImage = SwingFXUtils.toFXImage(sprites[0*cols+5], null);
+		porteOuverteNSImage = SwingFXUtils.toFXImage(sprites[0*cols+6], null);
 		solImage = SwingFXUtils.toFXImage(sprites[2*cols+14], null);
 		sortieImage = SwingFXUtils.toFXImage(sprites[7*cols+10], null);
 		arrierePlan = new Image("file:images/arriere_plan.png");
@@ -164,6 +174,8 @@ public class MainWindow {
 		background = new Background(new BackgroundImage(arrierePlan, null, null, null, null));
 		choosePlayer = new Image("file:images/choosePlayer.png");
 		tresorFermeImage =  SwingFXUtils.toFXImage(sprites[2*cols+4], null);
+		entreeImage =  SwingFXUtils.toFXImage(sprites[6*cols+4], null);
+		brouillardImage =  SwingFXUtils.toFXImage(sprites[4*cols+11], null);
 
 		playerOneFace = SwingFXUtils.toFXImage(sprites[8*cols+3], null);
 		playerOneFaceD = SwingFXUtils.toFXImage(sprites[8*cols+4], null);
@@ -191,6 +203,37 @@ public class MainWindow {
 		playerTwoGauche = SwingFXUtils.toFXImage(sprites[10*cols], null);
 		playerTwoGaucheD = SwingFXUtils.toFXImage(sprites[10*cols+1], null);
 		playerTwoGaucheG = SwingFXUtils.toFXImage(sprites[10*cols+2], null);
+
+		cowFace = new ImageView(SwingFXUtils.toFXImage(sprites[8*cols+6], null));
+		cowFaceD = new ImageView(SwingFXUtils.toFXImage(sprites[8*cols+6], null));
+		cowFaceG = new ImageView(SwingFXUtils.toFXImage(sprites[8*cols+8], null));
+		cowDroite = new ImageView(SwingFXUtils.toFXImage(sprites[9*cols+6], null));
+		cowDroiteD = new ImageView(SwingFXUtils.toFXImage(sprites[9*cols+7], null));
+		cowDroiteG = new ImageView(SwingFXUtils.toFXImage(sprites[9*cols+8], null));
+		cowDerriere =new ImageView( SwingFXUtils.toFXImage(sprites[11*cols+6], null));
+		cowDerriereD = new ImageView(SwingFXUtils.toFXImage(sprites[11*cols+7], null));
+		cowDerriereG = new ImageView(SwingFXUtils.toFXImage(sprites[11*cols+8], null));
+		cowGauche = new ImageView(SwingFXUtils.toFXImage(sprites[10*cols+6], null));
+		cowGaucheD = new ImageView(SwingFXUtils.toFXImage(sprites[10*cols+7], null));
+		cowGaucheG = new ImageView(SwingFXUtils.toFXImage(sprites[10*cols+8], null));
+
+
+
+		cowMoves = new ArrayList<ImageView>();
+		cowMoves.add(cowFace);
+		cowMoves.add(cowFaceD);
+		cowMoves.add(cowFaceG);
+		cowMoves.add(cowDroite);
+		cowMoves.add(cowDroiteD);
+		cowMoves.add(cowDroiteG);
+		cowMoves.add(cowDerriere);
+		cowMoves.add(cowDerriereD);
+		cowMoves.add(cowDerriereG);
+		cowMoves.add(cowGauche);
+		cowMoves.add(cowGaucheD);
+		cowMoves.add(cowGaucheG);
+
+
 
 		createMap = new Image("file:images/createMap.png");
 		selectMap = new Image("file:images/selectMap.png");
@@ -348,6 +391,7 @@ public class MainWindow {
 		ImageView solIV = new ImageView(solImage);
 		ImageView sortieIV = new ImageView(sortieImage);
 		ImageView tresorFermeIV = new ImageView(tresorFermeImage);
+		ImageView entreeIV = new ImageView(entreeImage);
 
 		Button mur = new Button();
 		Button porteFermeeNS = new Button();
@@ -407,9 +451,16 @@ public class MainWindow {
 			Node [] nodes = new Node[15];
 
 			for(int j=0; j<15; j++) {
-				ImageView iv = new ImageView(solImage);
-				nodes[j] = new StackPane(iv);
-				iv.setId("EMP");
+
+				if(i==0 && j==0) {
+					nodes[j] = new StackPane(entreeIV);
+					entreeIV.setId("IN");
+				}
+				else {
+					ImageView iv = new ImageView(solImage);
+					nodes[j] = new StackPane(iv);
+					iv.setId("EMP");
+				}
 			}
 			g.addColumn(i, nodes);
 
@@ -444,6 +495,8 @@ public class MainWindow {
 			selectedImage = tresorFermeImage;
 			id = "TRS";
 		});
+
+
 
 		int i=0;
 		for(Node d : g.getChildren()) {
@@ -564,7 +617,6 @@ public class MainWindow {
 		hbox.getChildren().addAll(outils, map);
 
 		PlayerService pm = new PlayerServiceContract( new PlayerMouvements(new Player(), playerMoves));
-		//PlayerMouvements pm = new PlayerMouvements(new Player(), playerMoves);
 		EnvironmentService em = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), grille));
 
 		em.init(15, 15);
@@ -656,12 +708,98 @@ public class MainWindow {
 				pm.step();
 			}
 
-			if(e.getCode()== KeyCode.O){
+			if(e.getCode()== KeyCode.Z){
 				pm.openDoor();
+				StackPane sp = null;
+
+				switch(pm.getFace()) {
+					case N:
+						sp = (StackPane) grille.getChildren().get((pm.getRow()+1)*pm.getEnv().getHeight()+pm.getCol());
+						break;
+					case S:
+						sp = (StackPane) grille.getChildren().get((pm.getRow()-1)*pm.getEnv().getHeight()+pm.getCol());
+						break;
+					case E:
+						sp = (StackPane) grille.getChildren().get((pm.getRow())*pm.getEnv().getHeight()+pm.getCol()+1);
+						break;
+					case W:
+						sp = (StackPane) grille.getChildren().get((pm.getRow())*pm.getEnv().getHeight()+pm.getCol()-1);
+						break;
+				}
+
+				ImageView doorIV = null ;
+				boolean found = false;
+				for(Node n : sp.getChildren()) {
+					doorIV = (ImageView) n;
+					if(doorIV.getId()=="DCN" || doorIV.getId()=="DCW" ) {
+						found = true;
+						break;
+					}
+				}
+				if(found) {
+					sp.getChildren().remove(doorIV);
+					ImageView iv = null;
+					if(doorIV.getId()=="DCN") {
+						iv = new ImageView(porteOuverteNSImage);
+						iv.setId("DNO");
+
+					}
+					else {
+						iv = new ImageView(porteOuverteWEImage);
+						iv.setId("DWO");
+					}
+					sp.getChildren().add(iv);
+				}
 			}
 
-			if(e.getCode()== KeyCode.C){
+			if(e.getCode()== KeyCode.E){
+
 				pm.closeDoor();
+
+				StackPane sp = null;
+
+				switch(pm.getFace()) {
+					case N:
+						sp = (StackPane) grille.getChildren().get((pm.getRow()+1)*pm.getEnv().getHeight()+pm.getCol());
+						break;
+					case S:
+						sp = (StackPane) grille.getChildren().get((pm.getRow()-1)*pm.getEnv().getHeight()+pm.getCol());
+						break;
+					case E:
+						sp = (StackPane) grille.getChildren().get((pm.getRow())*pm.getEnv().getHeight()+pm.getCol()+1);
+						break;
+					case W:
+						sp = (StackPane) grille.getChildren().get((pm.getRow())*pm.getEnv().getHeight()+pm.getCol()-1);
+						break;
+				}
+				ImageView doorIV = null ;
+				boolean found = false;
+				for(Node n : sp.getChildren()) {
+					doorIV = (ImageView) n;
+					if(doorIV.getId()=="DNO" || doorIV.getId()=="DWO" ) {
+						found = true;
+						break;
+					}
+				}
+				if(found) {
+
+					sp.getChildren().remove(doorIV);
+					ImageView iv = null;
+					if(doorIV.getId()=="DNO") {
+						iv = new ImageView(porteFermeeNSImage);
+						iv.setId("DCN");
+
+					}
+					else {
+						iv = new ImageView(porteFermeeWEImage);
+						iv.setId("DCW");
+					}
+					sp.getChildren().add(iv);
+				}
+			}
+
+			if(e.getCode()==KeyCode.SPACE) {
+				pm.attack();
 			}
 
 

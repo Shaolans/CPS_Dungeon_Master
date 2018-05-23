@@ -88,29 +88,30 @@ public class PlayerMouvements implements PlayerService {
 
 		StackPane sp;
 
-		ImageView current = null ;
+		ImageView currentBis = null;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
-		sp.getChildren().add(current);
+		sp.getChildren().add(currentBis);
+		current = currentBis;
 
 
 		System.out.println(getFace());
@@ -121,30 +122,30 @@ public class PlayerMouvements implements PlayerService {
 	public void backward() {
 
 		StackPane sp;
-
-		ImageView current = null ;
+		ImageView currentBis = null;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
-		sp.getChildren().add(current);
+		sp.getChildren().add(currentBis);
+		current = currentBis;
 
 
 
@@ -154,28 +155,29 @@ public class PlayerMouvements implements PlayerService {
 	public void turnL() {
 
 		StackPane sp;
+		ImageView currentBis = null;
 
-		ImageView current = null ;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
 		sp.getChildren().remove(1);
+		current = currentBis;
 		sp.getChildren().add(current);
 
 
@@ -185,28 +187,29 @@ public class PlayerMouvements implements PlayerService {
 	public void turnR() {
 
 		StackPane sp;
+		ImageView currentBis = null;
 
-		ImageView current = null ;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
 		sp.getChildren().remove(1);
+		current = currentBis;
 		sp.getChildren().add(current);
 
 
@@ -218,28 +221,29 @@ public class PlayerMouvements implements PlayerService {
 
 		StackPane sp;
 
-		ImageView current = null ;
+		ImageView currentBis = null;
 
 		switch(getFace()){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		current = currentBis;
 		sp.getChildren().add(current);
 
 
@@ -250,28 +254,29 @@ public class PlayerMouvements implements PlayerService {
 
 		StackPane sp;
 
-		ImageView current = null ;
+		ImageView currentBis= null;
 
 		switch(oldDir){
 			case E :
-				current = face;
+				currentBis = face;
 				break;
 
 			case S :
-				current = droite;
+				currentBis = droite;
 				break;
 
 			case N:
-				current = gauche;
+				currentBis = gauche;
 				break;
 			case W:
-				current = derriere;
+				currentBis = derriere;
 				break;
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		current = currentBis;
 		sp.getChildren().add(current);
 	}
 
@@ -352,49 +357,105 @@ public class PlayerMouvements implements PlayerService {
 
 	@Override
 	public int getDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return joueur.getDamage();
 	}
 
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage) {
-		// TODO Auto-generated method stub
+		EnvironmentServiceDecorator dec = (EnvironmentServiceDecorator) env;
+		em = (EnvironmentMouvements) dec.getDelegate();
+		StackPane sp = (StackPane) em.grille.getChildren().get(0);
+		sp.getChildren().add(face);
+		current = face;
+		joueur.init(env, col, row, dir, hp, damage);
 
 	}
 
 	@Override
 	public void attack() {
-		// TODO Auto-generated method stub
+
+		joueur.attack();
+		StackPane sp;
+		ImageView currentBis=null;
+
+		if(current==face) {
+			currentBis = faceD;
+		}
+		if(current==gauche) {
+			currentBis = gaucheD;
+		}
+		if(current==droite) {
+			currentBis = droiteD;
+		}
+		if(current==derriere) {
+			currentBis = derriereD;
+		}
+
+		if(current==faceD) {
+			currentBis = faceG;
+		}
+
+		if(current==faceG) {
+			currentBis = faceD;
+		}
+
+		if(current==gaucheD) {
+			currentBis = gaucheG;
+		}
+
+		if(current==droiteD) {
+			currentBis = droiteG;
+		}
+
+		if(current==derriereD) {
+			currentBis = derriereG;
+		}
+		if(current==derriereG) {
+			currentBis = derriereD;
+		}
+
+		if(current==gaucheG) {
+			currentBis = gaucheD;
+		}
+
+		if(current==droiteG) {
+			currentBis = droiteD;
+		}
+
+
+		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
+		sp.getChildren().remove(current);
+		sp.getChildren().add(currentBis);
+		current=currentBis;
 
 	}
 
 	@Override
 	public void setHp(int hp) {
 		// TODO Auto-generated method stub
-
+		joueur.setHp(hp);
 	}
 
 	@Override
 	public int getHp() {
 		// TODO Auto-generated method stub
-		return 0;
+		return joueur.getHp();
 	}
 
 	@Override
 	public boolean foundTreasure() {
-		// TODO Auto-generated method stub
-		return false;
+		return joueur.foundTreasure();
 	}
 
 	@Override
 	public void setFoundTreasure(boolean b) {
 		// TODO Auto-generated method stub
-
+		joueur.setFoundTreasure(b);
 	}
 
 	@Override
 	public void pickItem() {
-		// TODO Auto-generated method stub
+		joueur.pickItem();
 
 	}
 

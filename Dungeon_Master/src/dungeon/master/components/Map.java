@@ -5,11 +5,11 @@ import dungeon.master.services.MapService;
 
 public class Map implements MapService {
 	protected Cell[][] cellmap;
-	
+
 	public Map(){
-		
+
 	}
-	
+
 	@Override
 	public int getHeight() {
 		return cellmap[0].length;
@@ -49,6 +49,7 @@ public class Map implements MapService {
 		if(cellmap[x][y] == Cell.DWO){
 			cellmap[x][y] = Cell.DWC;
 		} else if (cellmap[x][y] == Cell.DNO){
+
 			cellmap[x][y] = Cell.DNC;
 		}
 
