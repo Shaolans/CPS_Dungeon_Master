@@ -32,6 +32,7 @@ public class Environment extends EditMap implements EnvironmentService {
 		if(getCellContent(col, row).getValue()==null){
 			super.closeDoor(col, row);
 		}
+
 	}
 
 	@Override

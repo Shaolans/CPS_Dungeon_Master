@@ -1,5 +1,10 @@
 package dungeon.master.ui.implementations;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import dungeon.master.components.Cow;
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Option;
 import dungeon.master.services.EntityService;
@@ -14,6 +19,7 @@ public class EnvironmentMouvements implements EnvironmentService {
 
 	private EnvironmentService env;
 	GridPane grille;
+	List<Thread> ennemis = new ArrayList<>();
 
 	public EnvironmentMouvements(EnvironmentService env, GridPane grille) {
 		this.env = env;
@@ -60,17 +66,39 @@ public class EnvironmentMouvements implements EnvironmentService {
 	public void init(int w, int h) {
 
 		env.init(w, h);
-
+		int nbEnnemi = 4;
 		int i=0, j=0;
+		Random r = new Random();
+
 		for(Node n : grille.getChildren()){
 			StackPane sp = (StackPane) n;
 			ImageView im = (ImageView)sp.getChildren().get(sp.getChildren().size()-1);
 
-			env.setNature(0, 0, Cell.IN);
+
 
 			switch(im.getId()){
 				case "EMP":
 					env.setNature(i, j, Cell.EMP);
+
+					if(r.nextInt(20)==0) {
+						Cow c = new Cow();
+						env.setCellContent(i, j, c);
+						Thread t = new Thread(new Runnable() {
+
+							@Override
+							public void run() {
+								c.step();
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						});
+						t.start();
+						ennemis.add(t);
+					}
 					break;
 				case "DCN":
 					env.setNature(i, j, Cell.DNC);
@@ -86,6 +114,9 @@ public class EnvironmentMouvements implements EnvironmentService {
 					break;
 				case "TRS":
 					env.setNature(i, j, Cell.TRS);
+					break;
+				case "IN":
+					env.setNature(i, j, Cell.IN);
 					break;
 
 			}
@@ -116,14 +147,14 @@ public class EnvironmentMouvements implements EnvironmentService {
 
 	@Override
 	public void closeDoor(int col, int row) {
-		// TODO Auto-generated method stub
+		env.closeDoor(col, row);
 
 	}
 
 	@Override
 	public void setCellContent(int col, int row, EntityService mob) {
 		// TODO Auto-generated method stub
-
+		env.setCellContent(col, row, mob);
 	}
 
 
