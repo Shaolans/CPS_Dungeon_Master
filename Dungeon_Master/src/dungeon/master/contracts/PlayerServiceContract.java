@@ -769,8 +769,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 				System.out.println(getEnv().getCellNature(col_atpre, row_atpre+1));
 				System.out.println(existmob_atpre[col_atpre][row_atpre+1]);
 				System.out.println(row_atpre+1);
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
-						row_atpre+1 < getEnv().getHeight() &&
+				if(row_atpre+1 < getEnv().getHeight() && (getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == N ... does not hold");
@@ -784,8 +783,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
-						col_atpre+1 < getEnv().getWidth() &&
+				if(col_atpre+1 < getEnv().getWidth() && (getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 						throw new PostconditionError("getFace()@pre == E ... does not hold");
@@ -798,8 +796,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
-						row_atpre-1 >= 0 &&
+				if(row_atpre-1 >= 0 && (getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == S ... does not hold");
@@ -812,8 +809,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
-						col_atpre-1 >= 0 &&
+				if(col_atpre-1 >= 0 &&(getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 						throw new PostconditionError("getFace()@pre == W ... does not hold");
@@ -829,8 +826,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.BB) {
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
-						row_atpre+1 < getEnv().getHeight() &&
+				if(row_atpre+1 < getEnv().getHeight() && (getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == N ... does not hold");
@@ -844,8 +840,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
-						col_atpre+1 < getEnv().getWidth() &&
+				if(col_atpre+1 < getEnv().getWidth() && (getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 						throw new PostconditionError("getFace()@pre == E ... does not hold");
@@ -858,8 +854,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
-						row_atpre-1 >= 0 &&
+				if(row_atpre-1 >= 0 && (getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == S ... does not hold");
@@ -872,8 +868,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
-						col_atpre-1 >= 0 &&
+				if(col_atpre-1>=0 &&(getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 						throw new PostconditionError("getFace()@pre == W ... does not hold");
@@ -888,8 +883,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.LL) {
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
-						col_atpre+1 < getEnv().getWidth() &&
+				if(col_atpre+1 < getEnv().getWidth() &&(getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 						throw new PostconditionError("getFace()@pre == S ... (StrafeL) does not hold");
@@ -903,8 +898,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
-						row_atpre+1 < getEnv().getHeight() &&
+				if(row_atpre+1 < getEnv().getHeight() &&(getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == E ... (StrafeL) does not hold");
@@ -917,8 +912,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
-						row_atpre-1 >= 0 &&
+				if(row_atpre-1 >= 0 && (getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == W ... (StrafeL) does not hold");
@@ -931,8 +926,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
-						col_atpre-1 >= 0 &&
+				if(col_atpre-1 >= 0 && (getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 						throw new PostconditionError("getFace()@pre == N ... (StrafeL) does not hold");
@@ -947,8 +942,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 		if(lastcom_atpre.getValue() == Command.RR) {
 			if(getFace() == Dir.N) {
-				if((getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
-						col_atpre+1 < getEnv().getWidth() &&
+				if(col_atpre+1 < getEnv().getWidth() &&(getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre+1, row_atpre) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre+1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre+1)) {
 						throw new PostconditionError("getFace()@pre == N ... (StrafeR) does not hold");
@@ -962,8 +957,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 			if(getFace() == Dir.W) {
-				if((getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
-						row_atpre+1 < getEnv().getHeight() &&
+				if(row_atpre+1 < getEnv().getHeight() &&(getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre+1) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre][row_atpre+1] == null) {
 					if(!(getRow()==row_atpre+1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == E ... (StrafeR) does not hold");
@@ -976,8 +971,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.E) {
-				if((getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
-						row_atpre-1 >= 0 &&
+				if(row_atpre-1 >= 0 &&(getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.EMP || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.DNO || getEnv().getCellNature(col_atpre, row_atpre-1) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre][row_atpre-1] == null) {
 					if(!(getRow()==row_atpre-1 && getCol()==col_atpre)) {
 						throw new PostconditionError("getFace()@pre == W ... (StrafeR) does not hold");
@@ -990,8 +985,8 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 			}
 
 			if(getFace() == Dir.S) {
-				if((getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
-						col_atpre-1 >= 0 &&
+				if(col_atpre-1 >= 0 &&(getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.EMP || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.DWO || getEnv().getCellNature(col_atpre-1, row_atpre) == Cell.OUT) &&
+
 						existmob_atpre[col_atpre-1][row_atpre] == null) {
 					if(!(getRow()==row_atpre && getCol()==col_atpre-1)) {
 						throw new PostconditionError("getFace()@pre == S ... (StrafeR) does not hold");
