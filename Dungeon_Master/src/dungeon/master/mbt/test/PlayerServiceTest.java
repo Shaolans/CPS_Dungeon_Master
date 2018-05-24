@@ -34,6 +34,13 @@ public class PlayerServiceTest extends MobServiceTest {
 		player = null;
 	}
 	
+	public void openedTreasureTransitionTest_1() {
+		player.setLastCom(Command.BB);
+		env.setNature(5, 8, Cell.TRS);
+		player.pickItem();
+		assertTrue(env.getCellNature(5, 8) == Cell.EMP && player.foundTreasure());
+	}
+	
 	public void attackTransitionTest_1() {
 		try {
 			player.setLastCom(Command.BB);

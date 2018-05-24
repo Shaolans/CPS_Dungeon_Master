@@ -73,6 +73,26 @@ public class EditMapServiceTest {
 		}
 		
 	}
+	
+	@Test
+	public void isReachableTransitionTest_2() {
+		//cas positif
+		try {
+			ems.init(10, 20);
+			ems.setNature(0, 0, Cell.IN);
+			ems.setNature(1, 0, Cell.WLL);
+			ems.setNature(1, 1, Cell.WLL);
+			ems.setNature(0, 1, Cell.WLL);
+			ems.setNature(9, 19, Cell.OUT);
+			assertTrue(!ems.isReachable(0, 0, 9, 19));
+		}catch(PreconditionError ex) {
+			fail();
+		}catch(InvariantError ie) {
+			fail();
+		}
+		
+	}
+	
 	@Test
 	public void setNatureTransitionTest_1() {
 		//cas positif

@@ -96,6 +96,7 @@ public class Engine implements EngineService {
 		if(getPlayer().getCol() == xi && getPlayer().getRow() == yi) {
 			return true;
 		}
+		
 		return false;
 	}
 
