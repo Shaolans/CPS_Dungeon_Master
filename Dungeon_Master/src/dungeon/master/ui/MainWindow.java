@@ -8,16 +8,22 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import dungeon.master.components.Engine;
 import dungeon.master.components.Environment;
 import dungeon.master.components.Player;
+import dungeon.master.contracts.EngineServiceContract;
 import dungeon.master.contracts.EnvironmentServiceContract;
 import dungeon.master.contracts.PlayerServiceContract;
 import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
+import dungeon.master.services.CowService;
+import dungeon.master.services.EngineService;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.MonsterService;
 import dungeon.master.services.PlayerService;
 import dungeon.master.ui.implementations.EnvironmentMouvements;
 import dungeon.master.ui.implementations.PlayerMouvements;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -204,18 +210,18 @@ public class MainWindow {
 		playerTwoGaucheD = SwingFXUtils.toFXImage(sprites[10*cols+1], null);
 		playerTwoGaucheG = SwingFXUtils.toFXImage(sprites[10*cols+2], null);
 
-		cowFace = new ImageView(SwingFXUtils.toFXImage(sprites[8*cols+6], null));
-		cowFaceD = new ImageView(SwingFXUtils.toFXImage(sprites[8*cols+6], null));
-		cowFaceG = new ImageView(SwingFXUtils.toFXImage(sprites[8*cols+8], null));
-		cowDroite = new ImageView(SwingFXUtils.toFXImage(sprites[9*cols+6], null));
-		cowDroiteD = new ImageView(SwingFXUtils.toFXImage(sprites[9*cols+7], null));
-		cowDroiteG = new ImageView(SwingFXUtils.toFXImage(sprites[9*cols+8], null));
-		cowDerriere =new ImageView( SwingFXUtils.toFXImage(sprites[11*cols+6], null));
-		cowDerriereD = new ImageView(SwingFXUtils.toFXImage(sprites[11*cols+7], null));
-		cowDerriereG = new ImageView(SwingFXUtils.toFXImage(sprites[11*cols+8], null));
-		cowGauche = new ImageView(SwingFXUtils.toFXImage(sprites[10*cols+6], null));
-		cowGaucheD = new ImageView(SwingFXUtils.toFXImage(sprites[10*cols+7], null));
-		cowGaucheG = new ImageView(SwingFXUtils.toFXImage(sprites[10*cols+8], null));
+		cowFace = new ImageView(SwingFXUtils.toFXImage(sprites[12*cols+6], null));
+		cowFaceD = new ImageView(SwingFXUtils.toFXImage(sprites[12*cols+6], null));
+		cowFaceG = new ImageView(SwingFXUtils.toFXImage(sprites[12*cols+8], null));
+		cowDroite = new ImageView(SwingFXUtils.toFXImage(sprites[13*cols+6], null));
+		cowDroiteD = new ImageView(SwingFXUtils.toFXImage(sprites[13*cols+7], null));
+		cowDroiteG = new ImageView(SwingFXUtils.toFXImage(sprites[13*cols+8], null));
+		cowDerriere =new ImageView( SwingFXUtils.toFXImage(sprites[15*cols+6], null));
+		cowDerriereD = new ImageView(SwingFXUtils.toFXImage(sprites[15*cols+7], null));
+		cowDerriereG = new ImageView(SwingFXUtils.toFXImage(sprites[15*cols+8], null));
+		cowGauche = new ImageView(SwingFXUtils.toFXImage(sprites[14*cols+6], null));
+		cowGaucheD = new ImageView(SwingFXUtils.toFXImage(sprites[14*cols+7], null));
+		cowGaucheG = new ImageView(SwingFXUtils.toFXImage(sprites[14*cols+8], null));
 
 
 
@@ -617,12 +623,25 @@ public class MainWindow {
 		hbox.getChildren().addAll(outils, map);
 
 		PlayerService pm = new PlayerServiceContract( new PlayerMouvements(new Player(), playerMoves));
-		EnvironmentService em = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), grille));
-
+		EnvironmentMouvements env = new EnvironmentMouvements(new Environment(), grille);
+		EnvironmentService em = new EnvironmentServiceContract(env);
+		env.setService(em);
 		em.init(15, 15);
 		pm.init(em, 0, 0, Dir.E, 4, 2);
 
+
+		EngineService engine = new EngineServiceContract(new Engine());
+		engine.init(em, pm);
+		for(MonsterService monster : env.ennemis) {
+			engine.addEntity(monster);
+		}
+
+
+
 		scene.setOnKeyPressed(e->{
+
+
+
 			if(e.getCode()== KeyCode.DOWN){
 
 				switch(pm.getFace()){
@@ -802,6 +821,35 @@ public class MainWindow {
 				pm.attack();
 			}
 
+			if(pm.getRow()==ySortie && pm.getCol()==xSortie) {
+				if(pm.foundTreasure()) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setContentText("Bravo, vous avez récupéré le trésor et trouvé la sortie !\nMerci d'avoir joué");
+					alert.showAndWait();
+					stage.close();
+				}
+				else {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setContentText("Il faut d'abord trouver le trésor avant de sortir !");
+					alert.showAndWait();
+
+				}
+
+			}
+
+			if(e.getCode()==KeyCode.T) {
+				pm.pickItem();
+				if(pm.foundTreasure()) {
+					StackPane tmp = (StackPane) grille.getChildren().get(yTresor*15+xTresor);
+					tmp.getChildren().remove(tmp.getChildren().size()-1);
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setContentText("Bravo, vous avez récupéré le trésor !");
+					alert.showAndWait();
+
+				}
+			}
+			engine.clean();
+			engine.step();
 
 		});
 

@@ -4,15 +4,15 @@ import java.util.List;
 
 import dungeon.master.decorators.EnvironmentServiceDecorator;
 import dungeon.master.enumerations.Dir;
-import dungeon.master.services.CowService;
 import dungeon.master.services.EnvironmentService;
+import dungeon.master.services.MonsterService;
 import dungeon.master.ui.MainWindow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-public class CowMouvements implements CowService {
+public class MonsterMouvements implements MonsterService {
 
-	CowService cow;
+	MonsterService monster;
 	private ImageView face, faceD, faceG, droite, droiteD, droiteG,
 	derriere, derriereD, derriereG, gauche, gaucheD, gaucheG;
 
@@ -21,9 +21,9 @@ public class CowMouvements implements CowService {
 	private EnvironmentMouvements em;
 	private ImageView current;
 
-	public CowMouvements(CowService cow) {
+	public MonsterMouvements(MonsterService monster) {
 
-		this.cow = cow;
+		this.monster = monster;
 		List<ImageView> moves = MainWindow.cowMoves;
 		face = moves.get(0);
 		faceD = moves.get(1);
@@ -42,19 +42,19 @@ public class CowMouvements implements CowService {
 	@Override
 	public int getHp() {
 		// TODO Auto-generated method stub
-		return cow.getHp();
+		return monster.getHp();
 	}
 
 	@Override
 	public int getDamage() {
 		// TODO Auto-generated method stub
-		return cow.getDamage();
+		return monster.getDamage();
 	}
 
 	@Override
 	public void attack() {
 
-		cow.attack();
+		monster.attack();
 		StackPane sp;
 		ImageView currentBis=null;
 
@@ -111,32 +111,32 @@ public class CowMouvements implements CowService {
 	}
 	@Override
 	public void setHp(int hp) {
-		cow.setHp(hp);
+		monster.setHp(hp);
 
 	}
 
 	@Override
 	public EnvironmentService getEnv() {
 		// TODO Auto-generated method stub
-		return cow.getEnv();
+		return monster.getEnv();
 	}
 
 	@Override
 	public int getCol() {
 		// TODO Auto-generated method stub
-		return cow.getCol();
+		return monster.getCol();
 	}
 
 	@Override
 	public int getRow() {
 		// TODO Auto-generated method stub
-		return cow.getRow();
+		return monster.getRow();
 	}
 
 	@Override
 	public Dir getFace() {
 		// TODO Auto-generated method stub
-		return cow.getFace();
+		return monster.getFace();
 	}
 
 	@Override
@@ -146,7 +146,7 @@ public class CowMouvements implements CowService {
 		StackPane sp = (StackPane) em.grille.getChildren().get(0);
 		sp.getChildren().add(face);
 		current = face;
-		cow.init(env, col, row, dir);
+		monster.init(env, col, row, dir);
 
 	}
 
@@ -243,7 +243,7 @@ public class CowMouvements implements CowService {
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
-		sp.getChildren().remove(1);
+		sp.getChildren().remove(current);
 		current = currentBis;
 		sp.getChildren().add(current);
 
@@ -275,7 +275,7 @@ public class CowMouvements implements CowService {
 		}
 
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
-		sp.getChildren().remove(1);
+		sp.getChildren().remove(current);
 		current = currentBis;
 		sp.getChildren().add(current);
 
@@ -306,7 +306,7 @@ public class CowMouvements implements CowService {
 				currentBis = derriere;
 				break;
 		}
-
+		System.out.println("COW FACE :"+getFace());
 		sp = (StackPane)em.grille.getChildren().get(oldRow*em.getWidth()+oldCol);
 		sp.getChildren().remove(current);
 		sp = (StackPane)em.grille.getChildren().get(getRow()*em.getWidth()+getCol());
@@ -323,7 +323,7 @@ public class CowMouvements implements CowService {
 
 		ImageView currentBis= null;
 
-		switch(oldDir){
+		switch(getFace()){
 			case E :
 				currentBis = face;
 				break;
@@ -349,11 +349,11 @@ public class CowMouvements implements CowService {
 
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage) {
-		//EnvironmentServiceDecorator dec = (EnvironmentServiceDecorator) env;
-		em = (EnvironmentMouvements) env;
+		EnvironmentServiceDecorator dec = (EnvironmentServiceDecorator) env;
+		em = (EnvironmentMouvements) dec.getDelegate();
 
 		current = face;
-		cow.init(env, col, row, dir, hp, damage);
+		monster.init(env, col, row, dir, hp, damage);
 
 	}
 
@@ -364,7 +364,9 @@ public class CowMouvements implements CowService {
 		oldCol = getCol();
 		Dir oldDir = getFace();
 
-		cow.step();
+		monster.step();
+
+		System.out.println("Monters face "+getFace()+" "+getCol()+" "+getRow());
 
 		if(oldDir==getFace()) {
 			switch(getFace()) {

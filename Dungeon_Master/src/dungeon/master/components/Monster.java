@@ -16,14 +16,16 @@ public class Monster extends Entity implements MonsterService {
 				}
 			}
 		}
-		
-		if((getCol()+1 == player.getCol() && getRow() == player.getRow()) || 
+
+		if(player==null) return;
+
+		if((getCol()+1 == player.getCol() && getRow() == player.getRow()) ||
 				(getCol()-1 == player.getCol() && getRow() == player.getRow()) ||
 				(getCol() == player.getCol() && getRow()+1 == player.getRow()) ||
 				(getCol() == player.getCol() && getRow()-1 == player.getRow())) {
 			return;
 		}
-		
+
 		int dist = player.getRow()-getRow();
 		if(dist > 0) {
 			forward();
@@ -32,7 +34,7 @@ public class Monster extends Entity implements MonsterService {
 			backward();
 			return;
 		}
-		
+
 		dist = player.getCol()-getCol();
 		if(dist > 0) {
 			strafeR();
@@ -41,7 +43,7 @@ public class Monster extends Entity implements MonsterService {
 			strafeL();
 			return;
 		}
-		
+
 
 	}
 
@@ -50,15 +52,15 @@ public class Monster extends Entity implements MonsterService {
 		if(getRow()+1 < getEnv().getHeight() && (getEnv().getCellContent(getCol(), getRow()+1).getValue() instanceof PlayerService)) {
 			getEnv().getCellContent(getCol(), getRow()+1).getValue().setHp(getEnv().getCellContent(getCol(), getRow()+1).getValue().getHp()-getDamage());
 		}
-		
+
 		if(getRow()-1 >0 && (getEnv().getCellContent(getCol(), getRow()-1).getValue() instanceof PlayerService)) {
 			getEnv().getCellContent(getCol(), getRow()-1).getValue().setHp(getEnv().getCellContent(getCol(), getRow()-1).getValue().getHp()-getDamage());
 		}
-		
+
 		if(getCol()-1 >= 0 && (getEnv().getCellContent(getCol()-1, getRow()).getValue() instanceof PlayerService)) {
 			getEnv().getCellContent(getCol()-1, getRow()).getValue().setHp(getEnv().getCellContent(getCol()-1, getRow()).getValue().getHp()-getDamage());
 		}
-		
+
 		if(getCol()+1 < getEnv().getWidth() && (getEnv().getCellContent(getCol()+1, getRow()).getValue() instanceof PlayerService)) {
 			getEnv().getCellContent(getCol()-1, getRow()).getValue().setHp(getEnv().getCellContent(getCol()-1, getRow()).getValue().getHp()-getDamage());
 		}

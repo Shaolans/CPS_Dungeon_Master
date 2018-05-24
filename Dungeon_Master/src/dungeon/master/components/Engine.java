@@ -13,7 +13,7 @@ public class Engine implements EngineService {
 	private List<EntityService> entities;
 	private EnvironmentService envi;
 	private PlayerService player;
-	
+
 	@Override
 	public EnvironmentService getEnvi() {
 		return envi;
@@ -59,15 +59,15 @@ public class Engine implements EngineService {
 		for(EntityService ent: todelete) {
 			getEnvi().setCellContent(ent.getCol(), ent.getRow(), null);
 		}
-		
-		entities.removeIf(e->e.getHp() <= 0);
+
+		entities.removeAll(todelete);
 	}
 	@Override
 	public void step() {
 		for(EntityService ent: entities) {
 			ent.step();
 		}
-		
+
 	}
 
 	@Override
@@ -92,11 +92,11 @@ public class Engine implements EngineService {
 				}
 			}
 		}
-		
+
 		if(getPlayer().getCol() == xi && getPlayer().getRow() == yi) {
 			return true;
 		}
-		
+
 		return false;
 	}
 

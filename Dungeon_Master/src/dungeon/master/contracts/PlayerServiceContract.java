@@ -1233,14 +1233,14 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		}
 
 		if(getFace() == Dir.S && getRow()-1 >= 0 && nature_atpre[getCol()][getRow()-1] == Cell.TRS) {
-			if(!(getEnv().getCellNature(getCol(), getRow()-1) == Cell.DWC)) {
+			if(!(getEnv().getCellNature(getCol(), getRow()-1) == Cell.EMP)) {
 				throw new InvariantError("pickItem player does not hold");
 			}
 		}
 
 
 		if(getFace() == Dir.E && getCol()+1 < getEnv().getWidth() && nature_atpre[getCol()+1][getRow()] == Cell.TRS) {
-			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC)) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.EMP)) {
 				throw new InvariantError("pickItem player does not hold");
 			}
 		}
@@ -1248,7 +1248,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 
 
 		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.TRS) {
-			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWC)) {
+			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.EMP)) {
 				throw new InvariantError("pickItem player does not hold");
 			}
 		}

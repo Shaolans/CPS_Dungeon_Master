@@ -256,7 +256,7 @@ public class PlayerMouvements implements PlayerService {
 
 		ImageView currentBis= null;
 
-		switch(oldDir){
+		switch(getFace()){
 			case E :
 				currentBis = face;
 				break;

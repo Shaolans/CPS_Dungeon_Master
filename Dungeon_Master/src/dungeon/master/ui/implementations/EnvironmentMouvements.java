@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import dungeon.master.components.Cow;
+import dungeon.master.components.Monster;
 import dungeon.master.contracts.CowServiceContract;
+import dungeon.master.contracts.MonsterServiceContract;
 import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.enumerations.Option;
@@ -13,7 +15,10 @@ import dungeon.master.services.CowService;
 import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MobService;
+import dungeon.master.services.MonsterService;
 import dungeon.master.ui.MainWindow;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -23,11 +28,16 @@ public class EnvironmentMouvements implements EnvironmentService {
 
 	private EnvironmentService env;
 	GridPane grille;
-	List<Thread> ennemis = new ArrayList<>();
+	public List<MonsterService> ennemis = new ArrayList<>();
+	private EnvironmentService serv ;
 
 	public EnvironmentMouvements(EnvironmentService env, GridPane grille) {
 		this.env = env;
 		this.grille = grille;
+	}
+
+	public void setService(EnvironmentService serv) {
+		this.serv = serv;
 	}
 
 	@Override
@@ -90,33 +100,14 @@ public class EnvironmentMouvements implements EnvironmentService {
 								im = new ImageView(MainWindow.cowMoves.get(0).getImage());
 								im.setId("COW");
 								sp.getChildren().add(im);
-								CowService c = new CowServiceContract( new CowMouvements(new Cow()));
-								c.init(this, i, j, Dir.E, 4, 2);
+								System.out.println("AJOUT");
+								MonsterService c = new MonsterServiceContract( new MonsterMouvements(new Monster()));
+								ennemis.add(c);
+								if(serv!=null)
+								c.init(serv, i, j, Dir.E, 4, 2);
 								env.setCellContent(i, j, c);
-								Thread t = new Thread(new Runnable() {
-
-									@Override
-									public void run() {
 
 
-										while(c.getHp()>=0) {
-
-											c.step();
-											try {
-												Thread.sleep(500);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-										}
-										StackPane sp = (StackPane)grille.getChildren().get(c.getRow()*env.getWidth()+c.getCol());
-										sp.getChildren().remove(sp.getChildren().size()-1);
-										System.out.println("MORT");
-
-									}
-								});
-								t.start();
-								ennemis.add(t);
 							}
 							break;
 						case "DCN":
