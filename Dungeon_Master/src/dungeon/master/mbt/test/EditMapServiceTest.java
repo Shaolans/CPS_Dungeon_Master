@@ -76,7 +76,7 @@ public class EditMapServiceTest {
 	
 	@Test
 	public void isReachableTransitionTest_2() {
-		//cas positif
+		//cas negatif
 		try {
 			ems.init(10, 20);
 			ems.setNature(0, 0, Cell.IN);
