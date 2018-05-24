@@ -620,14 +620,14 @@ public class MainWindow {
 		EnvironmentService em = new EnvironmentServiceContract(new EnvironmentMouvements(new Environment(), grille));
 
 		em.init(15, 15);
-		pm.init(em, 0, 0, Dir.E);
+		pm.init(em, 0, 0, Dir.E, 4, 2);
 
 		scene.setOnKeyPressed(e->{
 			if(e.getCode()== KeyCode.DOWN){
 
 				switch(pm.getFace()){
 					case E:
-						pm.setLastCom(Command.BB);
+						pm.setLastCom(Command.FF);
 						break;
 					case W :
 						pm.setLastCom(Command.BB);
@@ -646,7 +646,7 @@ public class MainWindow {
 			if(e.getCode()== KeyCode.UP){
 				switch(pm.getFace()){
 				case E:
-					pm.setLastCom(Command.FF);
+					pm.setLastCom(Command.BB);
 					break;
 				case W :
 					pm.setLastCom(Command.FF);

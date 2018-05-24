@@ -10,7 +10,7 @@ public class Mob implements MobService {
 	protected int col;
 	protected int row;
 	protected Dir face;
-	
+
 	@Override
 	public EnvironmentService getEnv() {
 		return env;
@@ -45,23 +45,23 @@ public class Mob implements MobService {
 				row+1 < env.getHeight() &&
 				env.getCellContent(col, row+1).getValue() == null &&
 				(env.getCellNature(col, row+1) == Cell.EMP || env.getCellNature(col, row+1) == Cell.DNO || env.getCellNature(col, row+1) == Cell.OUT)){
-			
+
 			row++;
 			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
 			env.setCellContent(col, row-1, null);
-			
+
 		}
-		System.out.println("ICI "+col+" "+row+" "+env.getCellNature(col+1, row));
+
 		if(face == Dir.E &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row).getValue() == null &&
 				(env.getCellNature(col+1, row) == Cell.EMP || env.getCellNature(col+1, row) == Cell.DWO || env.getCellNature(col+1, row) == Cell.OUT)){
 			col++;
-			
+
 			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
 			env.setCellContent(col-1, row, null);
 		}
-		
+
 		if(face == Dir.S &&
 				row-1 >= 0 &&
 				env.getCellContent(col, row-1).getValue() == null &&
@@ -70,7 +70,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col, row+1).getValue());
 			env.setCellContent(col, row+1, null);
 		}
-		
+
 		if(face == Dir.W &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
@@ -79,8 +79,8 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col+1, row).getValue());
 			env.setCellContent(col+1, row, null);
 		}
-		
-		
+
+
 
 	}
 
@@ -94,7 +94,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
 			env.setCellContent(col, row-1, null);
 		}
-		
+
 		if(face == Dir.W &&
 				col+1 < env.getWidth() &&
 				env.getCellContent(col+1, row).getValue() == null &&
@@ -103,7 +103,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
 			env.setCellContent(col-1, row, null);
 		}
-		
+
 		if(face == Dir.N &&
 				row-1 >= 0 &&
 				env.getCellContent(col, row-1).getValue() == null &&
@@ -112,7 +112,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col, row+1).getValue());
 			env.setCellContent(col, row+1, null);
 		}
-		
+
 		if(face == Dir.E &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
@@ -149,7 +149,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
 			env.setCellContent(col-1, row, null);
 		}
-		
+
 		if(face == Dir.E &&
 				row+1 < env.getHeight() &&
 				env.getCellContent(col, row+1).getValue() == null &&
@@ -158,7 +158,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
 			env.setCellContent(col, row-1, null);
 		}
-		
+
 		if(face == Dir.N &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
@@ -167,7 +167,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col+1, row).getValue());
 			env.setCellContent(col+1, row, null);
 		}
-		
+
 		if(face == Dir.W &&
 				row-1 >= 0 &&
 				env.getCellContent(col, row-1).getValue() == null &&
@@ -188,7 +188,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col-1, row).getValue());
 			env.setCellContent(col-1, row, null);
 		}
-		
+
 		if(face == Dir.W &&
 				row+1 < env.getHeight() &&
 				env.getCellContent(col, row+1).getValue() == null &&
@@ -197,7 +197,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col, row-1).getValue());
 			env.setCellContent(col, row-1, null);
 		}
-		
+
 		if(face == Dir.S &&
 				col-1 >= 0 &&
 				env.getCellContent(col-1, row).getValue() == null &&
@@ -206,7 +206,7 @@ public class Mob implements MobService {
 			env.setCellContent(col, row, env.getCellContent(col+1, row).getValue());
 			env.setCellContent(col+1, row, null);
 		}
-		
+
 		if(face == Dir.E &&
 				row-1 >= 0 &&
 				env.getCellContent(col, row-1).getValue() == null &&

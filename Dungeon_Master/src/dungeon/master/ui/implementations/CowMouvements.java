@@ -349,10 +349,9 @@ public class CowMouvements implements CowService {
 
 	@Override
 	public void init(EnvironmentService env, int col, int row, Dir dir, int hp, int damage) {
-		EnvironmentServiceDecorator dec = (EnvironmentServiceDecorator) env;
-		em = (EnvironmentMouvements) dec.getDelegate();
-		StackPane sp = (StackPane) em.grille.getChildren().get(0);
-		sp.getChildren().add(face);
+		//EnvironmentServiceDecorator dec = (EnvironmentServiceDecorator) env;
+		em = (EnvironmentMouvements) env;
+
 		current = face;
 		cow.init(env, col, row, dir, hp, damage);
 
@@ -360,6 +359,10 @@ public class CowMouvements implements CowService {
 
 	@Override
 	public void step() {
+
+		oldRow = getRow();
+		oldCol = getCol();
+
 		cow.step();
 
 	}
