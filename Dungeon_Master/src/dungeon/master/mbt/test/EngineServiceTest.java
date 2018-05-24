@@ -17,7 +17,9 @@ import dungeon.master.components.Player;
 import dungeon.master.contracts.CowServiceContract;
 import dungeon.master.contracts.EngineServiceContract;
 import dungeon.master.contracts.EnvironmentServiceContract;
+import dungeon.master.enumerations.Cell;
 import dungeon.master.enumerations.Dir;
+import dungeon.master.exceptions.InvariantError;
 import dungeon.master.exceptions.PreconditionError;
 import dungeon.master.services.CowService;
 import dungeon.master.services.EngineService;
@@ -42,6 +44,41 @@ public class EngineServiceTest {
 		es = null;
 		env = null;
 	}
+	
+	@Test
+	public void GameTransTest_1() {
+		//cas positif
+		try {
+			PlayerService player = new Player();
+			player.init(env, 7, 2, Dir.N, 100, 10);
+			es.init(env, player);
+			player.strafeL();
+			player.strafeL();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.pickItem();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.forward();
+			player.strafeR();
+			player.strafeR();
+			player.strafeR();
+			player.strafeR();
+			assertTrue(es.isFinished());
+		}catch(PreconditionError pe) {
+			fail();
+		}catch(InvariantError e) {
+			fail();
+		}
+	}
+	
 	
 	@Test
 	public void addEntityTransTest_1() {
