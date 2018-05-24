@@ -362,9 +362,104 @@ public class CowMouvements implements CowService {
 
 		oldRow = getRow();
 		oldCol = getCol();
+		Dir oldDir = getFace();
 
 		cow.step();
 
-	}
+		if(oldDir==getFace()) {
+			switch(getFace()) {
+				case E :
 
+					if(getRow()==oldRow && getCol()==oldCol+1)
+						this.forward();
+					if(getRow()==oldRow && getCol()==oldCol-1)
+						this.backward();
+					if(getRow()==oldRow-1 && getCol()==oldCol)
+						this.strafeR();
+					if(getRow()==oldRow+1 && getCol()==oldCol)
+						this.strafeL();
+
+
+					break;
+
+				case W:
+
+					if(getRow()==oldRow && getCol()==oldCol+1)
+						this.backward();
+					if(getRow()==oldRow && getCol()==oldCol-1)
+						this.forward();
+					if(getRow()==oldRow-1 && getCol()==oldCol)
+						this.strafeL();
+					if(getRow()==oldRow+1 && getCol()==oldCol)
+						this.strafeR();
+
+					break;
+				case N :
+
+					if(getRow()==oldRow && getCol()==oldCol+1)
+						this.strafeR();
+					if(getRow()==oldRow && getCol()==oldCol-1)
+						this.strafeL();
+					if(getRow()==oldRow-1 && getCol()==oldCol)
+						this.backward();
+					if(getRow()==oldRow+1 && getCol()==oldCol)
+						this.forward();
+
+					break;
+				case S :
+
+					if(getRow()==oldRow && getCol()==oldCol+1)
+						this.strafeL();
+					if(getRow()==oldRow && getCol()==oldCol-1)
+						this.strafeR();
+					if(getRow()==oldRow-1 && getCol()==oldCol)
+						this.forward();
+					if(getRow()==oldRow+1 && getCol()==oldCol)
+						this.backward();
+
+					break;
+
+			}
+
+		}
+		else {
+			switch(getFace()) {
+			case E :
+
+				if(oldDir == Dir.N)
+					this.turnL();
+				else
+					this.turnR();
+
+
+				break;
+
+			case W:
+
+				if(oldDir == Dir.N)
+					this.turnR();
+				else
+					this.turnL();
+
+				break;
+			case N :
+
+				if(oldDir == Dir.W)
+					this.turnL();
+				else
+					this.turnR();
+				break;
+			case S :
+
+				if(oldDir == Dir.W)
+					this.turnR();
+				else
+					this.turnL();
+
+				break;
+			}
+
+
+		}
+	}
 }
