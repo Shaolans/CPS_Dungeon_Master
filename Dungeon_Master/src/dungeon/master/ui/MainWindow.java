@@ -621,7 +621,7 @@ public class MainWindow {
 		VBox map = new VBox(grille);
 
 		hbox.getChildren().addAll(outils, map);
-
+		EnvironmentMouvements.setGame(true);
 		PlayerService pm = new PlayerServiceContract( new PlayerMouvements(new Player(), playerMoves));
 		EnvironmentMouvements env = new EnvironmentMouvements(new Environment(), grille);
 		EnvironmentService em = new EnvironmentServiceContract(env);

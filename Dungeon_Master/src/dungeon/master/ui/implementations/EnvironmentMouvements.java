@@ -25,7 +25,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.image.ImageView;
 
 public class EnvironmentMouvements implements EnvironmentService {
-
+	private static boolean game = false;
 	private EnvironmentService env;
 	GridPane grille;
 	public List<MonsterService> ennemis = new ArrayList<>();
@@ -39,7 +39,11 @@ public class EnvironmentMouvements implements EnvironmentService {
 	public void setService(EnvironmentService serv) {
 		this.serv = serv;
 	}
-
+	
+	public static void setGame(boolean b) {
+		game = b;
+	}
+	
 	@Override
 	public boolean isReachable(int x1, int y1, int x2, int y2) {
 		// TODO Auto-generated method stub
@@ -96,7 +100,7 @@ public class EnvironmentMouvements implements EnvironmentService {
 						case "EMP":
 							env.setNature(i, j, Cell.EMP);
 
-							if(r.nextInt(80)==1) {
+							if(game && r.nextInt(80)==1) {
 								im = new ImageView(MainWindow.cowMoves.get(0).getImage());
 								im.setId("COW");
 								sp.getChildren().add(im);
