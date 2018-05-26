@@ -39,11 +39,11 @@ public class EnvironmentMouvements implements EnvironmentService {
 	public void setService(EnvironmentService serv) {
 		this.serv = serv;
 	}
-	
+
 	public static void setGame(boolean b) {
 		game = b;
 	}
-	
+
 	@Override
 	public boolean isReachable(int x1, int y1, int x2, int y2) {
 		// TODO Auto-generated method stub
@@ -100,16 +100,19 @@ public class EnvironmentMouvements implements EnvironmentService {
 						case "EMP":
 							env.setNature(i, j, Cell.EMP);
 
-							if(game && r.nextInt(80)==1) {
+							if(game && r.nextInt(50)==1) {
 								im = new ImageView(MainWindow.cowMoves.get(0).getImage());
 								im.setId("COW");
 								sp.getChildren().add(im);
 								System.out.println("AJOUT");
+								MainWindow.cowMoves.remove(0);
+								MainWindow.cowMoves.add(0, im);
 								MonsterService c = new MonsterServiceContract( new MonsterMouvements(new Monster()));
 								ennemis.add(c);
-								if(serv!=null)
-								c.init(serv, i, j, Dir.E, 4, 2);
-								env.setCellContent(i, j, c);
+								if(serv!=null) {
+									c.init(serv, i, j, Dir.E, 4, 1);
+									env.setCellContent(i, j, c);
+								}
 
 
 							}

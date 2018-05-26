@@ -9,6 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import dungeon.master.components.Engine;
+import dungeon.master.components.Entity;
 import dungeon.master.components.Environment;
 import dungeon.master.components.Player;
 import dungeon.master.contracts.EngineServiceContract;
@@ -18,6 +19,7 @@ import dungeon.master.enumerations.Command;
 import dungeon.master.enumerations.Dir;
 import dungeon.master.services.CowService;
 import dungeon.master.services.EngineService;
+import dungeon.master.services.EntityService;
 import dungeon.master.services.EnvironmentService;
 import dungeon.master.services.MonsterService;
 import dungeon.master.services.PlayerService;
@@ -627,7 +629,7 @@ public class MainWindow {
 		EnvironmentService em = new EnvironmentServiceContract(env);
 		env.setService(em);
 		em.init(15, 15);
-		pm.init(em, 0, 0, Dir.E, 4, 2);
+		pm.init(em, 0, 0, Dir.E, 20, 2);
 		em.setCellContent(0, 0, pm);
 
 		EngineService engine = new EngineServiceContract(new Engine());
@@ -848,8 +850,26 @@ public class MainWindow {
 
 				}
 			}
+
+			for(EntityService et : engine.getEntities()) {
+				if(et.getHp()<=0) {
+					StackPane p =(StackPane)grille.getChildren().get(et.getRow()*env.getHeight()+et.getCol());
+					p.getChildren().remove(p.getChildren().size()-1);
+				}
+			}
+
 			engine.clean();
 			engine.step();
+			for(EntityService et : engine.getEntities()) {
+				et.attack();
+			}
+
+			if(pm.getHp()<=0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Vous êtes mort ! Rejouez !");
+				alert.showAndWait();
+				stage.close();
+			}
 
 		});
 

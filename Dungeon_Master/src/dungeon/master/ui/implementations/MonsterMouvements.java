@@ -26,17 +26,17 @@ public class MonsterMouvements implements MonsterService {
 		this.monster = monster;
 		List<ImageView> moves = MainWindow.cowMoves;
 		face = moves.get(0);
-		faceD = moves.get(1);
-		faceG = moves.get(2);
-		droite = moves.get(3);
-		droiteD = moves.get(4);
-		droiteG = moves.get(5);
-		derriere = moves.get(6);
-		derriereD = moves.get(7);
-		derriereG = moves.get(8);
-		gauche = moves.get(9);
-		gaucheD = moves.get(10);
-		gaucheG = moves.get(11);
+		faceD = new ImageView(moves.get(1).getImage());
+		faceG = new ImageView(moves.get(2).getImage());
+		droite = new ImageView(moves.get(3).getImage());
+		droiteD = new ImageView(moves.get(4).getImage());
+		droiteG =new ImageView(moves.get(5).getImage());
+		derriere =new ImageView(moves.get(6).getImage());
+		derriereD =new ImageView(moves.get(7).getImage());
+		derriereG = new ImageView(moves.get(8).getImage());
+		gauche = new ImageView(moves.get(9).getImage());
+		gaucheD =new ImageView(moves.get(10).getImage());
+		gaucheG = new ImageView(moves.get(11).getImage());
 	}
 
 	@Override
