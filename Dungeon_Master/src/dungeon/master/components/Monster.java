@@ -28,19 +28,19 @@ public class Monster extends Entity implements MonsterService {
 
 		int dist = player.getRow()-getRow();
 		if(dist > 0) {
-			forward();
+			strafeL();
 			return;
 		}else if(dist < 0) {
-			backward();
+			strafeR();
 			return;
 		}
 
 		dist = player.getCol()-getCol();
 		if(dist > 0) {
-			strafeR();
+			forward();
 			return;
 		}else if(dist < 0) {
-			strafeL();
+			backward();
 			return;
 		}
 

@@ -628,7 +628,7 @@ public class MainWindow {
 		env.setService(em);
 		em.init(15, 15);
 		pm.init(em, 0, 0, Dir.E, 4, 2);
-
+		em.setCellContent(0, 0, pm);
 
 		EngineService engine = new EngineServiceContract(new Engine());
 		engine.init(em, pm);
