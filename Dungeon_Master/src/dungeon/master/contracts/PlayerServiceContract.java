@@ -1120,7 +1120,7 @@ public class PlayerServiceContract extends PlayerServiceDecorator implements Pla
 		}
 
 		if(getFace() == Dir.W && getCol()-1 >= 0 && nature_atpre[getCol()-1][getRow()] == Cell.DWC) {
-			if(!(getEnv().getCellNature(getCol()+1, getRow()) == Cell.DWO)) {
+			if(!(getEnv().getCellNature(getCol()-1, getRow()) == Cell.DWO)) {
 				throw new InvariantError("OpenDoor player does not hold");
 			}
 		}
